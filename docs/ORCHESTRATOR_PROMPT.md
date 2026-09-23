@@ -4,7 +4,7 @@ Paste everything below the line into Claude Code at the repo root. Muaaz runs it
 
 ---
 
-You are the build orchestrator for **Autonomous Discovery Lab**, a two-person hackathon project with a hard deadline at 20:10 IST tonight. Read `PRD_Autonomous_Discovery_Lab.pdf`, `IMPLEMENTATION_MUAAZ.md` and `IMPLEMENTATION_TEAMMATE.md` in this repo before doing anything. They are the spec. This prompt tells you how to execute them with tests.
+You are the build orchestrator for **Autonomous Discovery Lab**, a two-person hackathon project with a hard deadline at 20:10 IST tonight. Read `docs/PRD_Autonomous_Discovery_Lab.pdf`, `docs/IMPLEMENTATION_MUAAZ.md` and `docs/IMPLEMENTATION_TEAMMATE.md` before doing anything. They are the spec. This prompt tells you how to execute them with tests.
 
 ## Operating rules
 
@@ -20,6 +20,7 @@ You are the build orchestrator for **Autonomous Discovery Lab**, a two-person ha
 
 ```
 discovery-lab/
+  docs/                       # PRD + both implementation plans (read first)
   ca.py  lab.py               # lab track
   viewer.html  render_paper.py # viewer track
   tree.json                   # contract; fake in phase 0, real after 19:35
@@ -30,7 +31,7 @@ discovery-lab/
   Makefile                    # make test, make serve, make run, make paper
 ```
 
-Deps: `pip install anthropic numpy scipy pillow markdown pytest` and, for viewer tests, `npm i -D playwright && npx playwright install chromium` (if Playwright will not install in 3 minutes, fall back to the jsdom-free smoke test in Phase V2).
+Deps: `pip install anthropic numpy scipy pillow markdown pytest` (both tracks; `markdown` is needed because lab.py calls render_paper.py) and, for viewer tests, `npm i -D playwright && npx playwright install chromium` (if Playwright will not install in 3 minutes, fall back to the jsdom-free smoke test in Phase V2).
 
 ---
 
@@ -83,6 +84,7 @@ Tests (`tests/test_loop.py`) — use a `FakeFable` that returns scripted proposa
 - A proposal with broken code → node saved with `status: "error"`, `error` non-empty, and the *next* prompt's text contains that error string (assert on the captured user message).
 - A proposal whose `rules_to_test` are all already tested → node marked `error` with "already tested" in the message, no sandbox call.
 - `best_node_id` updates only when fitness strictly improves.
+- `replay.size` on every done node equals the `size` used by `ca.evaluate` (64). Assert against a module constant `ca.GRID_SIZE`, not a literal.
 - Anti-stagnation: after 4 done nodes with no improvement, the next user message contains `DIRECTIVE` and the top-3 ids.
 - Every 8th done node → message contains "rule family you have NOT tried".
 - `save()` is atomic: monkeypatch `os.replace` to assert it is used; a reader opening `tree.json` mid-write never gets invalid JSON (run 200 saves in a thread while parsing in another).
@@ -135,6 +137,9 @@ Tests:
 - Replay parity test (the important one): expose `window.stepCA(rule, seed, size, steps)` returning the grid as a flat array; compare against `python -c "import ca..."` output for `B3/S23` glider at steps 4 and 8 and for `B36/S23` replicator seed at step 20. Bit-exact match required. If it fails, the seed offset or wrap differs; fix the JS.
 - Replay runs at ≥ 12 fps for 2 s (count draw calls via a `window.__frames` counter).
 - Selection survives a poll: click `n1`, wait 3 s, panel still shows `n1`.
+- Replay survives a poll: click `n1`, record `window.__replayTimer`, wait 5 s with unchanged data; timer id is the same and the canvas element is the same object. Then change `n1.fitness` in the served file; panel rebuilds once.
+- XSS/escaping: fixture node whose hypothesis is `<img src=x onerror=window.__pwned=1> & "quotes"` renders as literal text, `window.__pwned` is undefined, and the panel layout is intact.
+- Stale removal: load `tree_big.json`, then serve `tree_small.json`; after 3 s exactly 3 `.node` groups remain.
 - On first load with `best_node_id` set, the best node is auto-selected and the replay is running.
 
 If Playwright is unavailable: write `tests/viewer_smoke.js` that runs the CA `step` function in plain Node (copy it into a module) and does the parity test only, plus a manual checklist in NOTES.md for the DOM items.
@@ -144,6 +149,7 @@ If Playwright is unavailable: write `tests/viewer_smoke.js` that runs the CA `st
 Tests (`tests/test_render_paper.py`):
 - `fixtures/paper_fake.md` → `paper.html` exists, contains `<table>`, `<h2>` for every PRD section, and the image is inlined as `data:image/png;base64,` (put a real PNG at `frames/n0_20.png` in the fixture setup).
 - Missing image path → dropped silently, no exception.
+- UTF-8: a paper.md containing `→`, `≥`, `—` and an emoji renders without exception under `PYTHONIOENCODING=cp1252` / on Windows, and the characters appear in paper.html.
 - Output is under 5 MB with 20 images.
 - Status flip: with the viewer pointed at a fixture whose `status` is `done`, a `#paper-btn` link to `paper.html` appears and opens.
 

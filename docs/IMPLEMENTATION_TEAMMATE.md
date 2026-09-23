@@ -67,8 +67,14 @@ let selected = null, tree = null;
 async function tick(){
   try { tree = await (await fetch("tree.json?t=" + Date.now())).json(); } catch(e){ return; }
   drawHeader(tree); drawTree(tree);
-  if (selected) showNode(tree.nodes.find(n => n.id === selected));
+  if (selected) {
+    const n = tree.nodes.find(x => x.id === selected);
+    if (!n) { selected = null; return; }
+    const fp = JSON.stringify([n.status, n.fitness, n.best_rule, n.frames, n.error]);   // rebuild only if content changed
+    if (fp !== lastFp) { lastFp = fp; showNode(n); }
+  }
 }
+let lastFp = null;
 setInterval(tick, 2000); tick();
 
 function drawHeader(t){
@@ -100,9 +106,10 @@ function drawTree(t){
        .transition().duration(400).attr("d", d3.linkHorizontal().x(d=>d.y).y(d=>d.x));
   const nodes = g.selectAll(".node").data(root.descendants().filter(d=>d.data.id!=="root"), d=>d.data.id);
   const enter = nodes.enter().append("g").attr("class","node").attr("transform", d=>`translate(${d.y},${d.x})`)
-      .style("cursor","pointer").on("click", (e,d)=>{selected=d.data.id; showNode(d.data.node);});
+      .style("cursor","pointer").on("click", (e,d)=>{selected=d.data.id; lastFp=null; showNode(d.data.node);});
   enter.append("circle").attr("r", 0).transition().duration(500).attr("r", 7);
   enter.append("text").attr("dx", 11).attr("dy", 4);
+  nodes.exit().remove(); links.exit().remove();       // restarted run -> stale nodes disappear
   const all = enter.merge(nodes);
   all.transition().duration(400).attr("transform", d=>`translate(${d.y},${d.x})`);
   all.classed("error", d=>d.data.node.status==="error")
@@ -119,6 +126,10 @@ Rules that make this not fall over on stage:
 - **Key by id, update in place.** Never `selectAll().remove()` on every poll; the tree will flicker and the selection will be lost.
 - **Orphan-safe hierarchy.** A node can be written before its parent finishes; attach to root if the parent is missing.
 - **Cache-bust the fetch** (`?t=`) or Chrome will serve you the same file forever.
+- **Remove exited nodes** (`nodes.exit().remove()`), or a restarted run leaves stale nodes on screen.
+- **Rebuild the panel only when the selected node's content changes.** Rebuilding on every poll restarts the replay every 2 s.
+- **Escape all model-written text** (hypothesis, notes, error) before inserting as HTML. One stray `<` from the model breaks the panel.
+- **Replay size must equal `ca.evaluate` size (64).** A different torus size gives different results once patterns hit the edge.
 
 **Checkpoint (19:10):** fake tree renders, adding a 4th node to the fake JSON by hand makes it animate in within 2 s.
 
@@ -127,31 +138,34 @@ Rules that make this not fall over on stage:
 ## 2. Minute 30–45: node panel + CA replay
 
 ```js
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
 function showNode(n){
   if (!n) return;
   const m = n.metrics||{};
   document.getElementById("panel").innerHTML = `
     <div><span class="badge ${n.status}">${n.status}</span> <b>${n.id}</b> ← ${n.parent||"root"} · depth ${n.depth}</div>
-    <h3 style="margin:10px 0 4px">${n.hypothesis||""}</h3>
-    <div style="color:var(--muted)">${n.notes||""}</div>
-    ${n.error?`<pre style="color:#f66;white-space:pre-wrap">${n.error}</pre>`:""}
-    <div style="margin:10px 0"><b>Best rule:</b> ${n.best_rule||"—"} &nbsp; <b>fitness</b> ${n.fitness??"—"}
+    <h3 style="margin:10px 0 4px">${esc(n.hypothesis)}</h3>
+    <div style="color:var(--muted)">${esc(n.notes)}</div>
+    ${n.error?`<pre style="color:#f66;white-space:pre-wrap">${esc(n.error)}</pre>`:""}
+    <div style="margin:10px 0"><b>Best rule:</b> ${esc(n.best_rule)||"—"} &nbsp; <b>fitness</b> ${n.fitness??"—"}
       &nbsp; copies ${m.copies??"—"} · alive ${m.alive??"—"} · growth ${(m.growth??0).toFixed?.(2)??"—"} · ${m.stable?"stable":"unstable"}</div>
-    <div style="color:var(--muted);font-size:12px">tested: ${(n.rules_tested||[]).join(", ")}</div>
-    <canvas id="replay" width="48" height="48" style="margin-top:12px"></canvas>
-    <div style="display:flex;gap:6px;margin-top:8px">${(n.frames||[]).map(f=>`<img src="${f}" style="width:30%;image-rendering:pixelated;border-radius:4px">`).join("")}</div>`;
+    <div style="color:var(--muted);font-size:12px">tested: ${esc((n.rules_tested||[]).join(", "))}</div>
+    <canvas id="replay" width="64" height="64" style="margin-top:12px"></canvas>
+    <div style="display:flex;gap:6px;margin-top:8px">${(n.frames||[]).map(f=>`<img src="${esc(f)}" style="width:30%;image-rendering:pixelated;border-radius:4px">`).join("")}</div>`;
   if (n.replay) startReplay(n.replay);
 }
 
 let replayTimer = null;
-function startReplay({rule, seed, size=48, steps=60}){
+function startReplay({rule, seed, size=64, steps=60}){   // size must match ca.evaluate (64)
   clearInterval(replayTimer);
   const [b, s] = rule.toUpperCase().split("/"); const birth = new Set([...b.slice(1)].map(Number)), surv = new Set([...s.slice(1)].map(Number));
   let grid = new Uint8Array(size*size);
   const oy = (size - seed.length) >> 1, ox = (size - seed[0].length) >> 1;
   seed.forEach((row,y)=>row.forEach((v,x)=>{ if(v) grid[(oy+y)*size+ox+x]=1; }));
   const start = grid.slice(); let t = 0;
-  const cv = document.getElementById("replay"), ctx = cv.getContext("2d"), img = ctx.createImageData(size,size);
+  const cv = document.getElementById("replay"); cv.width = size; cv.height = size;
+  const ctx = cv.getContext("2d"), img = ctx.createImageData(size,size);
   function step(){
     const next = new Uint8Array(size*size);
     for (let y=0;y<size;y++) for (let x=0;x<size;x++){
@@ -183,7 +197,7 @@ Muaaz's loop calls this at the end. Keep it dumb.
 ```python
 # render_paper.py
 import markdown, base64, re, pathlib
-md = pathlib.Path("paper.md").read_text()
+md = pathlib.Path("paper.md").read_text(encoding="utf-8")
 def inline(m):
     p = pathlib.Path(m.group(1))
     if not p.exists(): return ""
@@ -194,7 +208,7 @@ page = f"""<!doctype html><html><head><meta charset="utf-8"><title>Lab report</t
 <style>body{{max-width:820px;margin:40px auto;padding:0 20px;font:16px/1.6 Georgia,serif;background:#121212;color:#e8e8e8}}
 h1,h2{{color:#e8724a}} table{{border-collapse:collapse}} td,th{{border:1px solid #444;padding:6px 10px}} code{{background:#222;padding:1px 4px}}</style>
 </head><body>{html}<hr><p style="color:#888">Written autonomously by Claude Fable 5.1 from tree.json · Claude Community Mumbai Build Day</p></body></html>"""
-pathlib.Path("paper.html").write_text(page)
+pathlib.Path("paper.html").write_text(page, encoding="utf-8")
 print("paper.html written")
 ```
 

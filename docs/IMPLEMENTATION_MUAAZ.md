@@ -16,7 +16,7 @@ discovery-lab/
   STOP              # touch this file to trigger the paper
 ```
 
-Deps: `pip install anthropic numpy scipy pillow` — nothing else.
+Deps: `pip install anthropic numpy scipy pillow markdown` — nothing else (`markdown` is for render_paper.py, which lab.py calls).
 
 ---
 
@@ -36,6 +36,7 @@ Keep this tiny and correct. Fable's experiment code will call into it.
 import numpy as np
 from scipy.ndimage import label, convolve
 
+GRID_SIZE = 64   # single source of truth; replay.size in tree.json must equal this
 KERNEL = np.ones((3, 3), dtype=int); KERNEL[1, 1] = 0
 
 def parse_rule(rule: str):
@@ -49,7 +50,7 @@ def step(grid, birth, survive):
     keep = (grid == 1) & np.isin(n, list(survive))
     return (born | keep).astype(np.uint8)
 
-def place(seed, size=64):
+def place(seed, size=GRID_SIZE):
     g = np.zeros((size, size), dtype=np.uint8)
     s = np.array(seed, dtype=np.uint8)
     y, x = (size - s.shape[0]) // 2, (size - s.shape[1]) // 2
@@ -76,7 +77,7 @@ def count_copies(grid, seed):
             copies += 1
     return copies
 
-def evaluate(rule, seed, steps=60, size=64, snapshots=(0, 20, 40, 60)):
+def evaluate(rule, seed, steps=60, size=GRID_SIZE, snapshots=(0, 20, 40, 60)):
     birth, survive = parse_rule(rule)
     g = place(seed, size); alive0 = int(g.sum())
     frames, max_copies = {}, 0
@@ -150,6 +151,7 @@ from datetime import datetime, timezone, timedelta
 import anthropic
 from PIL import Image
 import numpy as np
+import ca
 
 IST = timezone(timedelta(hours=5, minutes=30))
 MODEL = "claude-fable-5-1"
@@ -191,7 +193,6 @@ def run_sandbox(node):
         os.remove(path)
 
 def write_frames(node_id, rule, seed):
-    import ca
     res = ca.evaluate(rule, seed)
     paths = []
     for t, g in res["frames"].items():
@@ -243,7 +244,7 @@ def main(question, minutes):
             node.update(best_rule=best["rule"], fitness=best["fitness"],
                         metrics={k: best[k] for k in ("copies", "alive", "growth", "stable")},
                         frames=write_frames(nid, best["rule"], node["seed"]),
-                        replay={"rule": best["rule"], "seed": node["seed"], "size": 48, "steps": 60},
+                        replay={"rule": best["rule"], "seed": node["seed"], "size": ca.GRID_SIZE, "steps": 60},  # must equal the simulation size; torus wrap differs otherwise,
                         status="done", results_top5=sorted(results, key=lambda r: -r["fitness"])[:5])
             if tree["best_node_id"] is None or node["fitness"] > next(n["fitness"] for n in tree["nodes"] if n["id"] == tree["best_node_id"]):
                 tree["best_node_id"] = nid
