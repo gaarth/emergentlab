@@ -93,10 +93,10 @@ def evaluate(rule, seed, steps=60, size=GRID_SIZE, snapshots=(0, 20, 40, 60)):
             g = step(g, birth, survive)
     alive = int(g.sum())
     stable = 0 < alive < 0.30 * size * size
-    copies = max(max_copies, count_copies(g, seed))
+    copies = count_copies(g, seed)  # copies that exist at the horizon, not a transient peak
     if int(np.sum(seed)) < 3:       # 1-2 cell "copies" are debris, not replication
         copies = 0
     fitness = float(copies) if stable else copies * 0.2
-    return {"rule": rule, "copies": copies, "alive": alive,
+    return {"rule": rule, "copies": copies, "peak_copies": max_copies, "alive": alive,
             "growth": alive / max(alive0, 1), "stable": stable,
             "fitness": fitness, "frames": frames}

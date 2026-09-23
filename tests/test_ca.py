@@ -50,7 +50,8 @@ def test_seeds_explosive():
     seed = [[0, 1, 0], [1, 1, 1], [0, 1, 0]]
     r = ca.evaluate("B2/S", seed)
     assert r["stable"] is False
-    assert r["copies"] >= 1 and r["fitness"] < r["copies"]
+    # copies counts the final grid; an explosion leaves none, so compare against the transient peak
+    assert r["peak_copies"] >= 1 and r["fitness"] < r["peak_copies"]
 
 
 def test_evaluate_fast():
