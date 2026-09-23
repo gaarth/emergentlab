@@ -1,6 +1,9 @@
 PY ?= python
 
-.PHONY: test test-py test-viewer serve run paper fixtures
+.PHONY: test test-py test-viewer serve run paper fixtures demo-check
+
+demo-check:
+	$(PY) demo_check.py
 
 test: test-py test-viewer
 

@@ -17,5 +17,15 @@
 - Fixture frame PNGs do not exist; the "no console errors" test ignores `Failed to load resource` 404s. Missing frames are hidden.
 - "Selection survives a poll" clicks `n0` (not the auto-selected best `n1`) so a reset would actually be caught.
 
+## Paper renderer (V3)
+- `render_paper.py [in.md] [out.html]`, defaults `paper.md` / `paper.html` (lab.py calls it with no args).
+- Image paths resolve relative to the .md folder, then cwd. Missing images are dropped with a stderr warning.
+- `(n17)` / `(n3, n17)` citations become links to `viewer.html#n17`. Light academic theme (judges read on white).
+
+## Demo check (phase D)
+- `python demo_check.py`. "Loop alive" uses log/tree.json freshness (< 60 s), not `ps` (the loop may run on Muaaz's laptop).
+- Video length uses `ffprobe` if installed, else a > 1 MB size heuristic.
+- `tests/live.spec.js` is the Playwright smoke against the real `tree.json`.
+
 ## Windows
 - No `make` on Gaarth's machine. The Makefile targets are plain commands; run them directly (see Makefile).
