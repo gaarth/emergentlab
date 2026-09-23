@@ -29,7 +29,7 @@ def test_fake_paper(tmp_path):
         assert f">{s}</h2>" in html, s
     assert "data:image/png;base64," in html
     assert 'src="frames/' not in html
-    assert 'href="viewer.html#n17"' in html   # (n17) citation became a link
+    assert 'href="/app/dist/index.html#n17"' in html   # (n17) citation became a link into the app
 
 
 def test_missing_image_dropped(tmp_path):

@@ -11,3 +11,7 @@ frames/
 test_tree.json
 demo/
 .venv/
+app/dist/
+runs/
+paper.md
+paper.html

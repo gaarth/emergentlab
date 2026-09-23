@@ -52,7 +52,7 @@ def inline_images(page_html, bases):
 def link_citations(page_html):
     """(n17) / (n3, n17) in body text -> links to the node in the viewer."""
     def cite(m):
-        ids = re.sub(r"\bn(\d+)\b", lambda k: f'<a class="cite" href="viewer.html#n{k.group(1)}">n{k.group(1)}</a>', m.group(1))
+        ids = re.sub(r"\bn(\d+)\b", lambda k: f'<a class="cite" href="/app/dist/index.html#n{k.group(1)}">n{k.group(1)}</a>', m.group(1))
         return f"({ids})"
     def text(m):
         return ">" + re.sub(r"\((n\d+(?:\s*[,;]\s*n\d+)*)\)", cite, m.group(1)) + "<"
@@ -72,7 +72,7 @@ def render(md_path="paper.md", out_path="paper.html"):
     page = f"""<!doctype html><html><head><meta charset="utf-8"><title>{title_txt}</title><style>{CSS}</style></head>
 <body>{body}
 <footer>Written autonomously by Claude Fable 5.1 from tree.json · Claude Community Mumbai Build Day ·
-<a href="viewer.html">open the live tree</a></footer></body></html>"""
+<a href="/app/dist/index.html">open the live tree</a></footer></body></html>"""
     out_path.write_text(page, encoding="utf-8")
     print(f"{out_path} written ({len(page) // 1024} KB)")
 

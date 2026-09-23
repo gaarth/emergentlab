@@ -174,13 +174,13 @@ Replace this mock with the real Fable loop.
     tree["status"] = "done"; save(tree, d)
 
 
-def main(nodes, interval, d, resume, seed):
+def main(nodes, interval, d, resume, seed, question=QUESTION):
     rng = random.Random(seed)
     d.mkdir(parents=True, exist_ok=True)
     if resume and (d / "tree.json").exists():
         tree = json.loads((d / "tree.json").read_text(encoding="utf-8"))
     else:
-        tree = {"question": QUESTION, "started_at": now(), "status": "running", "best_node_id": None, "nodes": []}
+        tree = {"question": question, "started_at": now(), "status": "running", "best_node_id": None, "nodes": []}
     tree["status"] = "running"; save(tree, d)
     while len(tree["nodes"]) < nodes and not (d / "STOP").exists():
         parent, depth, hyp, rules, seed_name = propose(tree, rng)
@@ -220,6 +220,6 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--nodes", type=int, default=50); ap.add_argument("--interval", type=float, default=3)
     ap.add_argument("--dir", default=str(ROOT)); ap.add_argument("--resume", action="store_true")
-    ap.add_argument("--seed", type=int, default=7)
+    ap.add_argument("--seed", type=int, default=7); ap.add_argument("--question", default=QUESTION)
     a = ap.parse_args()
-    main(a.nodes, a.interval, pathlib.Path(a.dir), a.resume, a.seed)
+    main(a.nodes, a.interval, pathlib.Path(a.dir), a.resume, a.seed, a.question)

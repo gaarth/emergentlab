@@ -38,16 +38,16 @@ check("paper.html exists and < 15 min old", age(paper) < 15 * 60,
       f"{age(paper) / 60:.1f} min old" if paper.exists() else "missing")
 
 try:
-    code = urllib.request.urlopen("http://localhost:8000/viewer.html", timeout=3).status
+    code = urllib.request.urlopen("http://localhost:8000/app/dist/index.html", timeout=3).status
 except Exception as e:
     code = str(e)
-check("viewer at localhost:8000 returns 200", code == 200, str(code))
+check("3D app at localhost:8000/app/dist/ returns 200", code == 200, str(code) if code != 200 else "")
 if code == 200:
     npx = shutil.which("npx") or shutil.which("npx.cmd")
-    p = subprocess.run([npx, "playwright", "test", "tests/live.spec.js"], cwd=ROOT, capture_output=True, text=True) if npx else None
+    p = subprocess.run([npx, "playwright", "test", "-g", "live tree.json"], cwd=ROOT, capture_output=True, text=True) if npx else None
     check("Playwright live smoke", bool(p) and p.returncode == 0, "" if p and p.returncode == 0 else (p.stdout[-400:] if p else "npx missing"))
 else:
-    check("Playwright live smoke", False, "server not running (python -m http.server 8000)")
+    check("Playwright live smoke", False, "server not running (python server.py) or app not built (cd app && npm run build)")
 
 best = tree.get("best_node_id")
 pngs = sorted((ROOT / "frames").glob(f"{best}_*.png")) if best else []

@@ -1,56 +1,7263 @@
 {
- "question": "Find a Life-like CA rule (B../S..) under which a 3x3 seed self-replicates.",
- "started_at": "2026-09-23T18:57:00+05:30",
- "status": "running",
- "best_node_id": "n1",
+ "question": "Find a Life-like CA rule (B../S..) and a seed of at most 5x5 cells under which the seed self-replicates: after N steps the grid contains 2 or more disjoint copies of the seed.",
+ "started_at": "2026-09-23T19:27:32+05:30",
+ "status": "done",
+ "best_node_id": "n0",
  "nodes": [
   {
-   "id": "n0", "parent": null, "depth": 0,
+   "id": "n0",
+   "parent": null,
+   "depth": 0,
    "hypothesis": "Baseline: sweep classic rules (Life, HighLife, Seeds) with a glider seed.",
-   "rules_tested": ["B3/S23", "B36/S23", "B2/S"],
-   "seed": [[0,1,0],[0,0,1],[1,1,1]],
+   "rules_tested": [
+    "B3/S23",
+    "B36/S23",
+    "B2/S",
+    "B3/S12345",
+    "B368/S245"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
    "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 0, keep branching here; otherwise mark it a dead end.",
    "status": "done",
-   "started_at": "2026-09-23T18:57:10+05:30", "ended_at": "2026-09-23T18:57:40+05:30",
-   "best_rule": "B36/S23",
+   "started_at": "2026-09-23T19:27:32+05:30",
+   "ended_at": "2026-09-23T19:27:34+05:30",
+   "best_rule": "B3/S23",
    "fitness": 1.0,
-   "metrics": {"copies": 1, "alive": 5, "growth": 1.0, "stable": true},
-   "frames": ["frames/n0_0.png", "frames/n0_20.png", "frames/n0_40.png"],
-   "replay": {"rule": "B36/S23", "seed": [[0,1,0],[0,0,1],[1,1,1]], "size": 64, "steps": 60},
-   "notes": "The glider survives but never copies itself; try a known replicator seed.",
-   "error": null
+   "metrics": {
+    "copies": 1,
+    "alive": 5,
+    "growth": 1.0,
+    "stable": true
+   },
+   "frames": [
+    "frames/n0_0.png",
+    "frames/n0_20.png",
+    "frames/n0_40.png",
+    "frames/n0_60.png"
+   ],
+   "replay": {
+    "rule": "B3/S23",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B3/S23",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B36/S23",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B2/S",
+     "copies": 1,
+     "alive": 586,
+     "growth": 117.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B3/S12345",
+     "copies": 1,
+     "alive": 399,
+     "growth": 79.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B368/S245",
+     "copies": 1,
+     "alive": 0,
+     "growth": 0.0,
+     "stable": false,
+     "fitness": 0.2
+    }
+   ]
   },
   {
-   "id": "n1", "parent": "n0", "depth": 1,
-   "hypothesis": "HighLife's replicator seed should produce 2+ copies under B36/S23 where n0's glider produced 1.",
-   "rules_tested": ["B36/S23", "B36/S236", "B368/S23", "B36/S235", "B356/S23"],
-   "seed": [[0,0,1,1,1],[0,1,0,0,1],[1,0,0,0,1],[1,0,0,1,0],[1,1,1,0,0]],
+   "id": "n1",
+   "parent": "n0",
+   "depth": 1,
+   "hypothesis": "B-only variations around B3/S23 with the glider seed should beat n0's fitness of 1.0.",
+   "rules_tested": [
+    "B3/S023",
+    "B35/S123",
+    "B3/S2",
+    "B3/S236",
+    "B238/S2368",
+    "B37/S123",
+    "B346/S2378",
+    "B34/S23",
+    "B36/S235",
+    "B378/S2358",
+    "B3/S123",
+    "B23/S23",
+    "B36/S0237",
+    "B35/S2347"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
    "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
    "status": "done",
-   "started_at": "2026-09-23T18:58:00+05:30", "ended_at": "2026-09-23T18:58:35+05:30",
-   "best_rule": "B36/S23",
-   "fitness": 2.0,
-   "metrics": {"copies": 2, "alive": 41, "growth": 1.3, "stable": true},
-   "frames": ["frames/n1_0.png", "frames/n1_20.png", "frames/n1_40.png"],
-   "replay": {"rule": "B36/S23", "seed": [[0,0,1,1,1],[0,1,0,0,1],[1,0,0,0,1],[1,0,0,1,0],[1,1,1,0,0]], "size": 64, "steps": 60},
-   "notes": "HighLife produced a replicator-like growth; branch here.",
-   "error": null
+   "started_at": "2026-09-23T19:27:36+05:30",
+   "ended_at": "2026-09-23T19:27:39+05:30",
+   "best_rule": "B3/S023",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 5,
+    "growth": 1.0,
+    "stable": true
+   },
+   "frames": [
+    "frames/n1_0.png",
+    "frames/n1_20.png",
+    "frames/n1_40.png",
+    "frames/n1_60.png"
+   ],
+   "replay": {
+    "rule": "B3/S023",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B3/S023",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B35/S123",
+     "copies": 1,
+     "alive": 446,
+     "growth": 89.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B3/S236",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B37/S123",
+     "copies": 1,
+     "alive": 348,
+     "growth": 69.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B346/S2378",
+     "copies": 1,
+     "alive": 259,
+     "growth": 51.8,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
   },
   {
-   "id": "n2", "parent": "n1", "depth": 2,
-   "hypothesis": "Adding survive-on-4 to HighLife stabilises the copies found in n1.",
-   "rules_tested": ["B36/S234", "B367/S234"],
-   "seed": [[0,0,1,1,1],[0,1,0,0,1],[1,0,0,0,1],[1,0,0,1,0],[1,1,1,0,0]],
-   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed)['copiez'] for r in rules]\n",
+   "id": "n2",
+   "parent": "n1",
+   "depth": 2,
+   "hypothesis": "Seeds-type explosive rules around B3/S023 with the glider seed should beat n1's fitness of 1.0.",
+   "rules_tested": [
+    "B3/S03",
+    "B35/S023",
+    "B35/S0235",
+    "B3/S0236",
+    "B23/S02",
+    "B23/S03",
+    "B34/S0237",
+    "B35/S0234",
+    "B237/S238",
+    "B23/S0234",
+    "B38/S0238",
+    "B38/S023"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:27:41+05:30",
+   "ended_at": "2026-09-23T19:27:44+05:30",
+   "best_rule": "B35/S0235",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 28,
+    "growth": 5.6,
+    "stable": true
+   },
+   "frames": [
+    "frames/n2_0.png",
+    "frames/n2_20.png",
+    "frames/n2_40.png",
+    "frames/n2_60.png"
+   ],
+   "replay": {
+    "rule": "B35/S0235",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B35/S0235",
+     "copies": 1,
+     "alive": 28,
+     "growth": 5.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B3/S0236",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B34/S0237",
+     "copies": 1,
+     "alive": 6,
+     "growth": 1.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B35/S0234",
+     "copies": 1,
+     "alive": 446,
+     "growth": 89.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B38/S0238",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n3",
+   "parent": "n2",
+   "depth": 3,
+   "hypothesis": "B3 sweeps over survive sets around B35/S0235 with the glider seed should beat n2's fitness of 1.0.",
+   "rules_tested": [
+    "B3/S025",
+    "B357/S01235",
+    "B358/S01235",
+    "B35/S035",
+    "B356/S02357",
+    "B356/S235",
+    "B35/S025",
+    "B356/S023",
+    "B35/S02358",
+    "B235/S0235",
+    "B235/S02358"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:27:46+05:30",
+   "ended_at": "2026-09-23T19:27:48+05:30",
+   "best_rule": "B357/S01235",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 654,
+    "growth": 130.8,
+    "stable": true
+   },
+   "frames": [
+    "frames/n3_0.png",
+    "frames/n3_20.png",
+    "frames/n3_40.png",
+    "frames/n3_60.png"
+   ],
+   "replay": {
+    "rule": "B357/S01235",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B357/S01235",
+     "copies": 1,
+     "alive": 654,
+     "growth": 130.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B358/S01235",
+     "copies": 1,
+     "alive": 650,
+     "growth": 130.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B356/S02357",
+     "copies": 1,
+     "alive": 716,
+     "growth": 143.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B356/S235",
+     "copies": 1,
+     "alive": 348,
+     "growth": 69.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B35/S02358",
+     "copies": 1,
+     "alive": 28,
+     "growth": 5.6,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n4",
+   "parent": "n0",
+   "depth": 1,
+   "hypothesis": "Seeds-type explosive rules around B3/S23 with the glider seed should beat n0's fitness of 1.0.",
+   "rules_tested": [
+    "B38/S2",
+    "B345/S12",
+    "B38/S3",
+    "B3/S237",
+    "B34/S238",
+    "B34/S234",
+    "B348/S13",
+    "B23/S238",
+    "B36/S2",
+    "B3/S238",
+    "B3/S3",
+    "B37/S23",
+    "B23/S235",
+    "B34/S3"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:27:50+05:30",
+   "ended_at": "2026-09-23T19:27:53+05:30",
+   "best_rule": "B3/S237",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 5,
+    "growth": 1.0,
+    "stable": true
+   },
+   "frames": [
+    "frames/n4_0.png",
+    "frames/n4_20.png",
+    "frames/n4_40.png",
+    "frames/n4_60.png"
+   ],
+   "replay": {
+    "rule": "B3/S237",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B3/S237",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B34/S238",
+     "copies": 1,
+     "alive": 6,
+     "growth": 1.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B34/S234",
+     "copies": 1,
+     "alive": 978,
+     "growth": 195.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B3/S238",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B37/S23",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n5",
+   "parent": "n2",
+   "depth": 3,
+   "hypothesis": "B-only variations around B35/S0235 with the glider seed should beat n2's fitness of 1.0.",
+   "rules_tested": [
+    "B35/S01235",
+    "B235/S025",
+    "B358/S02356",
+    "B2345/S0235",
+    "B3567/S0235",
+    "B357/S025",
+    "B345/S0235",
+    "B37/S023578",
+    "B3567/S012358",
+    "B35/S02357",
+    "B35/S35"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
    "status": "error",
-   "started_at": "2026-09-23T18:59:00+05:30", "ended_at": "2026-09-23T18:59:02+05:30",
+   "started_at": "2026-09-23T19:27:55+05:30",
+   "ended_at": "2026-09-23T19:27:57+05:30",
    "best_rule": null,
    "fitness": 0.0,
    "metrics": {},
    "frames": [],
    "replay": null,
-   "notes": "If S4 helps, copies should rise above 2.",
-   "error": "Traceback (most recent call last):\n  File \"tmpab12.py\", line 5, in <module>\n    out = run(rules, seed, ca)\n  File \"tmpab12.py\", line 4, in run\n    return [ca.evaluate(r, seed)['copiez'] for r in rules]\nKeyError: 'copiez'"
+   "error": "Traceback (most recent call last):\n  File \"tmp_exp.py\", line 6, in run\n    return [ca.evaluate(r, seed)['copy_count'] for r in rules]\nKeyError: 'copy_count'"
+  },
+  {
+   "id": "n6",
+   "parent": "n2",
+   "depth": 3,
+   "hypothesis": "B3 sweeps over survive sets around B35/S0235 with the HighLife replicator seed should beat n2's fitness of 1.0.",
+   "rules_tested": [
+    "B35/S02345",
+    "B356/S0235",
+    "B56/S0123",
+    "B3/S035",
+    "B35/S03",
+    "B35/S02356",
+    "B25/S02345",
+    "B357/S023568",
+    "B358/S235",
+    "B345/S02345",
+    "B345/S02356"
+   ],
+   "seed": [
+    [
+     0,
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   ],
+   "seed_name": "HighLife replicator",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If HighLife replicator copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:27:59+05:30",
+   "ended_at": "2026-09-23T19:28:01+05:30",
+   "best_rule": "B35/S02345",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 1028,
+    "growth": 85.667,
+    "stable": true
+   },
+   "frames": [
+    "frames/n6_0.png",
+    "frames/n6_20.png",
+    "frames/n6_40.png",
+    "frames/n6_60.png"
+   ],
+   "replay": {
+    "rule": "B35/S02345",
+    "seed": [
+     [
+      0,
+      0,
+      1,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     [
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B35/S02345",
+     "copies": 1,
+     "alive": 1028,
+     "growth": 85.667,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B356/S0235",
+     "copies": 1,
+     "alive": 284,
+     "growth": 23.667,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B56/S0123",
+     "copies": 1,
+     "alive": 8,
+     "growth": 0.667,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B35/S03",
+     "copies": 1,
+     "alive": 2,
+     "growth": 0.167,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B35/S02356",
+     "copies": 1,
+     "alive": 308,
+     "growth": 25.667,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n7",
+   "parent": "n2",
+   "depth": 3,
+   "hypothesis": "sparse birth rules around B35/S0235 with the glider seed should beat n2's fitness of 1.0.",
+   "rules_tested": [
+    "B5/S023",
+    "B35/S023456",
+    "B3/S02356",
+    "B5/S01235",
+    "B5/S0235",
+    "B357/S02358",
+    "B356/S02345",
+    "B3456/S0257",
+    "B5/S02356",
+    "B345/S235",
+    "B357/S235",
+    "B58/S0257",
+    "B3/S0235"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:28:03+05:30",
+   "ended_at": "2026-09-23T19:28:05+05:30",
+   "best_rule": "B5/S023",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 4,
+    "growth": 0.8,
+    "stable": true
+   },
+   "frames": [
+    "frames/n7_0.png",
+    "frames/n7_20.png",
+    "frames/n7_40.png",
+    "frames/n7_60.png"
+   ],
+   "replay": {
+    "rule": "B5/S023",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B5/S023",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B35/S023456",
+     "copies": 1,
+     "alive": 1137,
+     "growth": 227.4,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B3/S02356",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B5/S01235",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B5/S0235",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n8",
+   "parent": "n0",
+   "depth": 1,
+   "hypothesis": "survive-heavy rules around B3/S23 with the pi-heptomino seed should beat n0's fitness of 1.0.",
+   "rules_tested": [
+    "B23/S237",
+    "B34/S236",
+    "B3/S234",
+    "B35/S236",
+    "B36/S234",
+    "B37/S234",
+    "B35/S234",
+    "B237/S236",
+    "B3/S1234",
+    "B34/S2",
+    "B36/S123",
+    "B23/S2",
+    "B348/S0123",
+    "B36/S023"
+   ],
+   "seed": [
+    [
+     1,
+     1,
+     1
+    ],
+    [
+     1,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     1
+    ]
+   ],
+   "seed_name": "pi-heptomino",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If pi-heptomino copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:28:07+05:30",
+   "ended_at": "2026-09-23T19:28:10+05:30",
+   "best_rule": "B34/S236",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 524,
+    "growth": 74.857,
+    "stable": true
+   },
+   "frames": [
+    "frames/n8_0.png",
+    "frames/n8_20.png",
+    "frames/n8_40.png",
+    "frames/n8_60.png"
+   ],
+   "replay": {
+    "rule": "B34/S236",
+    "seed": [
+     [
+      1,
+      1,
+      1
+     ],
+     [
+      1,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B34/S236",
+     "copies": 1,
+     "alive": 524,
+     "growth": 74.857,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B3/S234",
+     "copies": 1,
+     "alive": 648,
+     "growth": 92.571,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B36/S234",
+     "copies": 1,
+     "alive": 501,
+     "growth": 71.571,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B37/S234",
+     "copies": 1,
+     "alive": 509,
+     "growth": 72.714,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B35/S234",
+     "copies": 1,
+     "alive": 204,
+     "growth": 29.143,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n9",
+   "parent": "n3",
+   "depth": 4,
+   "hypothesis": "B-only variations around B357/S01235 with the R-pentomino seed should beat n3's fitness of 1.0.",
+   "rules_tested": [
+    "B3457/S0125",
+    "B23457/S012345",
+    "B3578/S012358",
+    "B57/S012345",
+    "B367/S01235",
+    "B37/S1235",
+    "B578/S123",
+    "B357/S0123",
+    "B57/S0235",
+    "B357/S012357",
+    "B357/S0135",
+    "B37/S01235"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     1
+    ],
+    [
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "seed_name": "R-pentomino",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If R-pentomino copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:28:12+05:30",
+   "ended_at": "2026-09-23T19:28:15+05:30",
+   "best_rule": "B3457/S0125",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 314,
+    "growth": 62.8,
+    "stable": true
+   },
+   "frames": [
+    "frames/n9_0.png",
+    "frames/n9_20.png",
+    "frames/n9_40.png",
+    "frames/n9_60.png"
+   ],
+   "replay": {
+    "rule": "B3457/S0125",
+    "seed": [
+     [
+      0,
+      1,
+      1
+     ],
+     [
+      1,
+      1,
+      0
+     ],
+     [
+      0,
+      1,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B3457/S0125",
+     "copies": 1,
+     "alive": 314,
+     "growth": 62.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B3578/S012358",
+     "copies": 1,
+     "alive": 724,
+     "growth": 144.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B57/S012345",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B367/S01235",
+     "copies": 1,
+     "alive": 514,
+     "growth": 102.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B37/S1235",
+     "copies": 1,
+     "alive": 482,
+     "growth": 96.4,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n10",
+   "parent": "n1",
+   "depth": 2,
+   "hypothesis": "survive-heavy rules around B3/S023 with the HighLife replicator seed should beat n1's fitness of 1.0.",
+   "rules_tested": [
+    "B3/S02358",
+    "B38/S0234",
+    "B23/S0237",
+    "B35/S01237",
+    "B37/S0235",
+    "B358/S013",
+    "B34/S02345",
+    "B23/S0236",
+    "B34/S023",
+    "B38/S02358",
+    "B3/S0238"
+   ],
+   "seed": [
+    [
+     0,
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   ],
+   "seed_name": "HighLife replicator",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If HighLife replicator copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "error",
+   "started_at": "2026-09-23T19:28:17+05:30",
+   "ended_at": "2026-09-23T19:28:19+05:30",
+   "best_rule": null,
+   "fitness": 0.0,
+   "metrics": {},
+   "frames": [],
+   "replay": null,
+   "error": "Traceback (most recent call last):\n  File \"tmp_exp.py\", line 6, in run\n    return [ca.evaluate(r, seed)['copy_count'] for r in rules]\nKeyError: 'copy_count'"
+  },
+  {
+   "id": "n11",
+   "parent": "n2",
+   "depth": 3,
+   "hypothesis": "HighLife variants around B35/S0235 with the glider seed should beat n2's fitness of 1.0.",
+   "rules_tested": [
+    "B235/S02345",
+    "B35/S235",
+    "B2345/S02345",
+    "B345/S02357",
+    "B356/S35",
+    "B357/S02357",
+    "B2357/S02358",
+    "B45/S02358",
+    "B5/S023568",
+    "B3456/S035"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:28:21+05:30",
+   "ended_at": "2026-09-23T19:28:23+05:30",
+   "best_rule": "B35/S235",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 136,
+    "growth": 27.2,
+    "stable": true
+   },
+   "frames": [
+    "frames/n11_0.png",
+    "frames/n11_20.png",
+    "frames/n11_40.png",
+    "frames/n11_60.png"
+   ],
+   "replay": {
+    "rule": "B35/S235",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B35/S235",
+     "copies": 1,
+     "alive": 136,
+     "growth": 27.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B345/S02357",
+     "copies": 1,
+     "alive": 927,
+     "growth": 185.4,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B357/S02357",
+     "copies": 1,
+     "alive": 28,
+     "growth": 5.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B45/S02358",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B5/S023568",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n12",
+   "parent": "n3",
+   "depth": 4,
+   "hypothesis": "survive-heavy rules around B357/S01235 with the glider seed should beat n3's fitness of 1.0.",
+   "rules_tested": [
+    "B57/S12356",
+    "B3578/S012345",
+    "B3457/S012345",
+    "B347/S01235",
+    "B357/S12358",
+    "B2357/S012345",
+    "B578/S0135",
+    "B378/S0123",
+    "B357/S1235",
+    "B3578/S01235",
+    "B37/S012345",
+    "B57/S01235",
+    "B3457/S01235",
+    "B7/S235",
+    "B357/S0123456"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:28:25+05:30",
+   "ended_at": "2026-09-23T19:28:27+05:30",
+   "best_rule": "B57/S12356",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 4,
+    "growth": 0.8,
+    "stable": true
+   },
+   "frames": [
+    "frames/n12_0.png",
+    "frames/n12_20.png",
+    "frames/n12_40.png",
+    "frames/n12_60.png"
+   ],
+   "replay": {
+    "rule": "B57/S12356",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B57/S12356",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B3578/S012345",
+     "copies": 1,
+     "alive": 1040,
+     "growth": 208.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B347/S01235",
+     "copies": 1,
+     "alive": 923,
+     "growth": 184.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B357/S12358",
+     "copies": 1,
+     "alive": 666,
+     "growth": 133.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B578/S0135",
+     "copies": 1,
+     "alive": 2,
+     "growth": 0.4,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n13",
+   "parent": "n11",
+   "depth": 4,
+   "hypothesis": "survive-heavy rules around B35/S235 with the glider seed should beat n11's fitness of 1.0.",
+   "rules_tested": [
+    "B35/S25",
+    "B3/S1235",
+    "B357/S2345",
+    "B358/S35",
+    "B358/S1235",
+    "B356/S25",
+    "B35/S23",
+    "B357/S2358",
+    "B358/S5",
+    "B356/S2357",
+    "B357/S23457"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:28:29+05:30",
+   "ended_at": "2026-09-23T19:28:32+05:30",
+   "best_rule": "B3/S1235",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 606,
+    "growth": 121.2,
+    "stable": true
+   },
+   "frames": [
+    "frames/n13_0.png",
+    "frames/n13_20.png",
+    "frames/n13_40.png",
+    "frames/n13_60.png"
+   ],
+   "replay": {
+    "rule": "B3/S1235",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B3/S1235",
+     "copies": 1,
+     "alive": 606,
+     "growth": 121.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B357/S2345",
+     "copies": 1,
+     "alive": 787,
+     "growth": 157.4,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B358/S1235",
+     "copies": 1,
+     "alive": 654,
+     "growth": 130.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B357/S2358",
+     "copies": 1,
+     "alive": 156,
+     "growth": 31.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B356/S2357",
+     "copies": 1,
+     "alive": 688,
+     "growth": 137.6,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n14",
+   "parent": "n2",
+   "depth": 3,
+   "hypothesis": "HighLife variants around B35/S0235 with the glider seed should beat n2's fitness of 1.0.",
+   "rules_tested": [
+    "B357/S023",
+    "B356/S025",
+    "B5/S012356",
+    "B356/S023456",
+    "B3458/S0125",
+    "B3/S235",
+    "B358/S02358",
+    "B357/S0235",
+    "B235/S0256"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:28:34+05:30",
+   "ended_at": "2026-09-23T19:28:36+05:30",
+   "best_rule": "B5/S012356",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 4,
+    "growth": 0.8,
+    "stable": true
+   },
+   "frames": [
+    "frames/n14_0.png",
+    "frames/n14_20.png",
+    "frames/n14_40.png",
+    "frames/n14_60.png"
+   ],
+   "replay": {
+    "rule": "B5/S012356",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B5/S012356",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B356/S023456",
+     "copies": 1,
+     "alive": 1181,
+     "growth": 236.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B3458/S0125",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B3/S235",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B358/S02358",
+     "copies": 1,
+     "alive": 248,
+     "growth": 49.6,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n15",
+   "parent": "n0",
+   "depth": 1,
+   "hypothesis": "sparse birth rules around B3/S23 with the glider seed should beat n0's fitness of 1.0.",
+   "rules_tested": [
+    "B37/S237",
+    "B236/S234",
+    "B348/S237",
+    "B38/S23",
+    "B345/S23",
+    "B38/S123",
+    "B23/S3",
+    "B36/S237",
+    "B37/S238"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:28:38+05:30",
+   "ended_at": "2026-09-23T19:28:40+05:30",
+   "best_rule": "B37/S237",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 5,
+    "growth": 1.0,
+    "stable": true
+   },
+   "frames": [
+    "frames/n15_0.png",
+    "frames/n15_20.png",
+    "frames/n15_40.png",
+    "frames/n15_60.png"
+   ],
+   "replay": {
+    "rule": "B37/S237",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B37/S237",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B348/S237",
+     "copies": 1,
+     "alive": 6,
+     "growth": 1.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B38/S23",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B345/S23",
+     "copies": 1,
+     "alive": 230,
+     "growth": 46.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B38/S123",
+     "copies": 1,
+     "alive": 20,
+     "growth": 4.0,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n16",
+   "parent": "n0",
+   "depth": 1,
+   "hypothesis": "HighLife variants around B3/S23 with the pi-heptomino seed should beat n0's fitness of 1.0.",
+   "rules_tested": [
+    "B235/S3",
+    "B345/S236",
+    "B35/S3",
+    "B38/S235",
+    "B37/S3",
+    "B358/S03",
+    "B35/S238",
+    "B238/S238",
+    "B38/S237",
+    "B38/S2357"
+   ],
+   "seed": [
+    [
+     1,
+     1,
+     1
+    ],
+    [
+     1,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     1
+    ]
+   ],
+   "seed_name": "pi-heptomino",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If pi-heptomino copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:28:42+05:30",
+   "ended_at": "2026-09-23T19:28:44+05:30",
+   "best_rule": "B345/S236",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 524,
+    "growth": 74.857,
+    "stable": true
+   },
+   "frames": [
+    "frames/n16_0.png",
+    "frames/n16_20.png",
+    "frames/n16_40.png",
+    "frames/n16_60.png"
+   ],
+   "replay": {
+    "rule": "B345/S236",
+    "seed": [
+     [
+      1,
+      1,
+      1
+     ],
+     [
+      1,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B345/S236",
+     "copies": 1,
+     "alive": 524,
+     "growth": 74.857,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B38/S235",
+     "copies": 1,
+     "alive": 24,
+     "growth": 3.429,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B38/S237",
+     "copies": 1,
+     "alive": 154,
+     "growth": 22.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B235/S3",
+     "copies": 1,
+     "alive": 1689,
+     "growth": 241.286,
+     "stable": false,
+     "fitness": 0.2
+    },
+    {
+     "rule": "B35/S3",
+     "copies": 1,
+     "alive": 0,
+     "growth": 0.0,
+     "stable": false,
+     "fitness": 0.2
+    }
+   ]
+  },
+  {
+   "id": "n17",
+   "parent": "n2",
+   "depth": 3,
+   "hypothesis": "B-only variations around B35/S0235 with the glider seed should beat n2's fitness of 1.0.",
+   "rules_tested": [
+    "B358/S0235",
+    "B235/S012358",
+    "B235/S01235",
+    "B5/S02357",
+    "B5/S025",
+    "B345/S025",
+    "B235/S023568",
+    "B357/S012358",
+    "B5/S02358",
+    "B3567/S023568",
+    "B345/S023",
+    "B56/S2345"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:28:46+05:30",
+   "ended_at": "2026-09-23T19:28:49+05:30",
+   "best_rule": "B358/S0235",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 456,
+    "growth": 91.2,
+    "stable": true
+   },
+   "frames": [
+    "frames/n17_0.png",
+    "frames/n17_20.png",
+    "frames/n17_40.png",
+    "frames/n17_60.png"
+   ],
+   "replay": {
+    "rule": "B358/S0235",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B358/S0235",
+     "copies": 1,
+     "alive": 456,
+     "growth": 91.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B5/S02357",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B345/S025",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B357/S012358",
+     "copies": 1,
+     "alive": 652,
+     "growth": 130.4,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B5/S02358",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n18",
+   "parent": "n2",
+   "depth": 3,
+   "hypothesis": "Seeds-type explosive rules around B35/S0235 with the pi-heptomino seed should beat n2's fitness of 1.0.",
+   "rules_tested": [
+    "B3/S02345",
+    "B356/S0357",
+    "B36/S02358",
+    "B235/S023",
+    "B36/S0356",
+    "B345/S02358",
+    "B235/S2358",
+    "B356/S035",
+    "B357/S02356",
+    "B5/S02345"
+   ],
+   "seed": [
+    [
+     1,
+     1,
+     1
+    ],
+    [
+     1,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     1
+    ]
+   ],
+   "seed_name": "pi-heptomino",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If pi-heptomino copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:28:51+05:30",
+   "ended_at": "2026-09-23T19:28:53+05:30",
+   "best_rule": "B3/S02345",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 462,
+    "growth": 66.0,
+    "stable": true
+   },
+   "frames": [
+    "frames/n18_0.png",
+    "frames/n18_20.png",
+    "frames/n18_40.png",
+    "frames/n18_60.png"
+   ],
+   "replay": {
+    "rule": "B3/S02345",
+    "seed": [
+     [
+      1,
+      1,
+      1
+     ],
+     [
+      1,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B3/S02345",
+     "copies": 1,
+     "alive": 462,
+     "growth": 66.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B36/S02358",
+     "copies": 1,
+     "alive": 16,
+     "growth": 2.286,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B345/S02358",
+     "copies": 1,
+     "alive": 1006,
+     "growth": 143.714,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B357/S02356",
+     "copies": 1,
+     "alive": 582,
+     "growth": 83.143,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B5/S02345",
+     "copies": 1,
+     "alive": 6,
+     "growth": 0.857,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n19",
+   "parent": "n0",
+   "depth": 1,
+   "hypothesis": "HighLife variants around B3/S23 with the HighLife replicator seed should beat n0's fitness of 1.0.",
+   "rules_tested": [
+    "B35/S2",
+    "B4/S1236",
+    "B378/S23",
+    "B34/S02",
+    "B234/S2367",
+    "B7/S2",
+    "B4/S13",
+    "B34/S27",
+    "B23/S236",
+    "B357/S26"
+   ],
+   "seed": [
+    [
+     0,
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   ],
+   "seed_name": "HighLife replicator",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If HighLife replicator copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:28:55+05:30",
+   "ended_at": "2026-09-23T19:28:57+05:30",
+   "best_rule": "B4/S1236",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 12,
+    "growth": 1.0,
+    "stable": true
+   },
+   "frames": [
+    "frames/n19_0.png",
+    "frames/n19_20.png",
+    "frames/n19_40.png",
+    "frames/n19_60.png"
+   ],
+   "replay": {
+    "rule": "B4/S1236",
+    "seed": [
+     [
+      0,
+      0,
+      1,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     [
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B4/S1236",
+     "copies": 1,
+     "alive": 12,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B378/S23",
+     "copies": 1,
+     "alive": 8,
+     "growth": 0.667,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B34/S02",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.333,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B4/S13",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.333,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B35/S2",
+     "copies": 1,
+     "alive": 0,
+     "growth": 0.0,
+     "stable": false,
+     "fitness": 0.2
+    }
+   ]
+  },
+  {
+   "id": "n20",
+   "parent": "n0",
+   "depth": 1,
+   "hypothesis": "B3 sweeps over survive sets around B3/S23 with the glider seed should beat n0's fitness of 1.0.",
+   "rules_tested": [
+    "B37/S236",
+    "B378/S1237",
+    "B36/S238",
+    "B368/S0235",
+    "B236/S23",
+    "B34/S237",
+    "B345/S2348",
+    "B34/S235",
+    "B34/S123",
+    "B36/S38",
+    "B3/S2345",
+    "B378/S2356",
+    "B38/S236",
+    "B34/S1237",
+    "B357/S3",
+    "B238/S2346"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:28:59+05:30",
+   "ended_at": "2026-09-23T19:29:02+05:30",
+   "best_rule": "B37/S236",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 5,
+    "growth": 1.0,
+    "stable": true
+   },
+   "frames": [
+    "frames/n20_0.png",
+    "frames/n20_20.png",
+    "frames/n20_40.png",
+    "frames/n20_60.png"
+   ],
+   "replay": {
+    "rule": "B37/S236",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B37/S236",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B378/S1237",
+     "copies": 1,
+     "alive": 472,
+     "growth": 94.4,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B36/S238",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B368/S0235",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B34/S237",
+     "copies": 1,
+     "alive": 6,
+     "growth": 1.2,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n21",
+   "parent": "n1",
+   "depth": 2,
+   "hypothesis": "B-only variations around B3/S023 with the pi-heptomino seed should beat n1's fitness of 1.0.",
+   "rules_tested": [
+    "B37/S023",
+    "B3/S0123",
+    "B3/S028",
+    "B23/S0235",
+    "B38/S0123",
+    "B38/S0235",
+    "B36/S02356",
+    "B34/S0236",
+    "B368/S023",
+    "B347/S027"
+   ],
+   "seed": [
+    [
+     1,
+     1,
+     1
+    ],
+    [
+     1,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     1
+    ]
+   ],
+   "seed_name": "pi-heptomino",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If pi-heptomino copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:29:04+05:30",
+   "ended_at": "2026-09-23T19:29:06+05:30",
+   "best_rule": "B37/S023",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 3,
+    "growth": 0.429,
+    "stable": true
+   },
+   "frames": [
+    "frames/n21_0.png",
+    "frames/n21_20.png",
+    "frames/n21_40.png",
+    "frames/n21_60.png"
+   ],
+   "replay": {
+    "rule": "B37/S023",
+    "seed": [
+     [
+      1,
+      1,
+      1
+     ],
+     [
+      1,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B37/S023",
+     "copies": 1,
+     "alive": 3,
+     "growth": 0.429,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B3/S0123",
+     "copies": 1,
+     "alive": 340,
+     "growth": 48.571,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B38/S0123",
+     "copies": 1,
+     "alive": 402,
+     "growth": 57.429,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B38/S0235",
+     "copies": 1,
+     "alive": 139,
+     "growth": 19.857,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B36/S02356",
+     "copies": 1,
+     "alive": 284,
+     "growth": 40.571,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n22",
+   "parent": "n11",
+   "depth": 4,
+   "hypothesis": "B-only variations around B35/S235 with the glider seed should beat n11's fitness of 1.0.",
+   "rules_tested": [
+    "B2357/S345",
+    "B345/S2356",
+    "B56/S02356",
+    "B345/S1235",
+    "B58/S1235",
+    "B357/S234",
+    "B3/S35",
+    "B35/S2356",
+    "B235/S235"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:29:08+05:30",
+   "ended_at": "2026-09-23T19:29:11+05:30",
+   "best_rule": "B345/S2356",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 1177,
+    "growth": 235.4,
+    "stable": true
+   },
+   "frames": [
+    "frames/n22_0.png",
+    "frames/n22_20.png",
+    "frames/n22_40.png",
+    "frames/n22_60.png"
+   ],
+   "replay": {
+    "rule": "B345/S2356",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B345/S2356",
+     "copies": 1,
+     "alive": 1177,
+     "growth": 235.4,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B56/S02356",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B345/S1235",
+     "copies": 1,
+     "alive": 1150,
+     "growth": 230.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B58/S1235",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B357/S234",
+     "copies": 1,
+     "alive": 517,
+     "growth": 103.4,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n23",
+   "parent": "n2",
+   "depth": 3,
+   "hypothesis": "sparse birth rules around B35/S0235 with the glider seed should beat n2's fitness of 1.0.",
+   "rules_tested": [
+    "B3568/S02",
+    "B38/S03",
+    "B345/S01235",
+    "B356/S02358",
+    "B23/S02345",
+    "B35/S2357",
+    "B35/S1235",
+    "B357/S035",
+    "B3458/S0235"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "error",
+   "started_at": "2026-09-23T19:29:13+05:30",
+   "ended_at": "2026-09-23T19:29:15+05:30",
+   "best_rule": null,
+   "fitness": 0.0,
+   "metrics": {},
+   "frames": [],
+   "replay": null,
+   "error": "Traceback (most recent call last):\n  File \"tmp_exp.py\", line 6, in run\n    return [ca.evaluate(r, seed)['copy_count'] for r in rules]\nKeyError: 'copy_count'"
+  },
+  {
+   "id": "n24",
+   "parent": "n12",
+   "depth": 5,
+   "hypothesis": "B3 sweeps over survive sets around B57/S12356 with the HighLife replicator seed should beat n12's fitness of 1.0.",
+   "rules_tested": [
+    "B57/S12567",
+    "B57/S1356",
+    "B2578/S1256",
+    "B357/S1256",
+    "B578/S012356",
+    "B257/S12356",
+    "B57/S1256",
+    "B457/S1256",
+    "B57/S01256",
+    "B7/S1356",
+    "B5/S12356",
+    "B57/S1234568"
+   ],
+   "seed": [
+    [
+     0,
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   ],
+   "seed_name": "HighLife replicator",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If HighLife replicator copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:29:17+05:30",
+   "ended_at": "2026-09-23T19:29:19+05:30",
+   "best_rule": "B57/S12567",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 6,
+    "growth": 0.5,
+    "stable": true
+   },
+   "frames": [
+    "frames/n24_0.png",
+    "frames/n24_20.png",
+    "frames/n24_40.png",
+    "frames/n24_60.png"
+   ],
+   "replay": {
+    "rule": "B57/S12567",
+    "seed": [
+     [
+      0,
+      0,
+      1,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     [
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B57/S12567",
+     "copies": 1,
+     "alive": 6,
+     "growth": 0.5,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B578/S012356",
+     "copies": 1,
+     "alive": 10,
+     "growth": 0.833,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B57/S1256",
+     "copies": 1,
+     "alive": 6,
+     "growth": 0.5,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B57/S01256",
+     "copies": 1,
+     "alive": 8,
+     "growth": 0.667,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B7/S1356",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.333,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n25",
+   "parent": "n0",
+   "depth": 1,
+   "hypothesis": "sparse birth rules around B3/S23 with the glider seed should beat n0's fitness of 1.0.",
+   "rules_tested": [
+    "B3/S2378",
+    "B37/S2",
+    "B35/S0237",
+    "B37/S235",
+    "B4/S36",
+    "B38/S36",
+    "B346/S28",
+    "B346/S237",
+    "B35/S237",
+    "B236/S235"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:29:21+05:30",
+   "ended_at": "2026-09-23T19:29:23+05:30",
+   "best_rule": "B3/S2378",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 5,
+    "growth": 1.0,
+    "stable": true
+   },
+   "frames": [
+    "frames/n25_0.png",
+    "frames/n25_20.png",
+    "frames/n25_40.png",
+    "frames/n25_60.png"
+   ],
+   "replay": {
+    "rule": "B3/S2378",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B3/S2378",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B37/S235",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B346/S237",
+     "copies": 1,
+     "alive": 448,
+     "growth": 89.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B37/S2",
+     "copies": 1,
+     "alive": 0,
+     "growth": 0.0,
+     "stable": false,
+     "fitness": 0.2
+    },
+    {
+     "rule": "B35/S0237",
+     "copies": 1,
+     "alive": 0,
+     "growth": 0.0,
+     "stable": false,
+     "fitness": 0.2
+    }
+   ]
+  },
+  {
+   "id": "n26",
+   "parent": "n1",
+   "depth": 2,
+   "hypothesis": "HighLife variants around B3/S023 with the glider seed should beat n1's fitness of 1.0.",
+   "rules_tested": [
+    "B37/S0123",
+    "B34/S03",
+    "B346/S02346",
+    "B36/S02",
+    "B3/S0237",
+    "B35/S02",
+    "B235/S013",
+    "B37/S02"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:29:25+05:30",
+   "ended_at": "2026-09-23T19:29:28+05:30",
+   "best_rule": "B37/S0123",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 504,
+    "growth": 100.8,
+    "stable": true
+   },
+   "frames": [
+    "frames/n26_0.png",
+    "frames/n26_20.png",
+    "frames/n26_40.png",
+    "frames/n26_60.png"
+   ],
+   "replay": {
+    "rule": "B37/S0123",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B37/S0123",
+     "copies": 1,
+     "alive": 504,
+     "growth": 100.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B34/S03",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B3/S0237",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B346/S02346",
+     "copies": 1,
+     "alive": 1323,
+     "growth": 264.6,
+     "stable": false,
+     "fitness": 0.2
+    },
+    {
+     "rule": "B36/S02",
+     "copies": 1,
+     "alive": 0,
+     "growth": 0.0,
+     "stable": false,
+     "fitness": 0.2
+    }
+   ]
+  },
+  {
+   "id": "n27",
+   "parent": "n2",
+   "depth": 3,
+   "hypothesis": "B-only variations around B35/S0235 with the glider seed should beat n2's fitness of 1.0.",
+   "rules_tested": [
+    "B3/S01235",
+    "B5/S25",
+    "B356/S01235",
+    "B3/S023567",
+    "B5/S023457",
+    "B345/S035",
+    "B57/S023457",
+    "B35/S05",
+    "B358/S025",
+    "B235/S023567",
+    "B3/S02357",
+    "B23/S0123"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:29:30+05:30",
+   "ended_at": "2026-09-23T19:29:32+05:30",
+   "best_rule": "B3/S01235",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 646,
+    "growth": 129.2,
+    "stable": true
+   },
+   "frames": [
+    "frames/n27_0.png",
+    "frames/n27_20.png",
+    "frames/n27_40.png",
+    "frames/n27_60.png"
+   ],
+   "replay": {
+    "rule": "B3/S01235",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B3/S01235",
+     "copies": 1,
+     "alive": 646,
+     "growth": 129.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B356/S01235",
+     "copies": 1,
+     "alive": 744,
+     "growth": 148.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B3/S023567",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B5/S023457",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B345/S035",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n28",
+   "parent": "n1",
+   "depth": 2,
+   "hypothesis": "sparse birth rules around B3/S023 with the glider seed should beat n1's fitness of 1.0.",
+   "rules_tested": [
+    "B3/S02",
+    "B34/S0235",
+    "B357/S02",
+    "B35/S0238",
+    "B36/S0236",
+    "B358/S023",
+    "B358/S238",
+    "B345/S02",
+    "B35/S0123",
+    "B37/S03",
+    "B348/S123",
+    "B3/S0234",
+    "B23/S01235"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:29:34+05:30",
+   "ended_at": "2026-09-23T19:29:37+05:30",
+   "best_rule": "B34/S0235",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 6,
+    "growth": 1.2,
+    "stable": true
+   },
+   "frames": [
+    "frames/n28_0.png",
+    "frames/n28_20.png",
+    "frames/n28_40.png",
+    "frames/n28_60.png"
+   ],
+   "replay": {
+    "rule": "B34/S0235",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B34/S0235",
+     "copies": 1,
+     "alive": 6,
+     "growth": 1.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B36/S0236",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B345/S02",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B35/S0123",
+     "copies": 1,
+     "alive": 454,
+     "growth": 90.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B348/S123",
+     "copies": 1,
+     "alive": 712,
+     "growth": 142.4,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n29",
+   "parent": "n2",
+   "depth": 3,
+   "hypothesis": "sparse birth rules around B35/S0235 with the glider seed should beat n2's fitness of 1.0.",
+   "rules_tested": [
+    "B3456/S0235",
+    "B357/S02345",
+    "B356/S02356",
+    "B358/S0234",
+    "B25/S0235",
+    "B358/S02",
+    "B235/S035",
+    "B235/S0238",
+    "B356/S1235",
+    "B35/S0345",
+    "B2356/S235"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:29:39+05:30",
+   "ended_at": "2026-09-23T19:29:41+05:30",
+   "best_rule": "B3456/S0235",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 986,
+    "growth": 197.2,
+    "stable": true
+   },
+   "frames": [
+    "frames/n29_0.png",
+    "frames/n29_20.png",
+    "frames/n29_40.png",
+    "frames/n29_60.png"
+   ],
+   "replay": {
+    "rule": "B3456/S0235",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B3456/S0235",
+     "copies": 1,
+     "alive": 986,
+     "growth": 197.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B357/S02345",
+     "copies": 1,
+     "alive": 837,
+     "growth": 167.4,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B356/S02356",
+     "copies": 1,
+     "alive": 664,
+     "growth": 132.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B358/S0234",
+     "copies": 1,
+     "alive": 560,
+     "growth": 112.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B356/S1235",
+     "copies": 1,
+     "alive": 608,
+     "growth": 121.6,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n30",
+   "parent": "n1",
+   "depth": 2,
+   "hypothesis": "B-only variations around B3/S023 with the glider seed should beat n1's fitness of 1.0.",
+   "rules_tested": [
+    "B34/S026",
+    "B6/S03",
+    "B36/S0235",
+    "B348/S02345",
+    "B23/S234",
+    "B23/S023",
+    "B238/S0237",
+    "B37/S0238",
+    "B37/S0236",
+    "B38/S02",
+    "B4/S023"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:29:43+05:30",
+   "ended_at": "2026-09-23T19:29:46+05:30",
+   "best_rule": "B36/S0235",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 5,
+    "growth": 1.0,
+    "stable": true
+   },
+   "frames": [
+    "frames/n30_0.png",
+    "frames/n30_20.png",
+    "frames/n30_40.png",
+    "frames/n30_60.png"
+   ],
+   "replay": {
+    "rule": "B36/S0235",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B36/S0235",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B37/S0238",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B37/S0236",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B4/S023",
+     "copies": 1,
+     "alive": 3,
+     "growth": 0.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B34/S026",
+     "copies": 1,
+     "alive": 0,
+     "growth": 0.0,
+     "stable": false,
+     "fitness": 0.2
+    }
+   ]
+  },
+  {
+   "id": "n31",
+   "parent": "n4",
+   "depth": 2,
+   "hypothesis": "B-only variations around B3/S237 with the glider seed should beat n4's fitness of 1.0.",
+   "rules_tested": [
+    "B34/S2367",
+    "B238/S237",
+    "B38/S2378",
+    "B368/S234",
+    "B3/S37",
+    "B37/S2347",
+    "B38/S12357",
+    "B3/S27",
+    "B3/S2367",
+    "B367/S23",
+    "B36/S37",
+    "B348/S1237",
+    "B3/S1237"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:29:48+05:30",
+   "ended_at": "2026-09-23T19:29:50+05:30",
+   "best_rule": "B34/S2367",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 6,
+    "growth": 1.2,
+    "stable": true
+   },
+   "frames": [
+    "frames/n31_0.png",
+    "frames/n31_20.png",
+    "frames/n31_40.png",
+    "frames/n31_60.png"
+   ],
+   "replay": {
+    "rule": "B34/S2367",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B34/S2367",
+     "copies": 1,
+     "alive": 6,
+     "growth": 1.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B38/S2378",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B368/S234",
+     "copies": 1,
+     "alive": 396,
+     "growth": 79.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B37/S2347",
+     "copies": 1,
+     "alive": 579,
+     "growth": 115.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B38/S12357",
+     "copies": 1,
+     "alive": 478,
+     "growth": 95.6,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n32",
+   "parent": "n14",
+   "depth": 4,
+   "hypothesis": "B-only variations around B5/S012356 with the glider seed should beat n14's fitness of 1.0.",
+   "rules_tested": [
+    "B5/S0123567",
+    "B457/S0136",
+    "B45/S012356",
+    "B36/S023568",
+    "B25/S012356",
+    "B45/S01235",
+    "B567/S013568",
+    "B5/S0123568",
+    "B57/S1235"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:29:52+05:30",
+   "ended_at": "2026-09-23T19:29:55+05:30",
+   "best_rule": "B5/S0123567",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 4,
+    "growth": 0.8,
+    "stable": true
+   },
+   "frames": [
+    "frames/n32_0.png",
+    "frames/n32_20.png",
+    "frames/n32_40.png",
+    "frames/n32_60.png"
+   ],
+   "replay": {
+    "rule": "B5/S0123567",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B5/S0123567",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B457/S0136",
+     "copies": 1,
+     "alive": 2,
+     "growth": 0.4,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B45/S012356",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B36/S023568",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B45/S01235",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n33",
+   "parent": "n6",
+   "depth": 4,
+   "hypothesis": "survive-heavy rules around B35/S02345 with the HighLife replicator seed should beat n6's fitness of 1.0.",
+   "rules_tested": [
+    "B345/S0345",
+    "B356/S023457",
+    "B358/S23456",
+    "B2345/S034",
+    "B358/S023458",
+    "B345/S012345",
+    "B35/S023457",
+    "B235/S0245",
+    "B357/S023456",
+    "B357/S0234",
+    "B345/S023456",
+    "B5/S2345",
+    "B357/S023458",
+    "B56/S023456"
+   ],
+   "seed": [
+    [
+     0,
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   ],
+   "seed_name": "HighLife replicator",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If HighLife replicator copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:29:57+05:30",
+   "ended_at": "2026-09-23T19:29:59+05:30",
+   "best_rule": "B358/S23456",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 160,
+    "growth": 13.333,
+    "stable": true
+   },
+   "frames": [
+    "frames/n33_0.png",
+    "frames/n33_20.png",
+    "frames/n33_40.png",
+    "frames/n33_60.png"
+   ],
+   "replay": {
+    "rule": "B358/S23456",
+    "seed": [
+     [
+      0,
+      0,
+      1,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     [
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B358/S23456",
+     "copies": 1,
+     "alive": 160,
+     "growth": 13.333,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B358/S023458",
+     "copies": 1,
+     "alive": 1158,
+     "growth": 96.5,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B357/S0234",
+     "copies": 1,
+     "alive": 612,
+     "growth": 51.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B5/S2345",
+     "copies": 1,
+     "alive": 14,
+     "growth": 1.167,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B357/S023458",
+     "copies": 1,
+     "alive": 842,
+     "growth": 70.167,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n34",
+   "parent": "n20",
+   "depth": 2,
+   "hypothesis": "survive-heavy rules around B37/S236 with the glider seed should beat n20's fitness of 1.0.",
+   "rules_tested": [
+    "B378/S0236",
+    "B37/S2356",
+    "B3567/S0236",
+    "B378/S1236",
+    "B7/S02346",
+    "B7/S2356",
+    "B367/S236",
+    "B347/S2367",
+    "B3/S2346",
+    "B3/S2356",
+    "B378/S26",
+    "B367/S2346",
+    "B347/S236"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:30:01+05:30",
+   "ended_at": "2026-09-23T19:30:04+05:30",
+   "best_rule": "B378/S0236",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 5,
+    "growth": 1.0,
+    "stable": true
+   },
+   "frames": [
+    "frames/n34_0.png",
+    "frames/n34_20.png",
+    "frames/n34_40.png",
+    "frames/n34_60.png"
+   ],
+   "replay": {
+    "rule": "B378/S0236",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B378/S0236",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B37/S2356",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B378/S1236",
+     "copies": 1,
+     "alive": 442,
+     "growth": 88.4,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B7/S02346",
+     "copies": 1,
+     "alive": 3,
+     "growth": 0.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B7/S2356",
+     "copies": 1,
+     "alive": 3,
+     "growth": 0.6,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n35",
+   "parent": "n1",
+   "depth": 2,
+   "hypothesis": "Seeds-type explosive rules around B3/S023 with the glider seed should beat n1's fitness of 1.0.",
+   "rules_tested": [
+    "B235/S0234",
+    "B237/S02358",
+    "B2/S01238",
+    "B6/S0236",
+    "B36/S01238",
+    "B238/S023",
+    "B34/S0234",
+    "B38/S0236",
+    "B36/S03"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:30:06+05:30",
+   "ended_at": "2026-09-23T19:30:08+05:30",
+   "best_rule": "B6/S0236",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 3,
+    "growth": 0.6,
+    "stable": true
+   },
+   "frames": [
+    "frames/n35_0.png",
+    "frames/n35_20.png",
+    "frames/n35_40.png",
+    "frames/n35_60.png"
+   ],
+   "replay": {
+    "rule": "B6/S0236",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B6/S0236",
+     "copies": 1,
+     "alive": 3,
+     "growth": 0.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B36/S01238",
+     "copies": 1,
+     "alive": 398,
+     "growth": 79.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B34/S0234",
+     "copies": 1,
+     "alive": 1028,
+     "growth": 205.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B38/S0236",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B235/S0234",
+     "copies": 1,
+     "alive": 1973,
+     "growth": 394.6,
+     "stable": false,
+     "fitness": 0.2
+    }
+   ]
+  },
+  {
+   "id": "n36",
+   "parent": "n14",
+   "depth": 4,
+   "hypothesis": "sparse birth rules around B5/S012356 with the glider seed should beat n14's fitness of 1.0.",
+   "rules_tested": [
+    "B235/S013456",
+    "B35/S0236",
+    "B56/S012356",
+    "B3/S012356",
+    "B5/S01256",
+    "B25/S0123456",
+    "B56/S01356",
+    "B25/S0123567",
+    "B568/S023456",
+    "B23/S012567",
+    "B57/S0123456",
+    "B3/S0123567",
+    "B57/S02356"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:30:10+05:30",
+   "ended_at": "2026-09-23T19:30:13+05:30",
+   "best_rule": "B56/S012356",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 4,
+    "growth": 0.8,
+    "stable": true
+   },
+   "frames": [
+    "frames/n36_0.png",
+    "frames/n36_20.png",
+    "frames/n36_40.png",
+    "frames/n36_60.png"
+   ],
+   "replay": {
+    "rule": "B56/S012356",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B56/S012356",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B3/S012356",
+     "copies": 1,
+     "alive": 622,
+     "growth": 124.4,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B5/S01256",
+     "copies": 1,
+     "alive": 3,
+     "growth": 0.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B56/S01356",
+     "copies": 1,
+     "alive": 2,
+     "growth": 0.4,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B568/S023456",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n37",
+   "parent": "n0",
+   "depth": 1,
+   "hypothesis": "Seeds-type explosive rules around B3/S23 with the glider seed should beat n0's fitness of 1.0.",
+   "rules_tested": [
+    "B34/S26",
+    "B38/S238",
+    "B348/S235",
+    "B23/S26",
+    "B367/S2367",
+    "B368/S0123",
+    "B36/S2345",
+    "B346/S234",
+    "B238/S123",
+    "B348/S03",
+    "B38/S2367",
+    "B234/S23"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:30:15+05:30",
+   "ended_at": "2026-09-23T19:30:17+05:30",
+   "best_rule": "B38/S238",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 5,
+    "growth": 1.0,
+    "stable": true
+   },
+   "frames": [
+    "frames/n37_0.png",
+    "frames/n37_20.png",
+    "frames/n37_40.png",
+    "frames/n37_60.png"
+   ],
+   "replay": {
+    "rule": "B38/S238",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B38/S238",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B348/S235",
+     "copies": 1,
+     "alive": 6,
+     "growth": 1.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B367/S2367",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B368/S0123",
+     "copies": 1,
+     "alive": 402,
+     "growth": 80.4,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B36/S2345",
+     "copies": 1,
+     "alive": 728,
+     "growth": 145.6,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n38",
+   "parent": "n0",
+   "depth": 1,
+   "hypothesis": "survive-heavy rules around B3/S23 with the glider seed should beat n0's fitness of 1.0.",
+   "rules_tested": [
+    "B345/S3",
+    "B357/S23",
+    "B6/S02",
+    "B235/S25",
+    "B6/S2356",
+    "B23/S2378",
+    "B36/S3",
+    "B358/S13",
+    "B357/S27"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:30:19+05:30",
+   "ended_at": "2026-09-23T19:30:21+05:30",
+   "best_rule": "B345/S3",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 4,
+    "growth": 0.8,
+    "stable": true
+   },
+   "frames": [
+    "frames/n38_0.png",
+    "frames/n38_20.png",
+    "frames/n38_40.png",
+    "frames/n38_60.png"
+   ],
+   "replay": {
+    "rule": "B345/S3",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B345/S3",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B6/S02",
+     "copies": 1,
+     "alive": 1,
+     "growth": 0.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B6/S2356",
+     "copies": 1,
+     "alive": 3,
+     "growth": 0.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B357/S23",
+     "copies": 1,
+     "alive": 0,
+     "growth": 0.0,
+     "stable": false,
+     "fitness": 0.2
+    },
+    {
+     "rule": "B235/S25",
+     "copies": 1,
+     "alive": 1833,
+     "growth": 366.6,
+     "stable": false,
+     "fitness": 0.2
+    }
+   ]
+  },
+  {
+   "id": "n39",
+   "parent": "n1",
+   "depth": 2,
+   "hypothesis": "HighLife variants around B3/S023 with the glider seed should beat n1's fitness of 1.0.",
+   "rules_tested": [
+    "B37/S0234",
+    "B38/S027",
+    "B37/S02345",
+    "B367/S03",
+    "B23/S01234",
+    "B36/S0123",
+    "B34/S025",
+    "B368/S01235",
+    "B34/S0123"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:30:23+05:30",
+   "ended_at": "2026-09-23T19:30:26+05:30",
+   "best_rule": "B37/S0234",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 551,
+    "growth": 110.2,
+    "stable": true
+   },
+   "frames": [
+    "frames/n39_0.png",
+    "frames/n39_20.png",
+    "frames/n39_40.png",
+    "frames/n39_60.png"
+   ],
+   "replay": {
+    "rule": "B37/S0234",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B37/S0234",
+     "copies": 1,
+     "alive": 551,
+     "growth": 110.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B37/S02345",
+     "copies": 1,
+     "alive": 659,
+     "growth": 131.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B36/S0123",
+     "copies": 1,
+     "alive": 355,
+     "growth": 71.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B368/S01235",
+     "copies": 1,
+     "alive": 679,
+     "growth": 135.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B34/S0123",
+     "copies": 1,
+     "alive": 896,
+     "growth": 179.2,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n40",
+   "parent": "n2",
+   "depth": 3,
+   "hypothesis": "sparse birth rules around B35/S0235 with the glider seed should beat n2's fitness of 1.0.",
+   "rules_tested": [
+    "B3567/S023",
+    "B3568/S023",
+    "B2357/S035",
+    "B3457/S2357",
+    "B358/S023578",
+    "B235/S02",
+    "B235/S02357",
+    "B358/S035",
+    "B57/S023"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:30:28+05:30",
+   "ended_at": "2026-09-23T19:30:30+05:30",
+   "best_rule": "B3457/S2357",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 968,
+    "growth": 193.6,
+    "stable": true
+   },
+   "frames": [
+    "frames/n40_0.png",
+    "frames/n40_20.png",
+    "frames/n40_40.png",
+    "frames/n40_60.png"
+   ],
+   "replay": {
+    "rule": "B3457/S2357",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B3457/S2357",
+     "copies": 1,
+     "alive": 968,
+     "growth": 193.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B358/S023578",
+     "copies": 1,
+     "alive": 380,
+     "growth": 76.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B57/S023",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B3567/S023",
+     "copies": 1,
+     "alive": 0,
+     "growth": 0.0,
+     "stable": false,
+     "fitness": 0.2
+    },
+    {
+     "rule": "B3568/S023",
+     "copies": 1,
+     "alive": 0,
+     "growth": 0.0,
+     "stable": false,
+     "fitness": 0.2
+    }
+   ]
+  },
+  {
+   "id": "n41",
+   "parent": "n1",
+   "depth": 2,
+   "hypothesis": "B3 sweeps over survive sets around B3/S023 with the glider seed should beat n1's fitness of 1.0.",
+   "rules_tested": [
+    "B236/S0234",
+    "B346/S02358",
+    "B23/S0238",
+    "B368/S0236",
+    "B34/S0238",
+    "B23/S012",
+    "B6/S012",
+    "B38/S0237",
+    "B3/S013",
+    "B346/S036",
+    "B356/S012"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:30:32+05:30",
+   "ended_at": "2026-09-23T19:30:34+05:30",
+   "best_rule": "B346/S02358",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 698,
+    "growth": 139.6,
+    "stable": true
+   },
+   "frames": [
+    "frames/n41_0.png",
+    "frames/n41_20.png",
+    "frames/n41_40.png",
+    "frames/n41_60.png"
+   ],
+   "replay": {
+    "rule": "B346/S02358",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B346/S02358",
+     "copies": 1,
+     "alive": 698,
+     "growth": 139.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B368/S0236",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B34/S0238",
+     "copies": 1,
+     "alive": 6,
+     "growth": 1.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B6/S012",
+     "copies": 1,
+     "alive": 3,
+     "growth": 0.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B38/S0237",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n42",
+   "parent": "n33",
+   "depth": 5,
+   "hypothesis": "B-only variations around B358/S23456 with the HighLife replicator seed should beat n33's fitness of 1.0.",
+   "rules_tested": [
+    "B58/S234568",
+    "B348/S023456",
+    "B3458/S2346",
+    "B3568/S023456",
+    "B358/S023456",
+    "B2358/S23456",
+    "B3458/S234568",
+    "B58/S2356",
+    "B358/S2456",
+    "B38/S12356",
+    "B35/S234567",
+    "B38/S2345",
+    "B358/S2356",
+    "B35678/S24567"
+   ],
+   "seed": [
+    [
+     0,
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   ],
+   "seed_name": "HighLife replicator",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If HighLife replicator copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "error",
+   "started_at": "2026-09-23T19:30:36+05:30",
+   "ended_at": "2026-09-23T19:30:38+05:30",
+   "best_rule": null,
+   "fitness": 0.0,
+   "metrics": {},
+   "frames": [],
+   "replay": null,
+   "error": "Traceback (most recent call last):\n  File \"tmp_exp.py\", line 6, in run\n    return [ca.evaluate(r, seed)['copy_count'] for r in rules]\nKeyError: 'copy_count'"
+  },
+  {
+   "id": "n43",
+   "parent": "n2",
+   "depth": 3,
+   "hypothesis": "B3 sweeps over survive sets around B35/S0235 with the glider seed should beat n2's fitness of 1.0.",
+   "rules_tested": [
+    "B5/S235",
+    "B358/S25",
+    "B5/S023567",
+    "B356/S012357",
+    "B358/S02357",
+    "B3456/S012357",
+    "B356/S03",
+    "B345/S2345"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:30:40+05:30",
+   "ended_at": "2026-09-23T19:30:43+05:30",
+   "best_rule": "B5/S235",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 4,
+    "growth": 0.8,
+    "stable": true
+   },
+   "frames": [
+    "frames/n43_0.png",
+    "frames/n43_20.png",
+    "frames/n43_40.png",
+    "frames/n43_60.png"
+   ],
+   "replay": {
+    "rule": "B5/S235",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B5/S235",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B5/S023567",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B356/S012357",
+     "copies": 1,
+     "alive": 718,
+     "growth": 143.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B358/S02357",
+     "copies": 1,
+     "alive": 572,
+     "growth": 114.4,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B358/S25",
+     "copies": 1,
+     "alive": 0,
+     "growth": 0.0,
+     "stable": false,
+     "fitness": 0.2
+    }
+   ]
+  },
+  {
+   "id": "n44",
+   "parent": "n1",
+   "depth": 2,
+   "hypothesis": "survive-heavy rules around B3/S023 with the glider seed should beat n1's fitness of 1.0.",
+   "rules_tested": [
+    "B378/S0235",
+    "B345/S0238",
+    "B38/S024",
+    "B346/S03",
+    "B238/S034",
+    "B3/S02368",
+    "B378/S238",
+    "B357/S01237",
+    "B5/S238",
+    "B378/S023",
+    "B23/S027",
+    "B238/S035"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:30:45+05:30",
+   "ended_at": "2026-09-23T19:30:47+05:30",
+   "best_rule": "B378/S0235",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 5,
+    "growth": 1.0,
+    "stable": true
+   },
+   "frames": [
+    "frames/n44_0.png",
+    "frames/n44_20.png",
+    "frames/n44_40.png",
+    "frames/n44_60.png"
+   ],
+   "replay": {
+    "rule": "B378/S0235",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B378/S0235",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B345/S0238",
+     "copies": 1,
+     "alive": 296,
+     "growth": 59.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B346/S03",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B3/S02368",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B378/S238",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n45",
+   "parent": "n0",
+   "depth": 1,
+   "hypothesis": "sparse birth rules around B3/S23 with the glider seed should beat n0's fitness of 1.0.",
+   "rules_tested": [
+    "B347/S23",
+    "B368/S2",
+    "B4/S2367",
+    "B238/S3",
+    "B3/S2348",
+    "B235/S0236",
+    "B234/S237",
+    "B36/S13"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:30:49+05:30",
+   "ended_at": "2026-09-23T19:30:52+05:30",
+   "best_rule": "B347/S23",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 6,
+    "growth": 1.2,
+    "stable": true
+   },
+   "frames": [
+    "frames/n45_0.png",
+    "frames/n45_20.png",
+    "frames/n45_40.png",
+    "frames/n45_60.png"
+   ],
+   "replay": {
+    "rule": "B347/S23",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B347/S23",
+     "copies": 1,
+     "alive": 6,
+     "growth": 1.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B4/S2367",
+     "copies": 1,
+     "alive": 3,
+     "growth": 0.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B3/S2348",
+     "copies": 1,
+     "alive": 518,
+     "growth": 103.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B368/S2",
+     "copies": 1,
+     "alive": 0,
+     "growth": 0.0,
+     "stable": false,
+     "fitness": 0.2
+    },
+    {
+     "rule": "B238/S3",
+     "copies": 1,
+     "alive": 1566,
+     "growth": 313.2,
+     "stable": false,
+     "fitness": 0.2
+    }
+   ]
+  },
+  {
+   "id": "n46",
+   "parent": "n21",
+   "depth": 3,
+   "hypothesis": "B3 sweeps over survive sets around B37/S023 with the pi-heptomino seed should beat n21's fitness of 1.0.",
+   "rules_tested": [
+    "B3678/S013",
+    "B237/S01238",
+    "B78/S023",
+    "B367/S02",
+    "B7/S0123",
+    "B378/S03",
+    "B237/S023",
+    "B347/S023",
+    "B347/S02",
+    "B7/S023"
+   ],
+   "seed": [
+    [
+     1,
+     1,
+     1
+    ],
+    [
+     1,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     1
+    ]
+   ],
+   "seed_name": "pi-heptomino",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If pi-heptomino copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:30:54+05:30",
+   "ended_at": "2026-09-23T19:30:56+05:30",
+   "best_rule": "B3678/S013",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 2,
+    "growth": 0.286,
+    "stable": true
+   },
+   "frames": [
+    "frames/n46_0.png",
+    "frames/n46_20.png",
+    "frames/n46_40.png",
+    "frames/n46_60.png"
+   ],
+   "replay": {
+    "rule": "B3678/S013",
+    "seed": [
+     [
+      1,
+      1,
+      1
+     ],
+     [
+      1,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B3678/S013",
+     "copies": 1,
+     "alive": 2,
+     "growth": 0.286,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B7/S0123",
+     "copies": 1,
+     "alive": 6,
+     "growth": 0.857,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B378/S03",
+     "copies": 1,
+     "alive": 3,
+     "growth": 0.429,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B347/S023",
+     "copies": 1,
+     "alive": 209,
+     "growth": 29.857,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B347/S02",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.571,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n47",
+   "parent": "n22",
+   "depth": 5,
+   "hypothesis": "sparse birth rules around B345/S2356 with the glider seed should beat n22's fitness of 1.0.",
+   "rules_tested": [
+    "B3456/S356",
+    "B45/S2356",
+    "B45/S23456",
+    "B34568/S2356",
+    "B23458/S2346",
+    "B3458/S2356",
+    "B45/S236",
+    "B3457/S25",
+    "B2345/S235",
+    "B2345/S2356",
+    "B3457/S02356",
+    "B347/S23568",
+    "B345/S356",
+    "B34/S02356",
+    "B3456/S2356",
+    "B3457/S2356",
+    "B2345/S23456",
+    "B3458/S236"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:30:58+05:30",
+   "ended_at": "2026-09-23T19:31:01+05:30",
+   "best_rule": "B3456/S356",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 4,
+    "growth": 0.8,
+    "stable": true
+   },
+   "frames": [
+    "frames/n47_0.png",
+    "frames/n47_20.png",
+    "frames/n47_40.png",
+    "frames/n47_60.png"
+   ],
+   "replay": {
+    "rule": "B3456/S356",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B3456/S356",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B45/S2356",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B45/S23456",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B3458/S2356",
+     "copies": 1,
+     "alive": 1095,
+     "growth": 219.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B45/S236",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n48",
+   "parent": "n0",
+   "depth": 1,
+   "hypothesis": "HighLife variants around B3/S23 with the R-pentomino seed should beat n0's fitness of 1.0.",
+   "rules_tested": [
+    "B38/S",
+    "B3/S2347",
+    "B348/S23",
+    "B234/S1235",
+    "B237/S23",
+    "B238/S34",
+    "B367/S0235",
+    "B6/S23",
+    "B7/S1237"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     1
+    ],
+    [
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "seed_name": "R-pentomino",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If R-pentomino copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:31:03+05:30",
+   "ended_at": "2026-09-23T19:31:05+05:30",
+   "best_rule": "B3/S2347",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 424,
+    "growth": 84.8,
+    "stable": true
+   },
+   "frames": [
+    "frames/n48_0.png",
+    "frames/n48_20.png",
+    "frames/n48_40.png",
+    "frames/n48_60.png"
+   ],
+   "replay": {
+    "rule": "B3/S2347",
+    "seed": [
+     [
+      0,
+      1,
+      1
+     ],
+     [
+      1,
+      1,
+      0
+     ],
+     [
+      0,
+      1,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B3/S2347",
+     "copies": 1,
+     "alive": 424,
+     "growth": 84.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B348/S23",
+     "copies": 1,
+     "alive": 174,
+     "growth": 34.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B367/S0235",
+     "copies": 1,
+     "alive": 252,
+     "growth": 50.4,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B7/S1237",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B38/S",
+     "copies": 1,
+     "alive": 0,
+     "growth": 0.0,
+     "stable": false,
+     "fitness": 0.2
+    }
+   ]
+  },
+  {
+   "id": "n49",
+   "parent": "n0",
+   "depth": 1,
+   "hypothesis": "B-only variations around B3/S23 with the glider seed should beat n0's fitness of 1.0.",
+   "rules_tested": [
+    "B378/S237",
+    "B378/S235",
+    "B3/S13",
+    "B4/S03",
+    "B356/S2348",
+    "B37/S12",
+    "B235/S03",
+    "B3/S1238",
+    "B4/S234",
+    "B237/S237",
+    "B23/S34"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:31:07+05:30",
+   "ended_at": "2026-09-23T19:31:10+05:30",
+   "best_rule": "B378/S237",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 5,
+    "growth": 1.0,
+    "stable": true
+   },
+   "frames": [
+    "frames/n49_0.png",
+    "frames/n49_20.png",
+    "frames/n49_40.png",
+    "frames/n49_60.png"
+   ],
+   "replay": {
+    "rule": "B378/S237",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B378/S237",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B378/S235",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B356/S2348",
+     "copies": 1,
+     "alive": 542,
+     "growth": 108.4,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B37/S12",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B3/S1238",
+     "copies": 1,
+     "alive": 20,
+     "growth": 4.0,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n50",
+   "parent": "n2",
+   "depth": 3,
+   "hypothesis": "survive-heavy rules around B35/S0235 with the glider seed should beat n2's fitness of 1.0.",
+   "rules_tested": [
+    "B2345/S02357",
+    "B3456/S02345",
+    "B3578/S35",
+    "B358/S0238",
+    "B3457/S0135",
+    "B36/S2357",
+    "B2358/S0125",
+    "B56/S0345",
+    "B2358/S02357",
+    "B5/S012357"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:31:12+05:30",
+   "ended_at": "2026-09-23T19:31:14+05:30",
+   "best_rule": "B3457/S0135",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 508,
+    "growth": 101.6,
+    "stable": true
+   },
+   "frames": [
+    "frames/n50_0.png",
+    "frames/n50_20.png",
+    "frames/n50_40.png",
+    "frames/n50_60.png"
+   ],
+   "replay": {
+    "rule": "B3457/S0135",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B3457/S0135",
+     "copies": 1,
+     "alive": 508,
+     "growth": 101.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B36/S2357",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B5/S012357",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B2345/S02357",
+     "copies": 1,
+     "alive": 2545,
+     "growth": 509.0,
+     "stable": false,
+     "fitness": 0.2
+    },
+    {
+     "rule": "B3456/S02345",
+     "copies": 1,
+     "alive": 1452,
+     "growth": 290.4,
+     "stable": false,
+     "fitness": 0.2
+    }
+   ]
+  },
+  {
+   "id": "n51",
+   "parent": "n2",
+   "depth": 3,
+   "hypothesis": "B3 sweeps over survive sets around B35/S0235 with the glider seed should beat n2's fitness of 1.0.",
+   "rules_tested": [
+    "B3567/S02345",
+    "B56/S02357",
+    "B34/S012357",
+    "B5/S0356",
+    "B3457/S025",
+    "B3457/S023",
+    "B58/S023568",
+    "B3578/S0258",
+    "B2356/S025",
+    "B5/S035",
+    "B23/S025",
+    "B5/S023456",
+    "B2356/S0256",
+    "B38/S0358"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:31:16+05:30",
+   "ended_at": "2026-09-23T19:31:19+05:30",
+   "best_rule": "B3567/S02345",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 898,
+    "growth": 179.6,
+    "stable": true
+   },
+   "frames": [
+    "frames/n51_0.png",
+    "frames/n51_20.png",
+    "frames/n51_40.png",
+    "frames/n51_60.png"
+   ],
+   "replay": {
+    "rule": "B3567/S02345",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B3567/S02345",
+     "copies": 1,
+     "alive": 898,
+     "growth": 179.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B56/S02357",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B34/S012357",
+     "copies": 1,
+     "alive": 1105,
+     "growth": 221.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B3457/S025",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B3457/S023",
+     "copies": 1,
+     "alive": 276,
+     "growth": 55.2,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n52",
+   "parent": "n2",
+   "depth": 3,
+   "hypothesis": "B3 sweeps over survive sets around B35/S0235 with the glider seed should beat n2's fitness of 1.0.",
+   "rules_tested": [
+    "B3568/S0258",
+    "B2356/S0238",
+    "B25/S05",
+    "B3458/S0236",
+    "B37/S0125",
+    "B2356/S02345",
+    "B34/S0256",
+    "B358/S02345",
+    "B57/S023567",
+    "B56/S2358"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:31:21+05:30",
+   "ended_at": "2026-09-23T19:31:23+05:30",
+   "best_rule": "B25/S05",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 1009,
+    "growth": 201.8,
+    "stable": true
+   },
+   "frames": [
+    "frames/n52_0.png",
+    "frames/n52_20.png",
+    "frames/n52_40.png",
+    "frames/n52_60.png"
+   ],
+   "replay": {
+    "rule": "B25/S05",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B25/S05",
+     "copies": 1,
+     "alive": 1009,
+     "growth": 201.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B3458/S0236",
+     "copies": 1,
+     "alive": 604,
+     "growth": 120.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B37/S0125",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B358/S02345",
+     "copies": 1,
+     "alive": 951,
+     "growth": 190.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B57/S023567",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.8,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n53",
+   "parent": "n21",
+   "depth": 3,
+   "hypothesis": "Seeds-type explosive rules around B37/S023 with the HighLife replicator seed should beat n21's fitness of 1.0.",
+   "rules_tested": [
+    "B237/S0234",
+    "B36/S027",
+    "B7/S0235",
+    "B37/S0237",
+    "B367/S023",
+    "B347/S0234",
+    "B7/S0238",
+    "B237/S0235",
+    "B357/S0237",
+    "B7/S0236",
+    "B3/S02367",
+    "B357/S0238",
+    "B237/S0238",
+    "B36/S028"
+   ],
+   "seed": [
+    [
+     0,
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   ],
+   "seed_name": "HighLife replicator",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If HighLife replicator copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:31:25+05:30",
+   "ended_at": "2026-09-23T19:31:28+05:30",
+   "best_rule": "B36/S027",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 3,
+    "growth": 0.25,
+    "stable": true
+   },
+   "frames": [
+    "frames/n53_0.png",
+    "frames/n53_20.png",
+    "frames/n53_40.png",
+    "frames/n53_60.png"
+   ],
+   "replay": {
+    "rule": "B36/S027",
+    "seed": [
+     [
+      0,
+      0,
+      1,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     [
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B36/S027",
+     "copies": 1,
+     "alive": 3,
+     "growth": 0.25,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B7/S0235",
+     "copies": 1,
+     "alive": 12,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B37/S0237",
+     "copies": 1,
+     "alive": 108,
+     "growth": 9.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B367/S023",
+     "copies": 1,
+     "alive": 19,
+     "growth": 1.583,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B7/S0238",
+     "copies": 1,
+     "alive": 12,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n54",
+   "parent": "n0",
+   "depth": 1,
+   "hypothesis": "sparse birth rules around B3/S23 with the pi-heptomino seed should beat n0's fitness of 1.0.",
+   "rules_tested": [
+    "B356/S3",
+    "B347/S1237",
+    "B2/S13",
+    "B35/S24",
+    "B347/S3",
+    "B356/S23",
+    "B236/S2345",
+    "B37/S24",
+    "B368/S37"
+   ],
+   "seed": [
+    [
+     1,
+     1,
+     1
+    ],
+    [
+     1,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     1
+    ]
+   ],
+   "seed_name": "pi-heptomino",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If pi-heptomino copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:31:30+05:30",
+   "ended_at": "2026-09-23T19:31:32+05:30",
+   "best_rule": "B347/S1237",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 634,
+    "growth": 90.571,
+    "stable": true
+   },
+   "frames": [
+    "frames/n54_0.png",
+    "frames/n54_20.png",
+    "frames/n54_40.png",
+    "frames/n54_60.png"
+   ],
+   "replay": {
+    "rule": "B347/S1237",
+    "seed": [
+     [
+      1,
+      1,
+      1
+     ],
+     [
+      1,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B347/S1237",
+     "copies": 1,
+     "alive": 634,
+     "growth": 90.571,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B35/S24",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.571,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B356/S3",
+     "copies": 1,
+     "alive": 0,
+     "growth": 0.0,
+     "stable": false,
+     "fitness": 0.2
+    },
+    {
+     "rule": "B2/S13",
+     "copies": 1,
+     "alive": 1291,
+     "growth": 184.429,
+     "stable": false,
+     "fitness": 0.2
+    },
+    {
+     "rule": "B347/S3",
+     "copies": 1,
+     "alive": 0,
+     "growth": 0.0,
+     "stable": false,
+     "fitness": 0.2
+    }
+   ]
+  },
+  {
+   "id": "n55",
+   "parent": "n0",
+   "depth": 1,
+   "hypothesis": "Seeds-type explosive rules around B3/S23 with the glider seed should beat n0's fitness of 1.0.",
+   "rules_tested": [
+    "B3/S38",
+    "B3/S2358",
+    "B347/S234",
+    "B346/S38",
+    "B7/S2346",
+    "B238/S234",
+    "B367/S237",
+    "B3/S34"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:31:34+05:30",
+   "ended_at": "2026-09-23T19:31:36+05:30",
+   "best_rule": "B3/S2358",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 5,
+    "growth": 1.0,
+    "stable": true
+   },
+   "frames": [
+    "frames/n55_0.png",
+    "frames/n55_20.png",
+    "frames/n55_40.png",
+    "frames/n55_60.png"
+   ],
+   "replay": {
+    "rule": "B3/S2358",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B3/S2358",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B347/S234",
+     "copies": 1,
+     "alive": 990,
+     "growth": 198.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B346/S38",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B7/S2346",
+     "copies": 1,
+     "alive": 3,
+     "growth": 0.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B367/S237",
+     "copies": 1,
+     "alive": 5,
+     "growth": 1.0,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n56",
+   "parent": "n28",
+   "depth": 3,
+   "hypothesis": "B3 sweeps over survive sets around B34/S0235 with the glider seed should beat n28's fitness of 1.0.",
+   "rules_tested": [
+    "B34/S02357",
+    "B346/S02345",
+    "B4/S02356",
+    "B34/S02358",
+    "B346/S0235",
+    "B346/S235",
+    "B2348/S023456",
+    "B234/S0235",
+    "B347/S02357",
+    "B347/S0235",
+    "B45/S2357",
+    "B3456/S05",
+    "B4/S02345",
+    "B234/S02357"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:31:38+05:30",
+   "ended_at": "2026-09-23T19:31:41+05:30",
+   "best_rule": "B34/S02357",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 6,
+    "growth": 1.2,
+    "stable": true
+   },
+   "frames": [
+    "frames/n56_0.png",
+    "frames/n56_20.png",
+    "frames/n56_40.png",
+    "frames/n56_60.png"
+   ],
+   "replay": {
+    "rule": "B34/S02357",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B34/S02357",
+     "copies": 1,
+     "alive": 6,
+     "growth": 1.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B4/S02356",
+     "copies": 1,
+     "alive": 3,
+     "growth": 0.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B34/S02358",
+     "copies": 1,
+     "alive": 6,
+     "growth": 1.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B346/S0235",
+     "copies": 1,
+     "alive": 824,
+     "growth": 164.8,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B346/S235",
+     "copies": 1,
+     "alive": 707,
+     "growth": 141.4,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n57",
+   "parent": "n1",
+   "depth": 2,
+   "hypothesis": "B-only variations around B3/S023 with the pi-heptomino seed should beat n1's fitness of 1.0.",
+   "rules_tested": [
+    "B34/S035",
+    "B378/S02347",
+    "B35/S038",
+    "B236/S02358",
+    "B345/S03",
+    "B356/S0238",
+    "B6/S0237",
+    "B3/S027",
+    "B34/S036",
+    "B234/S0234",
+    "B368/S02378"
+   ],
+   "seed": [
+    [
+     1,
+     1,
+     1
+    ],
+    [
+     1,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     1
+    ]
+   ],
+   "seed_name": "pi-heptomino",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If pi-heptomino copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:31:43+05:30",
+   "ended_at": "2026-09-23T19:31:45+05:30",
+   "best_rule": "B34/S035",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 3,
+    "growth": 0.429,
+    "stable": true
+   },
+   "frames": [
+    "frames/n57_0.png",
+    "frames/n57_20.png",
+    "frames/n57_40.png",
+    "frames/n57_60.png"
+   ],
+   "replay": {
+    "rule": "B34/S035",
+    "seed": [
+     [
+      1,
+      1,
+      1
+     ],
+     [
+      1,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B34/S035",
+     "copies": 1,
+     "alive": 3,
+     "growth": 0.429,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B378/S02347",
+     "copies": 1,
+     "alive": 652,
+     "growth": 93.143,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B345/S03",
+     "copies": 1,
+     "alive": 8,
+     "growth": 1.143,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B356/S0238",
+     "copies": 1,
+     "alive": 10,
+     "growth": 1.429,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B34/S036",
+     "copies": 1,
+     "alive": 5,
+     "growth": 0.714,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n58",
+   "parent": "n0",
+   "depth": 1,
+   "hypothesis": "Seeds-type explosive rules around B3/S23 with the glider seed should beat n0's fitness of 1.0.",
+   "rules_tested": [
+    "B234/S28",
+    "B23/S123",
+    "B234/S0123",
+    "B36/S2348",
+    "B6/S2347",
+    "B38/S234",
+    "B34/S2368",
+    "B235/S1235",
+    "B34/S2347",
+    "B7/S3",
+    "B7/S236"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "seed_name": "glider",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If glider copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:31:47+05:30",
+   "ended_at": "2026-09-23T19:31:49+05:30",
+   "best_rule": "B36/S2348",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 421,
+    "growth": 84.2,
+    "stable": true
+   },
+   "frames": [
+    "frames/n58_0.png",
+    "frames/n58_20.png",
+    "frames/n58_40.png",
+    "frames/n58_60.png"
+   ],
+   "replay": {
+    "rule": "B36/S2348",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B36/S2348",
+     "copies": 1,
+     "alive": 421,
+     "growth": 84.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B6/S2347",
+     "copies": 1,
+     "alive": 3,
+     "growth": 0.6,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B38/S234",
+     "copies": 1,
+     "alive": 605,
+     "growth": 121.0,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B34/S2368",
+     "copies": 1,
+     "alive": 6,
+     "growth": 1.2,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B34/S2347",
+     "copies": 1,
+     "alive": 1199,
+     "growth": 239.8,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
+  },
+  {
+   "id": "n59",
+   "parent": "n53",
+   "depth": 4,
+   "hypothesis": "sparse birth rules around B36/S027 with the HighLife replicator seed should beat n53's fitness of 1.0.",
+   "rules_tested": [
+    "B6/S07",
+    "B6/S0257",
+    "B36/S0257",
+    "B36/S02378",
+    "B356/S027",
+    "B36/S27",
+    "B36/S0278",
+    "B36/S0247",
+    "B368/S0127",
+    "B346/S0278"
+   ],
+   "seed": [
+    [
+     0,
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   ],
+   "seed_name": "HighLife replicator",
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "notes": "If HighLife replicator copies rise above 1, keep branching here; otherwise mark it a dead end.",
+   "status": "done",
+   "started_at": "2026-09-23T19:31:51+05:30",
+   "ended_at": "2026-09-23T19:31:54+05:30",
+   "best_rule": "B6/S0257",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 4,
+    "growth": 0.333,
+    "stable": true
+   },
+   "frames": [
+    "frames/n59_0.png",
+    "frames/n59_20.png",
+    "frames/n59_40.png",
+    "frames/n59_60.png"
+   ],
+   "replay": {
+    "rule": "B6/S0257",
+    "seed": [
+     [
+      0,
+      0,
+      1,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     [
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "error": null,
+   "results_top5": [
+    {
+     "rule": "B6/S0257",
+     "copies": 1,
+     "alive": 4,
+     "growth": 0.333,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B36/S0257",
+     "copies": 1,
+     "alive": 3,
+     "growth": 0.25,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B36/S02378",
+     "copies": 1,
+     "alive": 30,
+     "growth": 2.5,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B36/S0278",
+     "copies": 1,
+     "alive": 3,
+     "growth": 0.25,
+     "stable": true,
+     "fitness": 1.0
+    },
+    {
+     "rule": "B36/S0247",
+     "copies": 1,
+     "alive": 2,
+     "growth": 0.167,
+     "stable": true,
+     "fitness": 1.0
+    }
+   ]
   }
  ]
 }

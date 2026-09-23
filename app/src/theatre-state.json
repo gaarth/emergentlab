@@ -1,0 +1,43 @@
+{
+  "sheetsById": {
+    "Intro": {
+      "staticOverrides": { "byObject": {} },
+      "sequence": {
+        "subUnitsPerUnit": 30,
+        "length": 3,
+        "type": "PositionalSequence",
+        "tracksByObject": {
+          "Tree": {
+            "trackData": {
+              "sx": { "type": "BasicKeyframedTrack", "__debugName": "Tree:[\"scale\",\"x\"]", "keyframes": [
+                { "id": "sx0", "position": 0, "connectedRight": true, "handles": [0.2, 0.8, 0.2, 1], "type": "bezier", "value": 0.001 },
+                { "id": "sx1", "position": 2.2, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 1 } ] },
+              "sy": { "type": "BasicKeyframedTrack", "__debugName": "Tree:[\"scale\",\"y\"]", "keyframes": [
+                { "id": "sy0", "position": 0, "connectedRight": true, "handles": [0.2, 0.8, 0.2, 1], "type": "bezier", "value": 0.001 },
+                { "id": "sy1", "position": 2.2, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 1 } ] },
+              "sz": { "type": "BasicKeyframedTrack", "__debugName": "Tree:[\"scale\",\"z\"]", "keyframes": [
+                { "id": "sz0", "position": 0, "connectedRight": true, "handles": [0.2, 0.8, 0.2, 1], "type": "bezier", "value": 0.001 },
+                { "id": "sz1", "position": 2.2, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 1 } ] },
+              "ry": { "type": "BasicKeyframedTrack", "__debugName": "Tree:[\"rotation\",\"y\"]", "keyframes": [
+                { "id": "ry0", "position": 0, "connectedRight": true, "handles": [0.2, 0.8, 0.2, 1], "type": "bezier", "value": -2.4 },
+                { "id": "ry1", "position": 3, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 0 } ] }
+            },
+            "trackIdByPropPath": {
+              "[\"scale\",\"x\"]": "sx", "[\"scale\",\"y\"]": "sy", "[\"scale\",\"z\"]": "sz", "[\"rotation\",\"y\"]": "ry"
+            }
+          },
+          "Key": {
+            "trackData": {
+              "ki": { "type": "BasicKeyframedTrack", "__debugName": "Key:[\"intensity\"]", "keyframes": [
+                { "id": "ki0", "position": 0, "connectedRight": true, "handles": [0.2, 0.8, 0.2, 1], "type": "bezier", "value": 0 },
+                { "id": "ki1", "position": 2.5, "connectedRight": true, "handles": [0.5, 1, 0.5, 0], "type": "bezier", "value": 35 } ] }
+            },
+            "trackIdByPropPath": { "[\"intensity\"]": "ki" }
+          }
+        }
+      }
+    }
+  },
+  "definitionVersion": "0.4.0",
+  "revisionHistory": []
+}

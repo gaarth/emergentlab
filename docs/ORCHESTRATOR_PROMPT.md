@@ -113,7 +113,17 @@ Run the paper step once on `cp tree.json test_tree.json` with the real model. Re
 
 ---
 
-## PHASE V — Viewer track (TRACK=viewer, Gaarth)
+## PHASE V — UI track (TRACK=viewer, Gaarth)
+
+> **Superseded 23 Sep 2026 (19:40):** the single-file `viewer.html` was scrapped at the user's request and replaced by a
+> React + Vite + React Three Fiber + Theatre.js app in `app/` (chat window for the question, 3D hypothesis tree, node panel
+> with CA replay). Spec: `docs/IMPLEMENTATION_TEAMMATE.md`. Serve with `python server.py` (also exposes `/api/start`
+> and `/api/stop` so the chat can launch `lab.py`/`mock_lab.py`); dev UI with `cd app && npm run dev`. UI tests are
+> `tests/app.spec.js`, run against the production build (`cd app && npm run build`) with `npx playwright test`; they
+> intercept `/tree.json` per test instead of using a `?src=` param. The V1–V3 test lists below describe the behaviour the
+> app must keep (tree updates in place, panel rebuilds only on change, replay parity, escaping, status → paper link).
+
+Original plan (kept for the behaviour contract):
 
 Serve with `make serve` = `python -m http.server 8000`. All viewer tests run Playwright against `http://localhost:8000/viewer.html?src=<fixture>` — add a `src` query param so tests can point the viewer at any fixture without touching `tree.json`.
 
