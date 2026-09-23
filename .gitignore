@@ -6,3 +6,8 @@ playwright-report/
 tree.json.tmp
 *.pyc
 logs/
+.env
+frames/
+test_tree.json
+demo/
+.venv/
