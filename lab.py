@@ -68,9 +68,11 @@ Research rules:
   replicators (HighLife B36/S23), Seeds-type explosive rules, isotropic near-neighbours."""
 
 PAPER_SYSTEM = """You are writing a short research report from a JSON hypothesis tree produced by an autonomous lab.
-Write Markdown with sections: Abstract, Question, Method, Search summary (table of top 5 rules with node id,
+Write Markdown with sections: Abstract, Question, Method, Search summary (table of the top 5 distinct rules with node id,
 rule, seed, copies, stable), Findings, Dead ends, Limitations, Next experiments.
-Every number you state must exist in the tree. Every number must come from the JSON; do not round or estimate.
+Every number you state must exist in the tree. Every number must come from the JSON; do not estimate.
+All decimals in the JSON are already rounded to 2 places; quote them as they appear.
+The grid is described by the "grid" field (e.g. "64x64 torus"); never shorten it to "64-cell".
 Cite node ids inline like (n17). Embed frames using ![](frames/xxx.png).
 Be honest: if no rule truly self-replicated, say which came closest and why. 600-900 words."""
 
@@ -262,8 +264,14 @@ def numbers_in(text):
 def write_paper(tree, ask=None, tree_path=TREE_PATH, render=True):
     tree["status"] = "writing_paper"
     save(tree, tree_path)
+    def _r(v):                                   # round every float so the paper never quotes 346.6666666667
+        if isinstance(v, float): return round(v, 2)
+        if isinstance(v, dict): return {k: _r(x) for k, x in v.items()}
+        if isinstance(v, list): return [_r(x) for x in v]
+        return v
     slim = {"question": tree.get("question"),
-            "nodes": [{k: v for k, v in n.items() if k != "experiment_code"} for n in tree["nodes"]]}
+            "grid": f"{ca.GRID_SIZE}x{ca.GRID_SIZE} torus", "steps": 60,
+            "nodes": [_r({k: v for k, v in n.items() if k != "experiment_code"}) for n in tree["nodes"]]}
     payload = json.dumps(slim)[:150000]
     if ask is None:
         def ask(system, user):
@@ -326,6 +334,9 @@ def main(question, minutes, ask=None, tree_path=TREE_PATH, paper_fn=None, max_no
             if not results:
                 raise RuntimeError("experiment returned no results")
             best = max(results, key=lambda r: r.get("fitness", 0))
+            for r in results:
+                for k in ("fitness", "growth"):
+                    if isinstance(r.get(k), float): r[k] = round(r[k], 2)
             node.update(best_rule=best["rule"], fitness=float(best.get("fitness", 0.0)),
                         metrics={k: best.get(k) for k in ("copies", "alive", "growth", "stable")},
                         frames=write_frames(nid, best["rule"], node["seed"]),

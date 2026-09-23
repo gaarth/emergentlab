@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Discovery Lab</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="vendor/react.production.min.js"></script>
+<script src="vendor/react-dom.production.min.js"></script>
+<script src="vendor/htm.min.js"></script>
+<style>
+  :root{
+    --bg:#0e1015;--bg2:#13161d;--card:#191d26;--line:#262b37;--line2:#323848;--fg:#f2f4f8;--fg2:#c3c8d4;--muted:#8d95a6;
+    --acc:#ff8a4c;--acc-soft:rgba(255,138,76,.16);--ok:#4ade80;--err:#f87171;--warn:#fbbf24;--sel:#7aa2ff;
+    --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.5 Inter,-apple-system,"Segoe UI",sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+  #root{height:100%;width:100vw;display:grid;grid-template-rows:auto 1fr;grid-template-columns:minmax(0,1fr)}
+  header{display:flex;align-items:center;gap:32px;min-width:0;overflow:hidden;padding:0 28px;height:72px;border-bottom:1px solid var(--line);background:var(--bg2)}
+  .brand{min-width:0;flex:1} .brand>div{min-width:0}
+  .brand h1{margin:0;font-size:15px;font-weight:600;letter-spacing:-.01em}
+  .brand p{margin:3px 0 0;color:var(--muted);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .stats{display:flex;gap:36px;flex:none}
+  .stat span{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+  .stat b{display:block;font-size:26px;line-height:1.1;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.03em;margin-top:1px}
+  .stat.hot b{color:var(--acc)}
+  .badge{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.06em;background:var(--card);color:var(--muted);white-space:nowrap;border:1px solid var(--line)}
+  .badge i{width:7px;height:7px;border-radius:50%;background:currentColor}
+  .badge.running{color:var(--ok);border-color:rgba(74,222,128,.3)} .badge.running i{animation:pulse 1.2s infinite}
+  .badge.writing{color:var(--warn)} .badge.writing i{animation:pulse .6s infinite}
+  .badge.done{color:var(--sel)} .badge.error{color:var(--err)}
+  @keyframes pulse{50%{opacity:.25}}
+  .paper{color:#000;background:var(--acc);font-weight:600;text-decoration:none;padding:9px 14px;border-radius:8px;font-size:13px;white-space:nowrap}
+  main{display:grid;grid-template-columns:minmax(0,1fr) 500px;min-height:0;min-width:0}
+  .treewrap{position:relative;overflow:auto;min-width:0}
+  .legend{position:absolute;top:14px;left:16px;display:flex;gap:16px;align-items:center;font-size:12px;color:var(--muted);z-index:2;background:rgba(14,16,21,.8);padding:6px 4px;backdrop-filter:blur(6px)}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+  .toggle{cursor:pointer;user-select:none;display:inline-flex;align-items:center;gap:6px}
+  svg{display:block}
+  .link{fill:none;stroke:#3a3a3a;stroke-width:2}
+  .link.dead{stroke:#2c2c2c}
+  .link.lit{stroke:var(--acc);stroke-width:2.5;opacity:.9}
+  .node{cursor:pointer}
+  .node circle.core{transition:r .2s}
+  .node:hover circle.core{filter:brightness(1.25)}
+  .node text{font:12px Inter,sans-serif;fill:var(--fg);paint-order:stroke;stroke:var(--bg);stroke-width:4px;font-weight:600}
+  .node .rule{font:11.5px var(--mono);fill:var(--fg2);font-weight:400}
+  .node .fitv{font:11.5px var(--mono);fill:var(--acc);font-weight:600}
+  .node.dead .rule,.node.dead .fitv{fill:var(--muted)}
+  .node.selected text{fill:var(--acc)}
+  .node.running circle.core{animation:pulse 1.2s infinite}
+  .node.fresh circle.core{filter:drop-shadow(0 0 10px var(--acc))}
+  .dim .node.dead{opacity:.15} .dim .link.dead{opacity:.1}
+  aside{min-width:0;overflow-x:hidden;overflow-y:auto;border-left:1px solid var(--line);background:var(--bg2);padding:22px 26px 40px}
+  .empty{color:var(--muted);display:grid;place-items:center;height:100%;text-align:center}
+  .crumb{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:12.5px;margin-bottom:14px}
+  .crumb b{color:var(--fg);font-size:15px;font-family:var(--mono);font-weight:600}
+  .crumb .path{font-family:var(--mono);font-size:12px}
+  .hyp{font-size:15px;font-weight:600;line-height:1.35;margin:16px 0 6px;color:var(--fg)}
+  .hyp.clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .cap{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin:8px 0 0}
+  .cap code{font:12px var(--mono);color:var(--muted)}
+  .chiprow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0 4px}
+  .chiprow div{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:7px 10px}
+  .chiprow span{display:block;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+  .chiprow b{display:block;font-size:17px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+  .chiprow .ok b{color:var(--ok)} .chiprow .bad b{color:var(--err)}
+  .notes{color:var(--muted);font-size:13px;line-height:1.55;margin:0 0 6px}
+  .notes.clamp{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+  .more{background:none;border:0;color:var(--sel);font:500 12.5px Inter,sans-serif;padding:0;cursor:pointer;margin-bottom:12px}
+  pre.err{color:#fecaca;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.25);padding:12px;border-radius:8px;font:12px/1.5 var(--mono);white-space:pre-wrap;word-break:break-word;margin:12px 0}
+  .kv{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;margin:16px 0 4px;border-top:1px solid var(--line)}
+  .kv div{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--line)}
+  .kv span{color:var(--muted);font-size:12.5px}
+  .kv b{font:600 14px var(--mono)}
+  .kv .hot b{color:var(--acc)} .kv .ok b{color:var(--ok)} .kv .bad b{color:var(--err)}
+  .bar{height:4px;border-radius:2px;background:var(--acc);margin:10px 0 4px}
+  .barwrap{height:4px;border-radius:2px;background:var(--line);margin:12px 0 2px} .barwrap .bar{margin:0}
+  .barlbl{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);margin-bottom:14px}
+  .sec{display:flex;justify-content:space-between;align-items:baseline;margin:22px 0 10px;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+  .sec code{font:12px var(--mono);color:var(--fg2);text-transform:none;letter-spacing:0}
+  canvas{width:100%;aspect-ratio:1;image-rendering:pixelated;background:#090b0f;border:1px solid var(--line);border-radius:10px;display:block}
+  .frames{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .frames figure{margin:0;text-align:center;font:11.5px var(--mono);color:var(--muted)}
+  .frames img{width:100%;aspect-ratio:1;image-rendering:pixelated;border-radius:8px;border:1px solid var(--line);display:block;background:#fff;margin-bottom:5px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{font:11.5px var(--mono);background:var(--card);border:1px solid var(--line);border-radius:6px;padding:3px 8px;color:var(--fg2)}
+  .chip.best{color:var(--acc);border-color:rgba(255,138,76,.5);background:var(--acc-soft)}
+  table{border-collapse:collapse;width:100%;font:12.5px var(--mono)}
+  th{color:var(--muted);font:500 11px Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;text-align:left;padding:6px 8px;border-bottom:1px solid var(--line2)}
+  th.r,td.r{text-align:right}
+  td{padding:8px;border-bottom:1px solid var(--line)}
+  tr.best td{color:var(--acc);font-weight:600}
+  @media (max-width:900px){main{grid-template-columns:1fr}aside{border-left:0;border-top:1px solid var(--line)}.stats{display:none}}
+</style></head>
+<body><div id="root"></div>
+<script>
+const {useState, useEffect, useRef, useMemo} = React;
+const html = htm.bind(React.createElement);
+const params = new URLSearchParams(location.search);
+const SRC = params.get("src") || "tree.json", POLL = +params.get("poll") || 2000;
+const num = v => typeof v === "number" && isFinite(v);
+const fmt1 = v => num(v) ? v.toFixed(1) : "—";
+
+// ---- CA engine: twin of ca.py (rule parsing, torus wrap, seed centring) ----
+function parseRule(rule){ const [b, s] = String(rule).toUpperCase().split("/"); if (s === undefined) throw new Error("bad rule");
+  return [new Set([...b.slice(1)].map(Number)), new Set([...s.slice(1)].map(Number))]; }
+function placeSeed(seed, size){ const g = new Uint8Array(size*size);
+  const oy = Math.floor((size-seed.length)/2), ox = Math.floor((size-(seed[0]||[]).length)/2);
+  seed.forEach((row,y) => row.forEach((v,x) => { if (v) g[(oy+y)*size+ox+x] = 1; })); return g; }
+function stepGrid(g, birth, surv, size){ const n2 = new Uint8Array(size*size);
+  for (let y=0;y<size;y++){ const ym=((y-1+size)%size)*size, y0=y*size, yp=((y+1)%size)*size;
+    for (let x=0;x<size;x++){ const xm=(x-1+size)%size, xp=(x+1)%size;
+      const n=g[ym+xm]+g[ym+x]+g[ym+xp]+g[y0+xm]+g[y0+xp]+g[yp+xm]+g[yp+x]+g[yp+xp];
+      n2[y0+x]=g[y0+x]?(surv.has(n)?1:0):(birth.has(n)?1:0); } } return n2; }
+window.stepCA = (rule, seed, size=64, steps=0) => { const [b,s]=parseRule(rule); let g=placeSeed(seed,size);
+  for (let i=0;i<steps;i++) g=stepGrid(g,b,s,size); return Array.from(g); };
+
+// ---- layout: tidy-ish tree without d3 (leaves get rows, parents centre on children) ----
+const DX = 26, DY = 200;
+function layout(nodes){
+  const byId = new Map(nodes.map(n => [n.id, n])), kids = new Map(nodes.map(n => [n.id, []])), roots = [];
+  for (const n of nodes){ const p = n.parent == null ? null : String(n.parent);
+    let ok = p != null && byId.has(p), cur = p, seen = new Set([n.id]);
+    while (ok && cur != null && byId.has(cur)) { if (seen.has(cur)) { ok = false; break; } seen.add(cur); cur = byId.get(cur).parent == null ? null : String(byId.get(cur).parent); }
+    (ok ? kids.get(p) : roots).push(n); }
+  const pos = new Map(); let row = 0;
+  const walk = (n, depth) => { const c = kids.get(n.id); let y;
+    if (!c.length) y = row++ * DX; else { const ys = c.map(k => walk(k, depth+1)); y = (ys[0] + ys[ys.length-1]) / 2; }
+    pos.set(n.id, {x: depth * DY, y}); return y; };
+  roots.forEach(r => walk(r, 0));
+  const links = []; for (const n of nodes) if (n.parent != null && pos.has(String(n.parent)) && kids.get(String(n.parent))?.includes(n)) links.push([byId.get(String(n.parent)), n]);
+  return {pos, links, rows: row, depth: Math.max(0, ...[...pos.values()].map(p => p.x))};
+}
+
+function useTree(){
+  const [tree, setTree] = useState(null);
+  useEffect(() => { let alive = true;
+    const tick = async () => { try { const r = await fetch(SRC + (SRC.includes("?") ? "&" : "?") + "t=" + Date.now(), {cache:"no-store"});
+        const t = await r.json(); if (alive && t && Array.isArray(t.nodes)) setTree(t); } catch(e) {} if (alive) setTimeout(tick, POLL); };
+    tick(); return () => { alive = false; }; }, []);
+  return tree;
+}
+
+function elapsed(t, nodes){ const t0 = new Date(t.started_at); if (isNaN(t0)) return "—"; let t1 = Date.now();
+  if (t.status === "done") { const e = nodes.map(n => +new Date(n.ended_at)).filter(x => !isNaN(x)); if (e.length) t1 = Math.max(...e); }
+  const m = Math.max(0, Math.round((t1-t0)/60000)); return m < 60 ? m + "m" : Math.floor(m/60) + "h " + m%60 + "m"; }
+
+function Header({t, nodes}){
+  const exps = nodes.reduce((a,n) => a + (Array.isArray(n.rules_tested) ? n.rules_tested.length : 0), 0);
+  const fits = nodes.filter(n => n.status === "done" && num(n.fitness)).map(n => n.fitness);
+  const s = String(t.status || ""), cls = {running:"running", writing_paper:"writing", done:"done"}[s] || "";
+  return html`<header>
+    <div class="brand"><div><h1>Autonomous Discovery Lab</h1><p title=${t.question}>${t.question}</p></div></div>
+    <div class="stats">
+      <div class="stat"><span>nodes</span><b id="s-nodes">${nodes.length}</b></div>
+      <div class="stat"><span>experiments</span><b id="s-exp">${exps.toLocaleString("en-US")}</b></div>
+      <div class="stat"><span>elapsed</span><b id="s-time">${elapsed(t, nodes)}</b></div>
+      <div class="stat hot"><span>best fitness</span><b id="s-best">${fits.length ? Math.max(...fits).toFixed(1) : "—"}</b></div>
+    </div>
+    <span class=${"badge " + cls} id="status"><i></i>${s.replace(/_/g," ").toUpperCase() || "…"}</span>
+    ${s === "done" && html`<a class="paper" id="paper-btn" href="paper.html" target="_blank">Read the paper →</a>`}
+  </header>`;
+}
+
+function Tree({t, nodes, selected, onPick, dim, setDim}){
+  const {pos, links, rows, depth} = useMemo(() => layout(nodes), [nodes]);
+  const byId = new Map(nodes.map(n => [n.id, n]));
+  const done = nodes.filter(n => n.status === "done" && num(n.fitness));
+  const bestF = done.length ? Math.max(...done.map(n => n.fitness)) : 0;
+  const isDead = n => n.status === "error" || (n.status === "done" && bestF > 0 && (n.fitness||0) < 0.2*bestF);
+  const norm = n => bestF > 0 && num(n.fitness) ? Math.log1p(Math.max(0, n.fitness)) / Math.log1p(bestF) : 0;
+  const fill = n => n.status === "done" ? (norm(n) < 0.15 ? "#3b4150" : `hsl(${28 - 12*norm(n)} 95% ${46 + 14*norm(n)}%)`)
+                  : n.status === "error" ? "#3a1d1d" : n.status === "running" ? "#4a2f22" : "#20242e";
+  const radius = n => n.status === "done" && bestF > 0 ? 5 + 7*Math.max(0, n.fitness)/bestF : 5;
+  const [fresh, setFresh] = useState(new Set()); const seenRef = useRef(null);
+  useEffect(() => { const ids = new Set(nodes.map(n => n.id));
+    if (seenRef.current) { const nw = [...ids].filter(i => !seenRef.current.has(i)); if (nw.length) { setFresh(new Set(nw)); setTimeout(() => setFresh(new Set()), 3000); } }
+    seenRef.current = ids; }, [nodes]);
+  // ancestors of the selected node light up
+  const lit = new Set(); for (let c = selected; c && byId.has(c); c = byId.get(c).parent == null ? null : String(byId.get(c).parent)) { if (lit.has(c)) break; lit.add(c); }
+  const wrap = useRef(null); const [box, setBox] = useState({w: 1000, h: 700});
+  useEffect(() => { const m = () => { if (wrap.current) { const r = wrap.current.getBoundingClientRect(); setBox({w: r.width, h: r.height}); } }; m(); addEventListener("resize", m); return () => removeEventListener("resize", m); }, []);
+  const small = nodes.length <= 40;
+  const treeW = depth + 260, treeH = Math.max(1, rows - 1) * DX;
+  const sx = Math.min(1.6, Math.max(1, (box.w - 80) / treeW)), sy = Math.min(2.2, Math.max(1, (box.h - 100) / Math.max(treeH, 1)));  // stretch spacing to fill the container
+  const W = Math.max(box.w, treeW * sx + 80), H = Math.max(box.h, treeH * sy + 120);
+  const ty = Math.max(70, (H - treeH * sy) / 2);
+  const P = id => { const p = pos.get(id); return {x: p.x * sx, y: p.y * sy}; };
+  const path = (a, b) => { const p = P(a.id), q = P(b.id), mx = p.x + (q.x-p.x)*0.5; return `M${p.x},${p.y}C${mx},${p.y} ${mx},${q.y} ${q.x},${q.y}`; };
+  return html`<div class=${"treewrap" + (dim ? " dim" : "")} ref=${wrap}>
+    <div class="legend"><span><i style=${{background:"#ff8a4c"}}></i>fitness (size + colour)</span>
+      <span><i style=${{background:"#3a1d1d",border:"1.5px solid #f87171"}}></i>error</span><span><i style=${{border:"2px solid #fff",background:"none"}}></i>best so far</span>
+      <label class="toggle"><input type="checkbox" checked=${dim} onChange=${e => setDim(e.target.checked)}/> dim dead ends</label></div>
+    <svg width=${W} height=${H}><g transform=${`translate(48,${ty})`}>
+      ${links.map(([a,b]) => html`<path key=${b.id} class=${"link" + (isDead(b) ? " dead" : "") + (lit.has(b.id) && lit.has(a.id) ? " lit" : "")} d=${path(a,b)}/>`)}
+      ${nodes.map(n => { const p = P(n.id), best = n.id === t.best_node_id, r = radius(n);
+        return html`<g key=${n.id} data-id=${n.id} class=${"node " + n.status + (best ? " best" : "") + (n.id === selected ? " selected" : "") + (isDead(n) ? " dead" : "") + (fresh.has(n.id) ? " fresh" : "")}
+                       transform=${`translate(${p.x},${p.y})`} onClick=${() => onPick(n.id)}>
+          ${n.id === selected && html`<circle r=${r + 6} fill="none" stroke="var(--acc)" stroke-width="2"/>`}
+          <circle class="core" r=${r} fill=${n.status === "error" ? "none" : fill(n)} stroke=${best ? "#fff" : n.status === "error" ? "#f87171" : n.status === "running" ? "#ff8a4c" : "none"}
+                  stroke-width=${best ? 2.5 : n.status === "error" ? 2 : 1.5}/>
+          <title>${n.id}${n.status === "error" ? " — failed: " + String(n.error || "").slice(0, 120) : n.status !== "done" ? " — running" : ""}</title>
+          <text dx=${r + 8} dy=${n.status === "done" ? -3 : 4}>${n.id}</text>
+          ${n.status === "done" && html`<text dx=${r + 8} dy="12"><tspan class="rule">${small ? (n.best_rule || "") : ""}</tspan><tspan class="fitv" dx=${small ? 8 : 0}>${fmt1(n.fitness)}</tspan></text>`}
+        </g>`; })}
+    </g></svg></div>`;
+}
+
+function Replay({r}){
+  const cv = useRef(null), lbl = useRef(null);
+  useEffect(() => { if (!r || !Array.isArray(r.seed) || !r.seed.length) return;
+    const size = Number.isInteger(r.size) && r.size >= 8 && r.size <= 512 ? r.size : 64, steps = Number.isInteger(r.steps) && r.steps > 0 ? r.steps : 60;
+    let b, s; try { [b, s] = parseRule(r.rule); } catch(e) { return; }
+    const start = placeSeed(r.seed, size); let g = start.slice(), t = 0, hold = 0;
+    const c = cv.current; c.width = size; c.height = size; const ctx = c.getContext("2d"), img = ctx.createImageData(size, size);
+    const draw = () => { for (let i=0;i<size*size;i++){ const on=g[i]; img.data[i*4]=on?255:5; img.data[i*4+1]=on?122:7; img.data[i*4+2]=on?61:11; img.data[i*4+3]=255; }
+      ctx.putImageData(img,0,0); if (lbl.current) lbl.current.textContent = `t = ${t} / ${steps}`; window.__frames = (window.__frames||0)+1; };
+    draw();
+    const id = setInterval(() => { if (t >= steps) { if (++hold < 12) return; g = start.slice(); t = 0; hold = 0; } else { g = stepGrid(g,b,s,size); t++; } draw(); }, 66);
+    window.__replayTimer = id; return () => { clearInterval(id); window.__replayTimer = null; };
+  }, [r && JSON.stringify(r)]);
+  if (!r) return null;
+  return html`<div><canvas id="replay" ref=${cv}/><div class="cap"><span><code>${r.rule}</code> · ${r.size ?? 64}×${r.size ?? 64} torus</span><span ref=${lbl}>t = 0</span></div></div>`;
+}
+
+function Panel({n, bestF}){
+  const [more, setMore] = useState(false);
+  useEffect(() => setMore(false), [n && n.id]);
+  if (!n) return html`<aside><div class="empty"><div>Select a hypothesis node</div></div></aside>`;
+  const m = (n.metrics && typeof n.metrics === "object") ? n.metrics : {}, top = Array.isArray(n.results_top5) ? n.results_top5 : [];
+  const frames = Array.isArray(n.frames) ? n.frames : [], rules = Array.isArray(n.rules_tested) ? n.rules_tested : [];
+  const long = (n.notes || "").length > 260;
+  const pct = num(n.fitness) && bestF > 0 ? Math.max(1, 100*n.fitness/bestF) : 0;
+  return html`<aside id="panel">
+    <div class="crumb"><span class=${"badge " + n.status}><i></i>${n.status}</span><b>${n.id}</b><span class="path">from ${n.parent ?? "root"} · depth ${n.depth ?? "—"}</span></div>
+    <${Replay} r=${n.replay}/>
+    <div class="chiprow">
+      <div><span>copies</span><b>${m.copies ?? "—"}</b></div>
+      <div><span>alive</span><b>${m.alive ?? "—"}</b></div>
+      <div><span>growth</span><b>${num(m.growth) ? m.growth.toFixed(1) : "—"}</b></div>
+      <div class=${m.stable === true ? "ok" : m.stable === false ? "bad" : ""}><span>stable</span><b>${m.stable == null ? "—" : m.stable ? "✓" : "✕"}</b></div>
+    </div>
+    <div class=${"hyp" + (!more ? " clamp" : "")}>${n.hypothesis || "—"}</div>
+    ${n.notes && more && html`<div class="notes">${n.notes}</div>`}
+    ${(n.notes || (n.hypothesis || "").length > 160) && html`<button class="more" onClick=${() => setMore(!more)}>${more ? "Show less" : "Show more"}</button>`}
+    ${n.error && html`<pre class="err">${n.error}</pre>`}
+    <div class="kv">
+      <div class="hot"><span>best rule</span><b>${n.best_rule || "—"}</b></div>
+      <div class="hot"><span>fitness</span><b>${num(n.fitness) ? n.fitness : "—"}</b></div>
+      <div><span>copies at t=60</span><b>${m.copies ?? "—"}</b></div>
+      <div><span>alive cells</span><b>${m.alive ?? "—"}</b></div>
+      <div><span>growth</span><b>${num(m.growth) ? m.growth.toFixed(1) + "×" : "—"}</b></div>
+      <div class=${m.stable === true ? "ok" : m.stable === false ? "bad" : ""}><span>stable</span><b>${m.stable == null ? "—" : m.stable ? "yes" : "no"}</b></div>
+    </div>
+    ${pct > 0 && html`<div><div class="barwrap"><div class="bar" style=${{width: pct + "%"}}></div></div><div class="barlbl"><span>fitness vs best in tree</span><span>${pct.toFixed(0)}%</span></div></div>`}
+    ${frames.length > 0 && html`<div><div class="sec"><span>snapshots</span><span>${n.best_rule}</span></div><div class="frames">
+      ${frames.map(f => { const tt = /_(\d+)\.png$/.exec(f); return html`<figure key=${f}><img src=${f} alt="" onError=${e => e.target.parentNode.style.display = "none"}/>t = ${tt ? tt[1] : "?"}</figure>`; })}</div></div>`}
+    ${top.length > 0 && html`<div><div class="sec"><span>top rules in this node</span></div><table><thead><tr><th>rule</th><th class="r">copies</th><th class="r">alive</th><th class="r">stable</th><th class="r">fitness</th></tr></thead><tbody>
+      ${top.map((x,i) => html`<tr key=${i} class=${x.rule === n.best_rule ? "best" : ""}><td>${x.rule}</td><td class="r">${x.copies}</td><td class="r">${x.alive}</td><td class="r">${x.stable ? "yes" : "no"}</td><td class="r">${x.fitness}</td></tr>`)}</tbody></table></div>`}
+    <div class="sec"><span>all rules tested</span><span>${rules.length}</span></div>
+    <div class="chips">${rules.map(r => html`<span key=${r} class=${"chip" + (r === n.best_rule ? " best" : "")}>${r}</span>`)}</div>
+  </aside>`;
+}
+
+function App(){
+  const t = useTree();
+  const [picked, setPicked] = useState(location.hash.slice(1) || null);
+  const [dim, setDim] = useState(false);
+  const nodes = useMemo(() => { if (!t) return []; const by = new Map(); for (const n of t.nodes) if (n && n.id != null) by.set(String(n.id), {...n, id: String(n.id)}); return [...by.values()]; }, [t]);
+  useEffect(() => { const h = () => setPicked(location.hash.slice(1) || null); addEventListener("hashchange", h); return () => removeEventListener("hashchange", h); }, []);
+  if (!t) return html`<div class="empty">loading ${SRC}…</div>`;
+  const byId = new Map(nodes.map(n => [n.id, n]));
+  const selected = picked && byId.has(picked) ? picked : (t.best_node_id != null && byId.has(String(t.best_node_id)) ? String(t.best_node_id) : null);
+  const done = nodes.filter(n => n.status === "done" && num(n.fitness)), bestF = done.length ? Math.max(...done.map(n => n.fitness)) : 0;
+  const pick = id => { setPicked(id); history.replaceState(null, "", location.pathname + location.search + "#" + id); };
+  return html`<${Header} t=${t} nodes=${nodes}/>
+    <main><${Tree} t=${t} nodes=${nodes} selected=${selected} onPick=${pick} dim=${dim} setDim=${setDim}/>
+      <${Panel} n=${selected ? byId.get(selected) : null} bestF=${bestF}/></main>`;
+}
+ReactDOM.createRoot(document.getElementById("root")).render(html`<${App}/>`);
+</script></body></html>

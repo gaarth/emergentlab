@@ -96,14 +96,17 @@ function Node({ n, p, isBest, isSelected, maxF, onPick, onHover, fresh }) {
   );
 }
 
+// The path from the selected node back to the root is drawn in orange (same flow as the 2D viewer).
 function Links({ links, pos, nodesById, selected }) {
+  const lit = new Set();
+  for (let c = selected; c && nodesById.has(c); c = nodesById.get(c).parent == null ? null : String(nodesById.get(c).parent)) { if (lit.has(c)) break; lit.add(c); }
   return links.map(([a, b]) => {
     const pa = pos.get(a), pb = pos.get(b); if (!pa || !pb) return null;
     const mid = pa.clone().lerp(pb, 0.5); mid.y += 0.6;
     const pts = new THREE.QuadraticBezierCurve3(pa, mid, pb).getPoints(20);
-    const n = nodesById.get(b), hot = selected === b || selected === a;
+    const n = nodesById.get(b), hot = lit.has(a) && lit.has(b);
     const c = n?.status === "error" ? "#c98080" : "#ffffff";
-    return <Line key={a + ">" + b} points={pts} color={hot ? "#ffffff" : c} lineWidth={hot ? 1.8 : 0.8} transparent opacity={hot ? 1 : 0.45} />;
+    return <Line key={a + ">" + b} points={pts} color={hot ? "#ff8a4c" : c} lineWidth={hot ? 2.4 : 0.8} transparent opacity={hot ? 1 : 0.4} />;
   });
 }
 
