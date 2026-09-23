@@ -1,0 +1,4022 @@
+{
+ "question": "Find a Life-like CA rule (B../S..) and a seed of at most 5x5 cells under which the seed self-replicates: after N steps the grid contains 2 or more disjoint copies of the seed.",
+ "started_at": "2026-09-23T18:32:46+05:30",
+ "status": "running",
+ "best_node_id": "n31",
+ "nodes": [
+  {
+   "id": "n0",
+   "parent": null,
+   "depth": 0,
+   "hypothesis": "Test B-only variations branching from scratch: expect more copies than the parent.",
+   "rules_tested": [
+    "B158/S146",
+    "B17/S6",
+    "B178/S",
+    "B2/S",
+    "B2/S156",
+    "B25/S5",
+    "B256/S",
+    "B4/S",
+    "B4/S13",
+    "B467/S347",
+    "B5/S3",
+    "B57/S"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:32:46+05:30",
+   "ended_at": "2026-09-23T18:33:16+05:30",
+   "best_rule": "B5/S3",
+   "fitness": 2.0,
+   "metrics": {
+    "copies": 2,
+    "alive": 368,
+    "growth": 4.27,
+    "stable": true
+   },
+   "frames": [
+    "frames/n0_0.png",
+    "frames/n0_20.png",
+    "frames/n0_40.png",
+    "frames/n0_60.png"
+   ],
+   "replay": {
+    "rule": "B5/S3",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored B-only variations.",
+   "error": null
+  },
+  {
+   "id": "n1",
+   "parent": "n0",
+   "depth": 1,
+   "hypothesis": "Test isotropic near-neighbours branching from n0: expect more copies than the parent.",
+   "rules_tested": [
+    "B2/S2",
+    "B28/S23",
+    "B356/S2",
+    "B37/S",
+    "B37/S5",
+    "B4/S",
+    "B568/S156",
+    "B6/S7",
+    "B8/S"
+   ],
+   "seed": [
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "error",
+   "started_at": "2026-09-23T18:33:31+05:30",
+   "ended_at": "2026-09-23T18:34:01+05:30",
+   "best_rule": null,
+   "fitness": 0.0,
+   "metrics": {},
+   "frames": [],
+   "replay": null,
+   "notes": "Explored isotropic near-neighbours.",
+   "error": "Traceback (most recent call last):\n  File \"exp.py\", line 5, in run\nKeyError: 'copies'"
+  },
+  {
+   "id": "n2",
+   "parent": "n1",
+   "depth": 2,
+   "hypothesis": "Test Seeds-type explosive rules branching from n1: expect more copies than the parent.",
+   "rules_tested": [
+    "B1/S",
+    "B1/S1",
+    "B12/S",
+    "B124/S13",
+    "B146/S",
+    "B158/S",
+    "B158/S258",
+    "B167/S028",
+    "B178/S2",
+    "B18/S3",
+    "B2/S",
+    "B245/S",
+    "B248/S013",
+    "B25/S",
+    "B258/S",
+    "B258/S68",
+    "B268/S134",
+    "B278/S",
+    "B28/S",
+    "B28/S023",
+    "B28/S4",
+    "B34/S",
+    "B346/S235",
+    "B347/S057",
+    "B35/S",
+    "B4/S126",
+    "B4/S56",
+    "B4/S6",
+    "B567/S14",
+    "B567/S2",
+    "B6/S",
+    "B6/S4",
+    "B7/S47"
+   ],
+   "seed": [
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:34:16+05:30",
+   "ended_at": "2026-09-23T18:34:46+05:30",
+   "best_rule": "B28/S023",
+   "fitness": 3.0,
+   "metrics": {
+    "copies": 3,
+    "alive": 774,
+    "growth": 18.72,
+    "stable": true
+   },
+   "frames": [
+    "frames/n2_0.png",
+    "frames/n2_20.png",
+    "frames/n2_40.png",
+    "frames/n2_60.png"
+   ],
+   "replay": {
+    "rule": "B28/S023",
+    "seed": [
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored Seeds-type explosive rules.",
+   "error": null
+  },
+  {
+   "id": "n3",
+   "parent": "n0",
+   "depth": 1,
+   "hypothesis": "Test HighLife variants branching from n0: expect more copies than the parent.",
+   "rules_tested": [
+    "B1/S6",
+    "B125/S8",
+    "B138/S",
+    "B156/S4",
+    "B2/S017",
+    "B2/S358",
+    "B2/S4",
+    "B23/S246",
+    "B245/S4",
+    "B25/S357",
+    "B3/S",
+    "B3/S025",
+    "B34/S0",
+    "B348/S",
+    "B356/S",
+    "B358/S568",
+    "B378/S",
+    "B38/S",
+    "B45/S128",
+    "B458/S",
+    "B46/S1",
+    "B46/S34",
+    "B5/S4",
+    "B568/S",
+    "B57/S",
+    "B57/S3",
+    "B6/S27",
+    "B6/S4",
+    "B67/S",
+    "B68/S058",
+    "B7/S",
+    "B78/S4",
+    "B8/S078",
+    "B8/S34"
+   ],
+   "seed": [
+    [
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:35:01+05:30",
+   "ended_at": "2026-09-23T18:35:31+05:30",
+   "best_rule": "B358/S568",
+   "fitness": 2.0,
+   "metrics": {
+    "copies": 2,
+    "alive": 208,
+    "growth": 3.03,
+    "stable": true
+   },
+   "frames": [
+    "frames/n3_0.png",
+    "frames/n3_20.png",
+    "frames/n3_40.png",
+    "frames/n3_60.png"
+   ],
+   "replay": {
+    "rule": "B358/S568",
+    "seed": [
+     [
+      1,
+      1,
+      0
+     ],
+     [
+      0,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored HighLife variants.",
+   "error": null
+  },
+  {
+   "id": "n4",
+   "parent": "n0",
+   "depth": 1,
+   "hypothesis": "Test B-only variations branching from n0: expect more copies than the parent.",
+   "rules_tested": [
+    "B1/S56",
+    "B147/S46",
+    "B158/S1",
+    "B18/S568",
+    "B235/S15",
+    "B236/S",
+    "B24/S",
+    "B24/S368",
+    "B3/S6",
+    "B348/S",
+    "B37/S016",
+    "B37/S568",
+    "B47/S78",
+    "B48/S4",
+    "B7/S",
+    "B7/S2",
+    "B7/S7",
+    "B78/S",
+    "B78/S237",
+    "B8/S8"
+   ],
+   "seed": [
+    [
+     0,
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:35:46+05:30",
+   "ended_at": "2026-09-23T18:36:16+05:30",
+   "best_rule": "B47/S78",
+   "fitness": 0.4,
+   "metrics": {
+    "copies": 2,
+    "alive": 856,
+    "growth": 8.49,
+    "stable": false
+   },
+   "frames": [
+    "frames/n4_0.png",
+    "frames/n4_20.png",
+    "frames/n4_40.png",
+    "frames/n4_60.png"
+   ],
+   "replay": {
+    "rule": "B47/S78",
+    "seed": [
+     [
+      0,
+      0,
+      1,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     [
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored B-only variations.",
+   "error": null
+  },
+  {
+   "id": "n5",
+   "parent": "n0",
+   "depth": 1,
+   "hypothesis": "Test Seeds-type explosive rules branching from n0: expect more copies than the parent.",
+   "rules_tested": [
+    "B1/S13",
+    "B135/S036",
+    "B137/S235",
+    "B146/S01",
+    "B156/S",
+    "B158/S1",
+    "B178/S3",
+    "B18/S",
+    "B2/S5",
+    "B25/S7",
+    "B256/S014",
+    "B268/S247",
+    "B3/S08",
+    "B3/S13",
+    "B3/S2",
+    "B3/S3",
+    "B34/S4",
+    "B346/S57",
+    "B357/S1",
+    "B36/S248",
+    "B368/S13",
+    "B4/S12",
+    "B478/S35",
+    "B48/S",
+    "B48/S025",
+    "B48/S46",
+    "B5/S",
+    "B5/S347",
+    "B5/S6",
+    "B6/S45",
+    "B67/S15",
+    "B7/S126",
+    "B7/S358",
+    "B7/S8"
+   ],
+   "seed": [
+    [
+     0,
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:36:31+05:30",
+   "ended_at": "2026-09-23T18:37:01+05:30",
+   "best_rule": "B256/S014",
+   "fitness": 0.0,
+   "metrics": {
+    "copies": 0,
+    "alive": 710,
+    "growth": 11.92,
+    "stable": true
+   },
+   "frames": [
+    "frames/n5_0.png",
+    "frames/n5_20.png",
+    "frames/n5_40.png",
+    "frames/n5_60.png"
+   ],
+   "replay": {
+    "rule": "B256/S014",
+    "seed": [
+     [
+      0,
+      0,
+      1,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     [
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored Seeds-type explosive rules.",
+   "error": null
+  },
+  {
+   "id": "n6",
+   "parent": "n2",
+   "depth": 3,
+   "hypothesis": "Test Seeds-type explosive rules branching from n2: expect more copies than the parent.",
+   "rules_tested": [
+    "B1/S045",
+    "B2/S",
+    "B346/S6",
+    "B4/S4",
+    "B5/S17",
+    "B56/S347"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:37:16+05:30",
+   "ended_at": "2026-09-23T18:37:46+05:30",
+   "best_rule": "B5/S17",
+   "fitness": 0.8,
+   "metrics": {
+    "copies": 4,
+    "alive": 788,
+    "growth": 13.48,
+    "stable": false
+   },
+   "frames": [
+    "frames/n6_0.png",
+    "frames/n6_20.png",
+    "frames/n6_40.png",
+    "frames/n6_60.png"
+   ],
+   "replay": {
+    "rule": "B5/S17",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored Seeds-type explosive rules.",
+   "error": null
+  },
+  {
+   "id": "n7",
+   "parent": "n2",
+   "depth": 3,
+   "hypothesis": "Test B3 sweeps over survive sets branching from n2: expect more copies than the parent.",
+   "rules_tested": [
+    "B16/S016",
+    "B18/S256",
+    "B27/S5",
+    "B38/S038",
+    "B456/S023",
+    "B6/S15",
+    "B8/S248"
+   ],
+   "seed": [
+    [
+     0,
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "error",
+   "started_at": "2026-09-23T18:38:01+05:30",
+   "ended_at": "2026-09-23T18:38:31+05:30",
+   "best_rule": null,
+   "fitness": 0.0,
+   "metrics": {},
+   "frames": [],
+   "replay": null,
+   "notes": "Explored B3 sweeps over survive sets.",
+   "error": "Traceback (most recent call last):\n  File \"exp.py\", line 5, in run\nKeyError: 'copies'"
+  },
+  {
+   "id": "n8",
+   "parent": "n7",
+   "depth": 4,
+   "hypothesis": "Test isotropic near-neighbours branching from n7: expect more copies than the parent.",
+   "rules_tested": [
+    "B145/S",
+    "B2/S123",
+    "B3/S",
+    "B3/S17",
+    "B36/S567",
+    "B37/S04",
+    "B4/S036",
+    "B4/S4",
+    "B48/S6",
+    "B568/S67",
+    "B578/S247",
+    "B68/S236"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:38:46+05:30",
+   "ended_at": "2026-09-23T18:39:16+05:30",
+   "best_rule": "B145/S",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 675,
+    "growth": 19.4,
+    "stable": true
+   },
+   "frames": [
+    "frames/n8_0.png",
+    "frames/n8_20.png",
+    "frames/n8_40.png",
+    "frames/n8_60.png"
+   ],
+   "replay": {
+    "rule": "B145/S",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored isotropic near-neighbours.",
+   "error": null
+  },
+  {
+   "id": "n9",
+   "parent": "n1",
+   "depth": 2,
+   "hypothesis": "Test HighLife variants branching from n1: expect more copies than the parent.",
+   "rules_tested": [
+    "B13/S56",
+    "B136/S",
+    "B138/S2",
+    "B14/S135",
+    "B146/S",
+    "B147/S28",
+    "B156/S348",
+    "B168/S7",
+    "B17/S048",
+    "B18/S12",
+    "B234/S47",
+    "B24/S46",
+    "B246/S035",
+    "B27/S",
+    "B28/S458",
+    "B3/S6",
+    "B345/S6",
+    "B346/S",
+    "B347/S68",
+    "B36/S08",
+    "B367/S048",
+    "B368/S012",
+    "B37/S",
+    "B4/S128",
+    "B4/S13",
+    "B46/S4",
+    "B5/S178",
+    "B56/S156",
+    "B56/S17",
+    "B567/S24",
+    "B568/S06",
+    "B6/S1",
+    "B68/S123",
+    "B7/S7",
+    "B8/S46"
+   ],
+   "seed": [
+    [
+     0,
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:39:31+05:30",
+   "ended_at": "2026-09-23T18:40:01+05:30",
+   "best_rule": "B27/S",
+   "fitness": 3.0,
+   "metrics": {
+    "copies": 4,
+    "alive": 895,
+    "growth": 4.74,
+    "stable": true
+   },
+   "frames": [
+    "frames/n9_0.png",
+    "frames/n9_20.png",
+    "frames/n9_40.png",
+    "frames/n9_60.png"
+   ],
+   "replay": {
+    "rule": "B27/S",
+    "seed": [
+     [
+      0,
+      0,
+      1,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     [
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored HighLife variants.",
+   "error": null
+  },
+  {
+   "id": "n10",
+   "parent": "n2",
+   "depth": 3,
+   "hypothesis": "Test isotropic near-neighbours branching from n2: expect more copies than the parent.",
+   "rules_tested": [
+    "B128/S35",
+    "B157/S",
+    "B23/S12",
+    "B3/S02",
+    "B78/S18"
+   ],
+   "seed": [
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:40:16+05:30",
+   "ended_at": "2026-09-23T18:40:46+05:30",
+   "best_rule": "B78/S18",
+   "fitness": 0.0,
+   "metrics": {
+    "copies": 0,
+    "alive": 892,
+    "growth": 13.21,
+    "stable": true
+   },
+   "frames": [
+    "frames/n10_0.png",
+    "frames/n10_20.png",
+    "frames/n10_40.png",
+    "frames/n10_60.png"
+   ],
+   "replay": {
+    "rule": "B78/S18",
+    "seed": [
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored isotropic near-neighbours.",
+   "error": null
+  },
+  {
+   "id": "n11",
+   "parent": "n4",
+   "depth": 2,
+   "hypothesis": "Test sparse birth rules branching from n4: expect more copies than the parent.",
+   "rules_tested": [
+    "B1/S",
+    "B135/S15",
+    "B136/S6",
+    "B146/S",
+    "B148/S136",
+    "B148/S145",
+    "B156/S02",
+    "B16/S",
+    "B168/S567",
+    "B17/S",
+    "B17/S47",
+    "B178/S12",
+    "B2/S",
+    "B234/S378",
+    "B246/S123",
+    "B267/S",
+    "B27/S6",
+    "B3/S0",
+    "B35/S02",
+    "B35/S7",
+    "B4/S018",
+    "B457/S16",
+    "B47/S",
+    "B47/S4",
+    "B478/S257",
+    "B478/S6",
+    "B48/S135",
+    "B5/S46",
+    "B6/S7",
+    "B67/S",
+    "B67/S134",
+    "B7/S",
+    "B7/S138"
+   ],
+   "seed": [
+    [
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:41:01+05:30",
+   "ended_at": "2026-09-23T18:41:31+05:30",
+   "best_rule": "B457/S16",
+   "fitness": 1.0,
+   "metrics": {
+    "copies": 1,
+    "alive": 653,
+    "growth": 2.37,
+    "stable": true
+   },
+   "frames": [
+    "frames/n11_0.png",
+    "frames/n11_20.png",
+    "frames/n11_40.png",
+    "frames/n11_60.png"
+   ],
+   "replay": {
+    "rule": "B457/S16",
+    "seed": [
+     [
+      1,
+      1,
+      0
+     ],
+     [
+      0,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored sparse birth rules.",
+   "error": null
+  },
+  {
+   "id": "n12",
+   "parent": "n8",
+   "depth": 5,
+   "hypothesis": "Test Seeds-type explosive rules branching from n8: expect more copies than the parent.",
+   "rules_tested": [
+    "B136/S",
+    "B15/S",
+    "B2/S68",
+    "B23/S078",
+    "B246/S",
+    "B27/S12",
+    "B3/S23",
+    "B3/S46",
+    "B34/S028",
+    "B367/S",
+    "B378/S5",
+    "B4/S278",
+    "B45/S056",
+    "B457/S",
+    "B68/S04",
+    "B68/S3",
+    "B8/S567"
+   ],
+   "seed": [
+    [
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:41:46+05:30",
+   "ended_at": "2026-09-23T18:42:16+05:30",
+   "best_rule": "B8/S567",
+   "fitness": 0.0,
+   "metrics": {
+    "copies": 0,
+    "alive": 438,
+    "growth": 10.22,
+    "stable": true
+   },
+   "frames": [
+    "frames/n12_0.png",
+    "frames/n12_20.png",
+    "frames/n12_40.png",
+    "frames/n12_60.png"
+   ],
+   "replay": {
+    "rule": "B8/S567",
+    "seed": [
+     [
+      1,
+      1,
+      0
+     ],
+     [
+      0,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored Seeds-type explosive rules.",
+   "error": null
+  },
+  {
+   "id": "n13",
+   "parent": "n913",
+   "depth": 1,
+   "hypothesis": "Test sparse birth rules branching from n913: expect more copies than the parent.",
+   "rules_tested": [
+    "B136/S6",
+    "B148/S37",
+    "B24/S2",
+    "B25/S5",
+    "B3/S2",
+    "B5/S"
+   ],
+   "seed": [
+    [
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:42:31+05:30",
+   "ended_at": "2026-09-23T18:43:01+05:30",
+   "best_rule": "B148/S37",
+   "fitness": 3.0,
+   "metrics": {
+    "copies": 4,
+    "alive": 833,
+    "growth": 15.71,
+    "stable": true
+   },
+   "frames": [
+    "frames/n13_0.png",
+    "frames/n13_20.png",
+    "frames/n13_40.png",
+    "frames/n13_60.png"
+   ],
+   "replay": {
+    "rule": "B148/S37",
+    "seed": [
+     [
+      1,
+      1,
+      0
+     ],
+     [
+      0,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored sparse birth rules.",
+   "error": null
+  },
+  {
+   "id": "n14",
+   "parent": "n13",
+   "depth": 2,
+   "hypothesis": "Test HighLife variants branching from n13: expect more copies than the parent.",
+   "rules_tested": [
+    "B1/S6",
+    "B123/S4",
+    "B137/S4",
+    "B14/S15",
+    "B16/S046",
+    "B178/S058",
+    "B18/S",
+    "B246/S06",
+    "B256/S124",
+    "B3/S",
+    "B37/S136",
+    "B4/S4",
+    "B47/S8",
+    "B48/S",
+    "B48/S68",
+    "B68/S7",
+    "B8/S18"
+   ],
+   "seed": [
+    [
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:43:16+05:30",
+   "ended_at": "2026-09-23T18:43:46+05:30",
+   "best_rule": "B8/S18",
+   "fitness": 3.0,
+   "metrics": {
+    "copies": 4,
+    "alive": 404,
+    "growth": 17.48,
+    "stable": true
+   },
+   "frames": [
+    "frames/n14_0.png",
+    "frames/n14_20.png",
+    "frames/n14_40.png",
+    "frames/n14_60.png"
+   ],
+   "replay": {
+    "rule": "B8/S18",
+    "seed": [
+     [
+      1,
+      1,
+      0
+     ],
+     [
+      0,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored HighLife variants.",
+   "error": null
+  },
+  {
+   "id": "n15",
+   "parent": "n0",
+   "depth": 1,
+   "hypothesis": "Test Seeds-type explosive rules branching from n0: expect more copies than the parent.",
+   "rules_tested": [
+    "B125/S",
+    "B126/S58",
+    "B136/S68",
+    "B16/S",
+    "B2/S014",
+    "B2/S5",
+    "B23/S1",
+    "B25/S24",
+    "B28/S37",
+    "B3/S",
+    "B3/S56",
+    "B345/S128",
+    "B346/S57",
+    "B348/S7",
+    "B35/S256",
+    "B357/S0",
+    "B358/S16",
+    "B36/S157",
+    "B367/S267",
+    "B378/S1",
+    "B4/S",
+    "B4/S05",
+    "B456/S01",
+    "B46/S",
+    "B56/S",
+    "B57/S",
+    "B58/S278",
+    "B7/S8",
+    "B8/S"
+   ],
+   "seed": [
+    [
+     0,
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:44:01+05:30",
+   "ended_at": "2026-09-23T18:44:31+05:30",
+   "best_rule": "B357/S0",
+   "fitness": 0.0,
+   "metrics": {
+    "copies": 0,
+    "alive": 591,
+    "growth": 7.44,
+    "stable": true
+   },
+   "frames": [
+    "frames/n15_0.png",
+    "frames/n15_20.png",
+    "frames/n15_40.png",
+    "frames/n15_60.png"
+   ],
+   "replay": {
+    "rule": "B357/S0",
+    "seed": [
+     [
+      0,
+      0,
+      1,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     [
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored Seeds-type explosive rules.",
+   "error": null
+  },
+  {
+   "id": "n16",
+   "parent": "n4",
+   "depth": 2,
+   "hypothesis": "Test sparse birth rules branching from n4: expect more copies than the parent.",
+   "rules_tested": [
+    "B17/S",
+    "B2/S",
+    "B238/S5",
+    "B256/S2",
+    "B26/S2",
+    "B28/S17",
+    "B345/S14",
+    "B5/S4",
+    "B5/S678",
+    "B6/S"
+   ],
+   "seed": [
+    [
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:44:46+05:30",
+   "ended_at": "2026-09-23T18:45:16+05:30",
+   "best_rule": "B6/S",
+   "fitness": 3.0,
+   "metrics": {
+    "copies": 3,
+    "alive": 36,
+    "growth": 10.01,
+    "stable": true
+   },
+   "frames": [
+    "frames/n16_0.png",
+    "frames/n16_20.png",
+    "frames/n16_40.png",
+    "frames/n16_60.png"
+   ],
+   "replay": {
+    "rule": "B6/S",
+    "seed": [
+     [
+      1,
+      1,
+      0
+     ],
+     [
+      0,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored sparse birth rules.",
+   "error": null
+  },
+  {
+   "id": "n17",
+   "parent": "n9",
+   "depth": 3,
+   "hypothesis": "Test Seeds-type explosive rules branching from n9: expect more copies than the parent.",
+   "rules_tested": [
+    "B124/S178",
+    "B145/S15",
+    "B17/S",
+    "B18/S78",
+    "B28/S1",
+    "B3/S25",
+    "B3/S78",
+    "B345/S16",
+    "B368/S0",
+    "B38/S56",
+    "B4/S078",
+    "B47/S047",
+    "B48/S",
+    "B48/S07",
+    "B5/S368",
+    "B57/S",
+    "B578/S12",
+    "B58/S78",
+    "B6/S",
+    "B6/S23",
+    "B7/S",
+    "B7/S348",
+    "B7/S58"
+   ],
+   "seed": [
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:45:31+05:30",
+   "ended_at": "2026-09-23T18:46:01+05:30",
+   "best_rule": "B6/S23",
+   "fitness": 3.0,
+   "metrics": {
+    "copies": 3,
+    "alive": 702,
+    "growth": 4.92,
+    "stable": true
+   },
+   "frames": [
+    "frames/n17_0.png",
+    "frames/n17_20.png",
+    "frames/n17_40.png",
+    "frames/n17_60.png"
+   ],
+   "replay": {
+    "rule": "B6/S23",
+    "seed": [
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored Seeds-type explosive rules.",
+   "error": null
+  },
+  {
+   "id": "n18",
+   "parent": "n3",
+   "depth": 2,
+   "hypothesis": "Test B-only variations branching from n3: expect more copies than the parent.",
+   "rules_tested": [
+    "B124/S3",
+    "B135/S6",
+    "B2/S057",
+    "B23/S147",
+    "B25/S34",
+    "B25/S568",
+    "B348/S48",
+    "B4/S",
+    "B458/S3",
+    "B468/S4",
+    "B48/S024",
+    "B5/S",
+    "B5/S12",
+    "B56/S",
+    "B6/S268",
+    "B8/S26",
+    "B8/S58"
+   ],
+   "seed": [
+    [
+     0,
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:46:16+05:30",
+   "ended_at": "2026-09-23T18:46:46+05:30",
+   "best_rule": "B25/S568",
+   "fitness": 0.0,
+   "metrics": {
+    "copies": 0,
+    "alive": 411,
+    "growth": 15.78,
+    "stable": false
+   },
+   "frames": [
+    "frames/n18_0.png",
+    "frames/n18_20.png",
+    "frames/n18_40.png",
+    "frames/n18_60.png"
+   ],
+   "replay": {
+    "rule": "B25/S568",
+    "seed": [
+     [
+      0,
+      0,
+      1,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     [
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored B-only variations.",
+   "error": null
+  },
+  {
+   "id": "n19",
+   "parent": "n5",
+   "depth": 2,
+   "hypothesis": "Test HighLife variants branching from n5: expect more copies than the parent.",
+   "rules_tested": [
+    "B1/S15",
+    "B125/S8",
+    "B136/S03",
+    "B145/S",
+    "B156/S35",
+    "B2/S058",
+    "B2/S27",
+    "B234/S6",
+    "B256/S",
+    "B27/S245",
+    "B278/S035",
+    "B3/S257",
+    "B3/S78",
+    "B367/S2",
+    "B368/S",
+    "B4/S167",
+    "B468/S368",
+    "B478/S16",
+    "B57/S",
+    "B58/S",
+    "B68/S",
+    "B68/S278",
+    "B8/S8"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:47:01+05:30",
+   "ended_at": "2026-09-23T18:47:31+05:30",
+   "best_rule": "B4/S167",
+   "fitness": 0.0,
+   "metrics": {
+    "copies": 0,
+    "alive": 189,
+    "growth": 15.4,
+    "stable": true
+   },
+   "frames": [
+    "frames/n19_0.png",
+    "frames/n19_20.png",
+    "frames/n19_40.png",
+    "frames/n19_60.png"
+   ],
+   "replay": {
+    "rule": "B4/S167",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored HighLife variants.",
+   "error": null
+  },
+  {
+   "id": "n20",
+   "parent": "n13",
+   "depth": 2,
+   "hypothesis": "Test B3 sweeps over survive sets branching from n13: expect more copies than the parent.",
+   "rules_tested": [
+    "B1/S035",
+    "B1/S67",
+    "B134/S017",
+    "B17/S2",
+    "B234/S",
+    "B236/S8",
+    "B248/S04",
+    "B268/S6",
+    "B27/S235",
+    "B278/S7",
+    "B3/S35",
+    "B367/S078",
+    "B367/S78",
+    "B368/S",
+    "B38/S1",
+    "B4/S",
+    "B5/S127",
+    "B5/S5",
+    "B5/S7",
+    "B6/S67",
+    "B7/S",
+    "B7/S04",
+    "B7/S238",
+    "B7/S3",
+    "B7/S368",
+    "B78/S156",
+    "B78/S68"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:47:46+05:30",
+   "ended_at": "2026-09-23T18:48:16+05:30",
+   "best_rule": "B5/S7",
+   "fitness": 3.0,
+   "metrics": {
+    "copies": 4,
+    "alive": 307,
+    "growth": 3.13,
+    "stable": true
+   },
+   "frames": [
+    "frames/n20_0.png",
+    "frames/n20_20.png",
+    "frames/n20_40.png",
+    "frames/n20_60.png"
+   ],
+   "replay": {
+    "rule": "B5/S7",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored B3 sweeps over survive sets.",
+   "error": null
+  },
+  {
+   "id": "n21",
+   "parent": "n10",
+   "depth": 4,
+   "hypothesis": "Test B3 sweeps over survive sets branching from n10: expect more copies than the parent.",
+   "rules_tested": [
+    "B126/S",
+    "B178/S",
+    "B178/S048",
+    "B248/S28",
+    "B258/S",
+    "B26/S",
+    "B278/S",
+    "B3/S",
+    "B3/S3",
+    "B357/S16",
+    "B358/S",
+    "B4/S047",
+    "B47/S3",
+    "B48/S47",
+    "B578/S",
+    "B67/S01",
+    "B7/S067",
+    "B7/S3",
+    "B8/S07"
+   ],
+   "seed": [
+    [
+     0,
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "error",
+   "started_at": "2026-09-23T18:48:31+05:30",
+   "ended_at": "2026-09-23T18:49:01+05:30",
+   "best_rule": null,
+   "fitness": 0.0,
+   "metrics": {},
+   "frames": [],
+   "replay": null,
+   "notes": "Explored B3 sweeps over survive sets.",
+   "error": "Traceback (most recent call last):\n  File \"exp.py\", line 5, in run\nKeyError: 'copies'"
+  },
+  {
+   "id": "n22",
+   "parent": "n6",
+   "depth": 4,
+   "hypothesis": "Test B-only variations branching from n6: expect more copies than the parent.",
+   "rules_tested": [
+    "B137/S3",
+    "B16/S",
+    "B17/S",
+    "B2/S",
+    "B2/S6",
+    "B256/S01",
+    "B28/S68",
+    "B34/S6",
+    "B36/S146",
+    "B47/S",
+    "B5/S045",
+    "B567/S26",
+    "B6/S",
+    "B78/S04"
+   ],
+   "seed": [
+    [
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "error",
+   "started_at": "2026-09-23T18:49:16+05:30",
+   "ended_at": "2026-09-23T18:49:46+05:30",
+   "best_rule": null,
+   "fitness": 0.0,
+   "metrics": {},
+   "frames": [],
+   "replay": null,
+   "notes": "Explored B-only variations.",
+   "error": "Traceback (most recent call last):\n  File \"exp.py\", line 5, in run\nKeyError: 'copies'"
+  },
+  {
+   "id": "n23",
+   "parent": "n13",
+   "depth": 2,
+   "hypothesis": "Test sparse birth rules branching from n13: expect more copies than the parent.",
+   "rules_tested": [
+    "B13/S6",
+    "B17/S",
+    "B236/S8",
+    "B24/S468",
+    "B27/S257",
+    "B3/S06",
+    "B3/S48",
+    "B34/S47",
+    "B34/S6",
+    "B348/S",
+    "B348/S56",
+    "B37/S125",
+    "B378/S017",
+    "B378/S37",
+    "B38/S",
+    "B38/S37",
+    "B4/S02",
+    "B4/S6",
+    "B4/S8",
+    "B45/S7",
+    "B47/S5",
+    "B6/S",
+    "B6/S367",
+    "B78/S57",
+    "B8/S",
+    "B8/S7"
+   ],
+   "seed": [
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:50:01+05:30",
+   "ended_at": "2026-09-23T18:50:31+05:30",
+   "best_rule": "B47/S5",
+   "fitness": 3.0,
+   "metrics": {
+    "copies": 3,
+    "alive": 760,
+    "growth": 12.32,
+    "stable": true
+   },
+   "frames": [
+    "frames/n23_0.png",
+    "frames/n23_20.png",
+    "frames/n23_40.png",
+    "frames/n23_60.png"
+   ],
+   "replay": {
+    "rule": "B47/S5",
+    "seed": [
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored sparse birth rules.",
+   "error": null
+  },
+  {
+   "id": "n24",
+   "parent": "n6",
+   "depth": 4,
+   "hypothesis": "Test B-only variations branching from n6: expect more copies than the parent.",
+   "rules_tested": [
+    "B14/S3",
+    "B147/S3",
+    "B17/S",
+    "B2/S",
+    "B235/S08",
+    "B235/S124",
+    "B25/S",
+    "B258/S123",
+    "B26/S",
+    "B268/S13",
+    "B27/S3",
+    "B28/S26",
+    "B35/S236",
+    "B35/S68",
+    "B356/S5",
+    "B358/S18",
+    "B36/S3",
+    "B378/S7",
+    "B4/S",
+    "B45/S27",
+    "B48/S367",
+    "B5/S",
+    "B5/S458",
+    "B56/S78",
+    "B57/S",
+    "B578/S",
+    "B58/S",
+    "B6/S6",
+    "B67/S247",
+    "B678/S16",
+    "B678/S268",
+    "B7/S",
+    "B8/S15"
+   ],
+   "seed": [
+    [
+     0,
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:50:46+05:30",
+   "ended_at": "2026-09-23T18:51:16+05:30",
+   "best_rule": "B7/S",
+   "fitness": 2.0,
+   "metrics": {
+    "copies": 2,
+    "alive": 295,
+    "growth": 6.82,
+    "stable": true
+   },
+   "frames": [
+    "frames/n24_0.png",
+    "frames/n24_20.png",
+    "frames/n24_40.png",
+    "frames/n24_60.png"
+   ],
+   "replay": {
+    "rule": "B7/S",
+    "seed": [
+     [
+      0,
+      0,
+      1,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     [
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored B-only variations.",
+   "error": null
+  },
+  {
+   "id": "n25",
+   "parent": "n18",
+   "depth": 3,
+   "hypothesis": "Test isotropic near-neighbours branching from n18: expect more copies than the parent.",
+   "rules_tested": [
+    "B123/S24",
+    "B126/S",
+    "B134/S36",
+    "B2/S016",
+    "B27/S027",
+    "B36/S1",
+    "B368/S4",
+    "B378/S",
+    "B4/S058",
+    "B6/S15",
+    "B7/S",
+    "B8/S",
+    "B8/S016"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:51:31+05:30",
+   "ended_at": "2026-09-23T18:52:01+05:30",
+   "best_rule": "B378/S",
+   "fitness": 2.0,
+   "metrics": {
+    "copies": 2,
+    "alive": 648,
+    "growth": 14.99,
+    "stable": true
+   },
+   "frames": [
+    "frames/n25_0.png",
+    "frames/n25_20.png",
+    "frames/n25_40.png",
+    "frames/n25_60.png"
+   ],
+   "replay": {
+    "rule": "B378/S",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored isotropic near-neighbours.",
+   "error": null
+  },
+  {
+   "id": "n26",
+   "parent": "n13",
+   "depth": 2,
+   "hypothesis": "Test Seeds-type explosive rules branching from n13: expect more copies than the parent.",
+   "rules_tested": [
+    "B1/S",
+    "B12/S",
+    "B127/S46",
+    "B136/S1",
+    "B156/S",
+    "B17/S4",
+    "B17/S7",
+    "B2/S",
+    "B2/S147",
+    "B2/S256",
+    "B236/S",
+    "B238/S18",
+    "B24/S45",
+    "B247/S16",
+    "B258/S6",
+    "B28/S012",
+    "B3/S",
+    "B34/S256",
+    "B4/S",
+    "B4/S13",
+    "B46/S2",
+    "B5/S",
+    "B5/S0",
+    "B567/S",
+    "B58/S07",
+    "B6/S4",
+    "B67/S0",
+    "B7/S14",
+    "B7/S5",
+    "B7/S68",
+    "B8/S",
+    "B8/S48"
+   ],
+   "seed": [
+    [
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:52:16+05:30",
+   "ended_at": "2026-09-23T18:52:46+05:30",
+   "best_rule": "B4/S13",
+   "fitness": 3.0,
+   "metrics": {
+    "copies": 4,
+    "alive": 382,
+    "growth": 11.87,
+    "stable": true
+   },
+   "frames": [
+    "frames/n26_0.png",
+    "frames/n26_20.png",
+    "frames/n26_40.png",
+    "frames/n26_60.png"
+   ],
+   "replay": {
+    "rule": "B4/S13",
+    "seed": [
+     [
+      1,
+      1,
+      0
+     ],
+     [
+      0,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored Seeds-type explosive rules.",
+   "error": null
+  },
+  {
+   "id": "n27",
+   "parent": "n15",
+   "depth": 2,
+   "hypothesis": "Test B-only variations branching from n15: expect more copies than the parent.",
+   "rules_tested": [
+    "B1/S238",
+    "B123/S1",
+    "B124/S034",
+    "B128/S7",
+    "B13/S",
+    "B14/S2",
+    "B2/S4",
+    "B2/S6",
+    "B235/S",
+    "B267/S247",
+    "B348/S",
+    "B4/S578",
+    "B46/S",
+    "B478/S",
+    "B5/S",
+    "B67/S358",
+    "B678/S13"
+   ],
+   "seed": [
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:53:01+05:30",
+   "ended_at": "2026-09-23T18:53:31+05:30",
+   "best_rule": "B2/S6",
+   "fitness": 0.0,
+   "metrics": {
+    "copies": 0,
+    "alive": 828,
+    "growth": 15.9,
+    "stable": true
+   },
+   "frames": [
+    "frames/n27_0.png",
+    "frames/n27_20.png",
+    "frames/n27_40.png",
+    "frames/n27_60.png"
+   ],
+   "replay": {
+    "rule": "B2/S6",
+    "seed": [
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored B-only variations.",
+   "error": null
+  },
+  {
+   "id": "n28",
+   "parent": "n3",
+   "depth": 2,
+   "hypothesis": "Test sparse birth rules branching from n3: expect more copies than the parent.",
+   "rules_tested": [
+    "B12/S024",
+    "B157/S",
+    "B4/S126",
+    "B4/S3",
+    "B68/S"
+   ],
+   "seed": [
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:53:46+05:30",
+   "ended_at": "2026-09-23T18:54:16+05:30",
+   "best_rule": "B12/S024",
+   "fitness": 3.0,
+   "metrics": {
+    "copies": 3,
+    "alive": 181,
+    "growth": 7.14,
+    "stable": true
+   },
+   "frames": [
+    "frames/n28_0.png",
+    "frames/n28_20.png",
+    "frames/n28_40.png",
+    "frames/n28_60.png"
+   ],
+   "replay": {
+    "rule": "B12/S024",
+    "seed": [
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored sparse birth rules.",
+   "error": null
+  },
+  {
+   "id": "n29",
+   "parent": "n929",
+   "depth": 1,
+   "hypothesis": "Test HighLife variants branching from n929: expect more copies than the parent.",
+   "rules_tested": [
+    "B124/S3",
+    "B13/S03",
+    "B138/S2",
+    "B156/S23",
+    "B17/S568",
+    "B17/S6",
+    "B23/S5",
+    "B25/S018",
+    "B3/S",
+    "B346/S067",
+    "B37/S08",
+    "B4/S",
+    "B45/S0",
+    "B456/S",
+    "B46/S358",
+    "B5/S126"
+   ],
+   "seed": [
+    [
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:54:31+05:30",
+   "ended_at": "2026-09-23T18:55:01+05:30",
+   "best_rule": "B45/S0",
+   "fitness": 3.0,
+   "metrics": {
+    "copies": 4,
+    "alive": 314,
+    "growth": 6.52,
+    "stable": true
+   },
+   "frames": [
+    "frames/n29_0.png",
+    "frames/n29_20.png",
+    "frames/n29_40.png",
+    "frames/n29_60.png"
+   ],
+   "replay": {
+    "rule": "B45/S0",
+    "seed": [
+     [
+      1,
+      1,
+      0
+     ],
+     [
+      0,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored HighLife variants.",
+   "error": null
+  },
+  {
+   "id": "n30",
+   "parent": "n5",
+   "depth": 2,
+   "hypothesis": "Test Seeds-type explosive rules branching from n5: expect more copies than the parent.",
+   "rules_tested": [
+    "B1/S178",
+    "B126/S",
+    "B134/S2",
+    "B146/S38",
+    "B148/S236",
+    "B15/S",
+    "B23/S013",
+    "B235/S056",
+    "B237/S",
+    "B248/S",
+    "B25/S0",
+    "B26/S235",
+    "B268/S6",
+    "B3/S17",
+    "B34/S",
+    "B34/S1",
+    "B368/S8",
+    "B37/S167",
+    "B38/S",
+    "B48/S34",
+    "B5/S",
+    "B5/S578",
+    "B56/S34",
+    "B57/S237",
+    "B578/S",
+    "B6/S",
+    "B6/S036",
+    "B6/S1",
+    "B6/S12",
+    "B6/S3",
+    "B7/S",
+    "B7/S0"
+   ],
+   "seed": [
+    [
+     0,
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:55:16+05:30",
+   "ended_at": "2026-09-23T18:55:46+05:30",
+   "best_rule": "B6/S1",
+   "fitness": 0.0,
+   "metrics": {
+    "copies": 0,
+    "alive": 450,
+    "growth": 4.12,
+    "stable": false
+   },
+   "frames": [
+    "frames/n30_0.png",
+    "frames/n30_20.png",
+    "frames/n30_40.png",
+    "frames/n30_60.png"
+   ],
+   "replay": {
+    "rule": "B6/S1",
+    "seed": [
+     [
+      0,
+      0,
+      1,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     [
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored Seeds-type explosive rules.",
+   "error": null
+  },
+  {
+   "id": "n31",
+   "parent": "n26",
+   "depth": 3,
+   "hypothesis": "Test B3 sweeps over survive sets branching from n26: expect more copies than the parent.",
+   "rules_tested": [
+    "B125/S",
+    "B128/S26",
+    "B147/S03",
+    "B147/S2",
+    "B3/S57",
+    "B35/S17",
+    "B356/S",
+    "B378/S",
+    "B46/S67",
+    "B57/S",
+    "B578/S02",
+    "B7/S568",
+    "B78/S",
+    "B8/S6"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:56:01+05:30",
+   "ended_at": "2026-09-23T18:56:31+05:30",
+   "best_rule": "B36/S23",
+   "fitness": 4.0,
+   "metrics": {
+    "copies": 4,
+    "alive": 541,
+    "growth": 17.6,
+    "stable": true
+   },
+   "frames": [
+    "frames/n31_0.png",
+    "frames/n31_20.png",
+    "frames/n31_40.png",
+    "frames/n31_60.png"
+   ],
+   "replay": {
+    "rule": "B36/S23",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored B3 sweeps over survive sets.",
+   "error": null
+  },
+  {
+   "id": "n32",
+   "parent": "n1",
+   "depth": 2,
+   "hypothesis": "Test HighLife variants branching from n1: expect more copies than the parent.",
+   "rules_tested": [
+    "B1/S057",
+    "B124/S0",
+    "B126/S5",
+    "B14/S",
+    "B23/S45",
+    "B25/S8",
+    "B28/S258",
+    "B346/S068",
+    "B4/S",
+    "B4/S3",
+    "B46/S37",
+    "B5/S",
+    "B5/S46",
+    "B5/S67",
+    "B57/S",
+    "B6/S14"
+   ],
+   "seed": [
+    [
+     0,
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:56:46+05:30",
+   "ended_at": "2026-09-23T18:57:16+05:30",
+   "best_rule": "B5/S46",
+   "fitness": 2.0,
+   "metrics": {
+    "copies": 2,
+    "alive": 743,
+    "growth": 0.61,
+    "stable": true
+   },
+   "frames": [
+    "frames/n32_0.png",
+    "frames/n32_20.png",
+    "frames/n32_40.png",
+    "frames/n32_60.png"
+   ],
+   "replay": {
+    "rule": "B5/S46",
+    "seed": [
+     [
+      0,
+      0,
+      1,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     [
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored HighLife variants.",
+   "error": null
+  },
+  {
+   "id": "n33",
+   "parent": "n31",
+   "depth": 4,
+   "hypothesis": "Test sparse birth rules branching from n31: expect more copies than the parent.",
+   "rules_tested": [
+    "B1/S1",
+    "B12/S2",
+    "B134/S6",
+    "B137/S257",
+    "B14/S",
+    "B14/S08",
+    "B148/S23",
+    "B238/S4",
+    "B246/S24",
+    "B248/S",
+    "B3/S17",
+    "B346/S",
+    "B357/S012",
+    "B36/S47",
+    "B38/S135",
+    "B456/S456",
+    "B47/S023",
+    "B478/S067",
+    "B5/S5",
+    "B5/S57",
+    "B6/S278",
+    "B7/S12",
+    "B8/S"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:57:31+05:30",
+   "ended_at": "2026-09-23T18:58:01+05:30",
+   "best_rule": "B1/S1",
+   "fitness": 0.0,
+   "metrics": {
+    "copies": 0,
+    "alive": 431,
+    "growth": 8.94,
+    "stable": true
+   },
+   "frames": [
+    "frames/n33_0.png",
+    "frames/n33_20.png",
+    "frames/n33_40.png",
+    "frames/n33_60.png"
+   ],
+   "replay": {
+    "rule": "B1/S1",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored sparse birth rules.",
+   "error": null
+  },
+  {
+   "id": "n34",
+   "parent": "n7",
+   "depth": 4,
+   "hypothesis": "Test B-only variations branching from n7: expect more copies than the parent.",
+   "rules_tested": [
+    "B1/S",
+    "B127/S",
+    "B128/S",
+    "B128/S026",
+    "B134/S",
+    "B156/S25",
+    "B168/S5",
+    "B17/S7",
+    "B2/S",
+    "B2/S18",
+    "B236/S7",
+    "B24/S",
+    "B24/S012",
+    "B246/S7",
+    "B26/S04",
+    "B268/S035",
+    "B27/S",
+    "B3/S",
+    "B3/S027",
+    "B3/S57",
+    "B346/S024",
+    "B4/S",
+    "B45/S",
+    "B45/S4",
+    "B456/S036",
+    "B468/S",
+    "B48/S5",
+    "B5/S7",
+    "B578/S6",
+    "B67/S",
+    "B67/S16",
+    "B67/S58",
+    "B68/S3",
+    "B7/S068",
+    "B7/S467",
+    "B78/S127",
+    "B78/S137",
+    "B78/S267",
+    "B8/S78"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "error",
+   "started_at": "2026-09-23T18:58:16+05:30",
+   "ended_at": "2026-09-23T18:58:46+05:30",
+   "best_rule": null,
+   "fitness": 0.0,
+   "metrics": {},
+   "frames": [],
+   "replay": null,
+   "notes": "Explored B-only variations.",
+   "error": "Traceback (most recent call last):\n  File \"exp.py\", line 5, in run\nKeyError: 'copies'"
+  },
+  {
+   "id": "n35",
+   "parent": "n7",
+   "depth": 4,
+   "hypothesis": "Test Seeds-type explosive rules branching from n7: expect more copies than the parent.",
+   "rules_tested": [
+    "B123/S4",
+    "B125/S03",
+    "B128/S",
+    "B13/S5",
+    "B137/S3",
+    "B14/S48",
+    "B145/S258",
+    "B146/S16",
+    "B148/S35",
+    "B15/S",
+    "B167/S57",
+    "B168/S37",
+    "B18/S8",
+    "B236/S",
+    "B257/S6",
+    "B28/S",
+    "B3/S",
+    "B3/S05",
+    "B34/S",
+    "B357/S15",
+    "B36/S238",
+    "B367/S37",
+    "B4/S25",
+    "B45/S06",
+    "B5/S7",
+    "B56/S236",
+    "B567/S38",
+    "B578/S468",
+    "B58/S05",
+    "B6/S2",
+    "B6/S3",
+    "B7/S0",
+    "B78/S08"
+   ],
+   "seed": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:59:01+05:30",
+   "ended_at": "2026-09-23T18:59:31+05:30",
+   "best_rule": "B236/S",
+   "fitness": 0.6,
+   "metrics": {
+    "copies": 3,
+    "alive": 215,
+    "growth": 10.8,
+    "stable": false
+   },
+   "frames": [
+    "frames/n35_0.png",
+    "frames/n35_20.png",
+    "frames/n35_40.png",
+    "frames/n35_60.png"
+   ],
+   "replay": {
+    "rule": "B236/S",
+    "seed": [
+     [
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored Seeds-type explosive rules.",
+   "error": null
+  },
+  {
+   "id": "n36",
+   "parent": "n27",
+   "depth": 3,
+   "hypothesis": "Test B3 sweeps over survive sets branching from n27: expect more copies than the parent.",
+   "rules_tested": [
+    "B1/S4",
+    "B125/S",
+    "B134/S01",
+    "B168/S18",
+    "B246/S458",
+    "B258/S68",
+    "B47/S06",
+    "B48/S017",
+    "B58/S"
+   ],
+   "seed": [
+    [
+     0,
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T18:59:46+05:30",
+   "ended_at": "2026-09-23T19:00:16+05:30",
+   "best_rule": "B258/S68",
+   "fitness": 0.0,
+   "metrics": {
+    "copies": 0,
+    "alive": 573,
+    "growth": 2.91,
+    "stable": true
+   },
+   "frames": [
+    "frames/n36_0.png",
+    "frames/n36_20.png",
+    "frames/n36_40.png",
+    "frames/n36_60.png"
+   ],
+   "replay": {
+    "rule": "B258/S68",
+    "seed": [
+     [
+      0,
+      0,
+      1,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     [
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored B3 sweeps over survive sets.",
+   "error": null
+  },
+  {
+   "id": "n37",
+   "parent": "n2",
+   "depth": 3,
+   "hypothesis": "Test sparse birth rules branching from n2: expect more copies than the parent.",
+   "rules_tested": [
+    "B2/S0",
+    "B237/S4",
+    "B46/S36",
+    "B568/S",
+    "B578/S"
+   ],
+   "seed": [
+    [
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "error",
+   "started_at": "2026-09-23T19:00:31+05:30",
+   "ended_at": "2026-09-23T19:01:01+05:30",
+   "best_rule": null,
+   "fitness": 0.0,
+   "metrics": {},
+   "frames": [],
+   "replay": null,
+   "notes": "Explored sparse birth rules.",
+   "error": "Traceback (most recent call last):\n  File \"exp.py\", line 5, in run\nKeyError: 'copies'"
+  },
+  {
+   "id": "n38",
+   "parent": "n6",
+   "depth": 4,
+   "hypothesis": "Test Seeds-type explosive rules branching from n6: expect more copies than the parent.",
+   "rules_tested": [
+    "B1/S034",
+    "B2/S23",
+    "B234/S",
+    "B26/S",
+    "B26/S78",
+    "B27/S",
+    "B367/S015",
+    "B378/S3",
+    "B457/S8",
+    "B47/S27",
+    "B47/S6",
+    "B5/S",
+    "B568/S5",
+    "B6/S457",
+    "B67/S17",
+    "B68/S5",
+    "B8/S2"
+   ],
+   "seed": [
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "error",
+   "started_at": "2026-09-23T19:01:16+05:30",
+   "ended_at": "2026-09-23T19:01:46+05:30",
+   "best_rule": null,
+   "fitness": 0.0,
+   "metrics": {},
+   "frames": [],
+   "replay": null,
+   "notes": "Explored Seeds-type explosive rules.",
+   "error": "Traceback (most recent call last):\n  File \"exp.py\", line 5, in run\nKeyError: 'copies'"
+  },
+  {
+   "id": "n39",
+   "parent": "n23",
+   "depth": 3,
+   "hypothesis": "Test isotropic near-neighbours branching from n23: expect more copies than the parent.",
+   "rules_tested": [
+    "B1/S0",
+    "B1/S2",
+    "B15/S7",
+    "B16/S13",
+    "B18/S14",
+    "B24/S347",
+    "B245/S358",
+    "B257/S2",
+    "B26/S6",
+    "B357/S",
+    "B36/S17",
+    "B37/S8",
+    "B4/S",
+    "B4/S67",
+    "B5/S8",
+    "B578/S6",
+    "B7/S",
+    "B7/S012",
+    "B78/S236"
+   ],
+   "seed": [
+    [
+     0,
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T19:02:01+05:30",
+   "ended_at": "2026-09-23T19:02:31+05:30",
+   "best_rule": "B7/S",
+   "fitness": 0.6,
+   "metrics": {
+    "copies": 3,
+    "alive": 625,
+    "growth": 2.02,
+    "stable": false
+   },
+   "frames": [
+    "frames/n39_0.png",
+    "frames/n39_20.png",
+    "frames/n39_40.png",
+    "frames/n39_60.png"
+   ],
+   "replay": {
+    "rule": "B7/S",
+    "seed": [
+     [
+      0,
+      0,
+      1,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     [
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored isotropic near-neighbours.",
+   "error": null
+  },
+  {
+   "id": "n40",
+   "parent": "n30",
+   "depth": 3,
+   "hypothesis": "Test B3 sweeps over survive sets branching from n30: expect more copies than the parent.",
+   "rules_tested": [
+    "B124/S8",
+    "B146/S5",
+    "B157/S",
+    "B237/S",
+    "B247/S135",
+    "B5/S123",
+    "B7/S058"
+   ],
+   "seed": [
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T19:02:46+05:30",
+   "ended_at": "2026-09-23T19:03:16+05:30",
+   "best_rule": "B237/S",
+   "fitness": 3.0,
+   "metrics": {
+    "copies": 4,
+    "alive": 880,
+    "growth": 10.77,
+    "stable": true
+   },
+   "frames": [
+    "frames/n40_0.png",
+    "frames/n40_20.png",
+    "frames/n40_40.png",
+    "frames/n40_60.png"
+   ],
+   "replay": {
+    "rule": "B237/S",
+    "seed": [
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored B3 sweeps over survive sets.",
+   "error": null
+  },
+  {
+   "id": "n41",
+   "parent": "n36",
+   "depth": 4,
+   "hypothesis": "Test Seeds-type explosive rules branching from n36: expect more copies than the parent.",
+   "rules_tested": [
+    "B123/S",
+    "B125/S2",
+    "B127/S017",
+    "B146/S458",
+    "B16/S7",
+    "B2/S",
+    "B2/S56",
+    "B235/S",
+    "B235/S14",
+    "B238/S478",
+    "B24/S3",
+    "B24/S4",
+    "B26/S23",
+    "B3/S016",
+    "B34/S",
+    "B37/S",
+    "B4/S026",
+    "B4/S3",
+    "B456/S367",
+    "B456/S6",
+    "B457/S8",
+    "B468/S1",
+    "B568/S45",
+    "B67/S1",
+    "B68/S078",
+    "B7/S",
+    "B7/S08"
+   ],
+   "seed": [
+    [
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T19:03:31+05:30",
+   "ended_at": "2026-09-23T19:04:01+05:30",
+   "best_rule": "B146/S458",
+   "fitness": 0.0,
+   "metrics": {
+    "copies": 0,
+    "alive": 684,
+    "growth": 9.9,
+    "stable": true
+   },
+   "frames": [
+    "frames/n41_0.png",
+    "frames/n41_20.png",
+    "frames/n41_40.png",
+    "frames/n41_60.png"
+   ],
+   "replay": {
+    "rule": "B146/S458",
+    "seed": [
+     [
+      1,
+      1,
+      0
+     ],
+     [
+      0,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored Seeds-type explosive rules.",
+   "error": null
+  },
+  {
+   "id": "n42",
+   "parent": "n0",
+   "depth": 1,
+   "hypothesis": "Test isotropic near-neighbours branching from n0: expect more copies than the parent.",
+   "rules_tested": [
+    "B1/S5",
+    "B12/S12",
+    "B135/S047",
+    "B14/S",
+    "B147/S36",
+    "B2/S078",
+    "B23/S",
+    "B23/S0",
+    "B237/S4",
+    "B24/S7",
+    "B245/S36",
+    "B26/S0",
+    "B27/S568",
+    "B3/S267",
+    "B34/S48",
+    "B347/S78",
+    "B35/S247",
+    "B35/S48",
+    "B4/S13",
+    "B45/S2",
+    "B45/S4",
+    "B456/S2",
+    "B458/S",
+    "B458/S8",
+    "B467/S04",
+    "B468/S178",
+    "B47/S",
+    "B478/S06",
+    "B5/S157",
+    "B5/S158",
+    "B56/S24",
+    "B58/S",
+    "B6/S78",
+    "B68/S137",
+    "B7/S",
+    "B78/S7",
+    "B8/S08",
+    "B8/S248",
+    "B8/S57"
+   ],
+   "seed": [
+    [
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T19:04:16+05:30",
+   "ended_at": "2026-09-23T19:04:46+05:30",
+   "best_rule": "B1/S5",
+   "fitness": 3.0,
+   "metrics": {
+    "copies": 4,
+    "alive": 426,
+    "growth": 17.66,
+    "stable": true
+   },
+   "frames": [
+    "frames/n42_0.png",
+    "frames/n42_20.png",
+    "frames/n42_40.png",
+    "frames/n42_60.png"
+   ],
+   "replay": {
+    "rule": "B1/S5",
+    "seed": [
+     [
+      1,
+      1,
+      0
+     ],
+     [
+      0,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      0
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored isotropic near-neighbours.",
+   "error": null
+  },
+  {
+   "id": "n43",
+   "parent": "n27",
+   "depth": 3,
+   "hypothesis": "Test HighLife variants branching from n27: expect more copies than the parent.",
+   "rules_tested": [
+    "B1/S16",
+    "B1/S358",
+    "B12/S",
+    "B128/S24",
+    "B168/S1",
+    "B234/S35",
+    "B24/S0",
+    "B258/S8",
+    "B278/S06",
+    "B3/S236",
+    "B3/S345",
+    "B3/S4",
+    "B348/S58",
+    "B35/S0",
+    "B356/S36",
+    "B367/S4",
+    "B38/S058",
+    "B4/S",
+    "B4/S137",
+    "B4/S357",
+    "B4/S7",
+    "B467/S0",
+    "B6/S",
+    "B6/S8",
+    "B68/S024",
+    "B7/S02",
+    "B7/S8",
+    "B8/S147",
+    "B8/S478",
+    "B8/S5"
+   ],
+   "seed": [
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "done",
+   "started_at": "2026-09-23T19:05:01+05:30",
+   "ended_at": "2026-09-23T19:05:31+05:30",
+   "best_rule": "B38/S058",
+   "fitness": 3.0,
+   "metrics": {
+    "copies": 3,
+    "alive": 24,
+    "growth": 12.43,
+    "stable": true
+   },
+   "frames": [
+    "frames/n43_0.png",
+    "frames/n43_20.png",
+    "frames/n43_40.png",
+    "frames/n43_60.png"
+   ],
+   "replay": {
+    "rule": "B38/S058",
+    "seed": [
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "size": 64,
+    "steps": 60
+   },
+   "notes": "Explored HighLife variants.",
+   "error": null
+  },
+  {
+   "id": "n44",
+   "parent": "n23",
+   "depth": 3,
+   "hypothesis": "Test B3 sweeps over survive sets branching from n23: expect more copies than the parent.",
+   "rules_tested": [
+    "B13/S056",
+    "B135/S",
+    "B158/S",
+    "B167/S67",
+    "B2/S",
+    "B2/S013",
+    "B26/S367",
+    "B28/S",
+    "B3/S0",
+    "B3/S8",
+    "B35/S067",
+    "B358/S56",
+    "B378/S56",
+    "B4/S348",
+    "B456/S8",
+    "B467/S05",
+    "B678/S38",
+    "B68/S8",
+    "B8/S"
+   ],
+   "seed": [
+    [
+     0,
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   ],
+   "experiment_code": "def run(rules, seed, ca):\n    return [ca.evaluate(r, seed) for r in rules]\n",
+   "status": "running",
+   "started_at": "2026-09-23T19:05:46+05:30",
+   "ended_at": null,
+   "best_rule": null,
+   "fitness": 0.0,
+   "metrics": {},
+   "frames": [],
+   "replay": null,
+   "notes": "Explored B3 sweeps over survive sets.",
+   "error": null
+  }
+ ]
+}
