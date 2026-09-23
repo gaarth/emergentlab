@@ -22,6 +22,13 @@
 - Image paths resolve relative to the .md folder, then cwd. Missing images are dropped with a stderr warning.
 - `(n17)` / `(n3, n17)` citations become links to `viewer.html#n17`. Light academic theme (judges read on white).
 
+## Mock backend
+- `python mock_lab.py [--nodes 60] [--interval 4] [--dir .]` grows `tree.json` like lab.py (real spec CA, random proposals,
+  frames, STOP file, writing_paper -> paper.html). It overwrites the root `tree.json`; `git checkout tree.json` restores the fake.
+- **Proxy gaming (tell Muaaz):** under the spec fitness, `B1357/S1357` (Fredkin parity rule, copies *any* pattern) and B1 rules
+  with tiny seeds like the blinker `[[1,1,1]]` scored 50–76 copies. The real loop will likely find this. Either treat it as
+  a legitimate finding or exclude seeds < 4 cells / B1 rules in the prompt. The mock excludes both.
+
 ## Demo check (phase D)
 - `python demo_check.py`. "Loop alive" uses log/tree.json freshness (< 60 s), not `ps` (the loop may run on Muaaz's laptop).
 - Video length uses `ffprobe` if installed, else a > 1 MB size heuristic.
