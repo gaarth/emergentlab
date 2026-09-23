@@ -19,11 +19,25 @@ from PIL import Image
 
 import ca
 
+def _load_env(path=".env"):
+    """Read KEY=VALUE lines from .env into os.environ (no extra dependency)."""
+    if not os.path.exists(path):
+        return
+    for line in open(path):
+        line = line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            k, v = line.split("=", 1)
+            os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+
+
+_load_env()
+
 IST = timezone(timedelta(hours=5, minutes=30))
 MODEL = "claude-fable-5-1"
 TREE_PATH = "tree.json"
 STOP_FILE = "STOP"
 SANDBOX_TIMEOUT = 20
+REPO = os.path.dirname(os.path.abspath(__file__))
 
 SYSTEM = """You are an autonomous research agent running a cellular-automaton discovery lab.
 You will be shown the hypothesis tree so far and full results of recent nodes.
@@ -67,7 +81,9 @@ def get_client():
     global _client
     if _client is None:
         import anthropic
-        _client = anthropic.Anthropic()
+        # Admin/org keys not scoped to a workspace need this header.
+        ws = os.environ.get("ANTHROPIC_WORKSPACE_ID")
+        _client = anthropic.Anthropic(default_headers={"anthropic-workspace-id": ws} if ws else None)
     return _client
 
 
@@ -110,7 +126,7 @@ def ask_fable(system, user, max_tokens=4000):
             r = get_client().messages.create(
                 model=MODEL, max_tokens=max_tokens, system=system,
                 messages=[{"role": "user", "content": user}])
-            txt = r.content[0].text
+            txt = "".join(b.text for b in r.content if getattr(b, "type", "") == "text")
             os.makedirs("logs", exist_ok=True)
             with open("logs/raw.log", "a") as f:
                 f.write(f"\n===== {datetime.now(IST).isoformat()} =====\n{txt}\n")
@@ -174,8 +190,9 @@ def run_sandbox(node, timeout=SANDBOX_TIMEOUT):
             f.write(prog)
             path = f.name
         try:
+            env = dict(os.environ, PYTHONPATH=REPO + os.pathsep + os.environ.get("PYTHONPATH", ""))
             p = subprocess.run([sys.executable, path], capture_output=True,
-                               text=True, timeout=timeout)
+                               text=True, timeout=timeout, env=env)
         except subprocess.TimeoutExpired:
             raise RuntimeError(f"experiment timed out after {timeout}s")
         if p.returncode != 0:
@@ -252,14 +269,15 @@ def write_paper(tree, ask=None, tree_path=TREE_PATH, render=True):
         def ask(system, user):
             r = get_client().messages.create(model=MODEL, max_tokens=6000, system=system,
                                              messages=[{"role": "user", "content": user}])
-            return r.content[0].text
+            return "".join(b.text for b in r.content if getattr(b, "type", "") == "text")
     md = ask(PAPER_SYSTEM, payload)
     with open("paper.md", "w", encoding="utf-8") as f:
         f.write(md or "")
     tree["status"] = "done"
     save(tree, tree_path)
-    if render and os.path.exists("render_paper.py"):
-        subprocess.run([sys.executable, "render_paper.py"])
+    renderer = os.path.join(REPO, "render_paper.py")
+    if render and os.path.exists(renderer):
+        subprocess.run([sys.executable, renderer])
     return md
 
 
